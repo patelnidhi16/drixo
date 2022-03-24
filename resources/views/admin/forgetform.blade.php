@@ -44,17 +44,18 @@
 
                                     <h6 class="h5 mb-0 mt-4">Forget Password</h6>
                                     <br><br>
-                                    <form action="" class="authentication-form" method="POST" id="forget">
-                                        @csrf
+                                    {{Form::open(array('route'=>'admin.forget','method'=>'POST','id'=>'forget','class'=>"authentication-form"))}}
+
                                         <div class="form-group" >
-                                            <label class="form-control-label">Email Address</label>
+                                        {{Form::label('email','Email Address',array('class'=>'form-control-label'))}}
                                             <div class="input-group input-group-merge" >
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         <i class="icon-dual" data-feather="mail"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control" id="email" name="email" placeholder="hello@coderthemes.com">
+                                            {{Form::text('email',null,array('class' => 'form-control','id'=>"email",'placeholder'=>"hello@coderthemes.com"))}}<br>
+
                                                <span id="servererror"></span>
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -66,7 +67,8 @@
 
                                        
                                         <div class="form-group mt-4">
-                                            <label class="form-control-label">Password</label>
+                                           
+                                            {{Form::label('password','Password',array('class'=>'form-control-label'))}}
 
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
@@ -74,7 +76,8 @@
                                                         <i class="icon-dual" data-feather="lock"></i>
                                                     </span>
                                                 </div>
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                                            {{Form::password('password',array('class' => 'form-control','id'=>"password",'placeholder'=>"Enter password"))}}<br>
+
                                                 <span id="servererror"></span>
 
                                                
@@ -86,7 +89,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group mt-4">
-                                            <label class="form-control-label">Confirm Password</label>
+                                            {{Form::label('cpassword','Confirm Password',array('class'=>'form-control-label'))}}
 
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
@@ -94,8 +97,8 @@
                                                         <i class="icon-dual" data-feather="lock"></i>
                                                     </span>
                                                 </div>
-                                                <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Enter your password">
-                                                <span id="servererror"></span>
+                                            {{Form::password('cpassword',array('class' => 'form-control','id'=>"cpassword",'placeholder'=>"Enter Confirm password"))}}<br>
+                                    <span id="servererror"></span>
 
                                                
                                                 @error('cpassword')
@@ -109,7 +112,7 @@
                                             <button class="btn btn-primary btn-block" type="submit" id="submit_btn"> Log In
                                             </button>
                                         </div>
-                                    </form>
+                                  {{Form::close()}}
 
                                 </div>
                                 <div class="col-lg-6 d-none d-md-inline-block">

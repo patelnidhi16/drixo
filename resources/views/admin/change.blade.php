@@ -45,92 +45,91 @@
 
                                     <h6 class="h5 mb-0 mt-4">Change Password</h6>
                                     <br><br>
-                                    <form action="{{route('admin.change')}}" class="authentication-form" method="POST" id="change">
-                                        @csrf
-                                        <div class="form-group" style="display:none;">
-                                            <label class="form-control-label">Email Address</label>
-                                            <div class="input-group input-group-merge" style="display:none;">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                        <i class="icon-dual" data-feather="mail"></i>
-                                                    </span>
-                                                </div>
-                                                <input type="hidden" class="form-control" id="email" name="email" placeholder="hello@coderthemes.com" value="{{Auth::guard('admin')->user()->email}}">
-                                                <span id="servererror"></span>
-                                                @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                    {{Form::open(array('route'=>'admin.change','method'=>'POST','id'=>'change','class'=>"authentication-form"))}}
+                                    <div class="form-group" style="display: none;">
+                                        {{Form::label('email','Email Address',array('class'=>'form-control-label'))}}
+                                        <div class="input-group input-group-merge"  >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="icon-dual" data-feather="mail"></i>
                                                 </span>
-                                                @enderror
                                             </div>
+                                            {{Form::hidden('email',$value=Auth::guard('admin')->user()->email, array('class' => 'form-control','id'=>"email",'placeholder'=>"hello@coderthemes.com"))}}<br>
+                                          
+                                            <span id="servererror"></span>
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
+                                    </div>
 
-                                        <div class="form-group mt-4">
-                                            <label class="form-control-label">Current Password</label>
-
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                        <i class="icon-dual" data-feather="lock"></i>
-                                                    </span>
-                                                </div>
-                                                <input type="password" class="form-control" id="currentpassword" name="currentpassword" placeholder="Enter your currentpassword">
-                                                <span id="servererror"></span>
-
-
-                                                @error('currentpassword')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                    <div class="form-group mt-4">
+                                        {{Form::label('currentpassword','Current Password',array('class'=>'form-control-label'))}}
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="icon-dual" data-feather="lock"></i>
                                                 </span>
-                                                @enderror
                                             </div>
+                                            {{Form::password('currentpassword',array('class' => 'form-control','id'=>"currentpassword",'placeholder'=>"Enter your password"))}}<br>
+                                          
+                                            <span id="servererror"></span>
+
+
+                                            @error('currentpassword')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
-                                        <div class="form-group mt-4">
-                                            <label class="form-control-label">Password</label>
-
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                        <i class="icon-dual" data-feather="lock"></i>
-                                                    </span>
-                                                </div>
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
-                                                <span id="servererror"></span>
-
-
-                                                @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        {{Form::label('password','Password',array('class'=>'form-control-label'))}}
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="icon-dual" data-feather="lock"></i>
                                                 </span>
-                                                @enderror
                                             </div>
+
+                                            {{Form::password('password',array('class' => 'form-control','id'=>"password",'placeholder'=>"Enter your password"))}}<br>
+                                           
+                                            <span id="servererror"></span>
+
+
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
-                                        <div class="form-group mt-4">
-                                            <label class="form-control-label">Confirm Password</label>
-
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                        <i class="icon-dual" data-feather="lock"></i>
-                                                    </span>
-                                                </div>
-                                                <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Enter your password">
-                                                <span id="servererror"></span>
-
-
-                                                @error('cpassword')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        {{Form::label('cpassword','Confirm Password',array('class'=>'form-control-label'))}}
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="icon-dual" data-feather="lock"></i>
                                                 </span>
-                                                @enderror
                                             </div>
-                                        </div>
-                                        <div class="form-group mb-0 text-center">
-                                            <button class="btn btn-primary btn-block" type="submit" id="submit_btn"> Log In
-                                            </button>
-                                        </div>
-                                    </form>
+                                            {{Form::password('cpassword',array('class' => 'form-control','id'=>"cpassword",'placeholder'=>"Enter your password"))}}<br>
+                                            <span id="servererror"></span>
 
+
+                                            @error('cpassword')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 text-center">
+                                        <button class="btn btn-primary btn-block" type="submit" id="submit_btn"> Log In
+                                        </button>
+                                    </div>
+                                    {{ Form::close()}}
                                 </div>
                                 <div class="col-lg-6 d-none d-md-inline-block">
                                     <div class="auth-page-sidebar">
@@ -203,13 +202,13 @@
                 contentType: false,
                 error: function(error) {
                     console.log(error);
-                    $(error.responseJSON.errors).each(function(key,value) {
-                     
-                       $('#cpassword').nextAll('span').html(value.cpassword[0]);
-                       $('#password').nextAll('span').html(value.cpassword[0]);
-                       $('#currentpassword').nextAll('span').html(value.currentpassword[0]); 
+                    $(error.responseJSON.errors).each(function(key, value) {
+
+                        $('#cpassword').nextAll('span').html(value.cpassword[0]);
+                        $('#password').nextAll('span').html(value.cpassword[0]);
+                        $('#currentpassword').nextAll('span').html(value.currentpassword[0]);
                     });
-                   
+
 
                 },
                 success: function(data) {

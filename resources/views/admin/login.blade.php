@@ -17,11 +17,10 @@
     <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
     <style>
-        .error
-        {
-            color: red  ;
+        .error {
+            color: red;
         }
-        </style>
+    </style>
 </head>
 
 <body class="authentication-bg">
@@ -44,18 +43,19 @@
                                     <h6 class="h5 mb-0 mt-4">Welcome back!</h6>
                                     <p class="text-muted mt-1 mb-4">Enter your email address and password to
                                         access admin panel.</p>
+                                        {{Form::open(array('route'=>'admin.login','method'=>'POST','id'=>'login','class'=>"authentication-form"))}}
 
-                                    <form class="authentication-form" action="" method="POST" id="login">
-                                        @csrf
                                         <div class="form-group">
-                                            <label class="form-control-label">Email Address</label>
+                                        {{Form::label('email','Email Address',array('class'=>'form-control-label'))}}
+
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         <i class="icon-dual" data-feather="mail"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" name="email" class="form-control" id="email" placeholder="hello@coderthemes.com" value="{{ old('email') }}">
+                                            {{Form::text('email',$value=old('email'),array('class' => 'form-control','id'=>"email",'placeholder'=>"hello@coderthemes.com"))}}<br>
+
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -65,7 +65,8 @@
                                         </div>
 
                                         <div class="form-group mt-4">
-                                            <label class="form-control-label">Password</label>
+                                        {{Form::label('password','Password',array('class'=>'form-control-label'))}}
+
                                             <a href="{{route('admin.reset')}}" class="float-right  text-unline-dashed ml-1 text-primary font-weight-bold ml-1">Forgot your password?</a>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
@@ -73,7 +74,8 @@
                                                         <i class="icon-dual" data-feather="lock"></i>
                                                     </span>
                                                 </div>
-                                                <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" value="{{ old('password') }}">
+                                            {{Form::password('password',array('class' => 'form-control','id'=>"password",'placeholder'=>"Enter your password"))}}<br>
+
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -86,7 +88,8 @@
                                             <button class="btn btn-primary btn-block" type="submit"> Log In
                                             </button>
                                         </div>
-                                    </form>
+                                        {{Form::close()}}
+
 
                                 </div>
                                 <div class="col-lg-6 d-none d-md-inline-block">
@@ -105,11 +108,7 @@
                     </div>
                     <!-- end card -->
 
-                    <!-- <div class="row mt-3">
-                        <div class="col-12 text-center">
-                            <p class="text-muted">Dont have an account? <a href="pages-register.html" class="text-primary font-weight-bold ml-1">Sign Up</a></p>
-                        </div> <!-- end col -->
-                    <!-- </div> --> 
+
                     <!-- end row -->
 
                 </div> <!-- end col -->
@@ -132,15 +131,15 @@
 <script src="{{asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js')}}"></script>
 
 <script>
-    $('#submit_btn').click(function(){
-       $('span').html(" ");
+    $('#submit_btn').click(function() {
+        $('span').html(" ");
     });
     $('#login').validate({
         rules: {
             email: {
                 required: true,
-                email:true,
-            },  
+                email: true,
+            },
             password: {
                 required: true,
             },
@@ -171,7 +170,7 @@
         //             window.location.href="{{route('admin.login')}}";
 
         //            }
-                   
+
         //         }
         //     });
         // }
@@ -179,4 +178,5 @@
 
     });
 </script>
+
 </html>

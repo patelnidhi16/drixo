@@ -45,25 +45,28 @@
                                     <p class="text-muted mt-1 mb-5">
                                         Enter your email address and we'll send you an email with instructions to reset your password.
                                     </p>
+                                    {{Form::open(array('route'=>'admin.forgetmail','method'=>'POST','id'=>'sendemail','class'=>"authentication-form"))}}
 
-                                    <form action="{{route('admin.forgetmail')}}" class="authentication-form" method="POST" id="sendemail">
-                                        @csrf
+                                    
                                         <div class="form-group">
-                                            <label class="form-control-label">Email Address</label>
+                                        {{Form::label('email','Email Address',array('class'=>'form-control-label'))}}
+
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         <i class="icon-dual" data-feather="mail"></i>
                                                     </span>
                                                 </div>
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="hello@coderthemes.com">
+                                            {{Form::text('email',null, array('class' => 'form-control','id'=>"email",'placeholder'=>"hello@coderthemes.com"))}}<br>
+
                                             </div>
                                         </div>
 
                                         <div class="form-group mb-0 text-center">
                                             <button class="btn btn-primary btn-block" type="submit" id="submit_btn"> Submit</button>
                                         </div>
-                                    </form>
+                                        {{Form::close()}}
+
                                 </div>
                                 <div class="col-lg-6 d-none d-md-inline-block">
                                     <div class="auth-page-sidebar">
@@ -136,7 +139,6 @@
                      
                     });
                    
-
                 },
                 success: function(data) {
                     alert(data);
