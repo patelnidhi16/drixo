@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\StudentController;
+use App\Mail\ApproveMail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,18 +26,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-
 Route::get('/calander', function () {
     return view('calander');
 })->name('calander');
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+

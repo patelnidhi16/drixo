@@ -62,6 +62,14 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3" style="display: none;">
+                            <label for="status" class="col-md-4 col-form-label text-md-end">{{ __('status') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="status" type="hidden" class="form-control @error('status') is-invalid @enderror" name="status"  autocomplete="new-status">
+
+                            </div>
+                        </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

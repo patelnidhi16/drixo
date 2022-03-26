@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-md-6 p-5">
                                     <div class="mx-auto mb-5">
-                                        <a href="index.html">
+                                        <a href="#">
                                             <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
                                             <h3 class="d-inline align-middle ml-1 text-logo">Shreyu</h3>
                                         </a>
@@ -47,7 +47,6 @@
 
                                         <div class="form-group">
                                         {{Form::label('email','Email Address',array('class'=>'form-control-label'))}}
-
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">

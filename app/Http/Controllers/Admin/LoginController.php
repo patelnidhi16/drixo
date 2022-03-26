@@ -16,15 +16,14 @@ class LoginController extends Controller
     {
         $this->middleware('guest:admin')->except('logout');
     }
-    
+
     public function showLoginForm(Request $request)
     {
         return view('admin.login');
     }
-
     protected function attemptLogin(Request $request)
     {
-          return $this->guard()->attempt(
+        return $this->guard()->attempt(
             $this->credentials($request),
             $request->filled('remember')
         );
@@ -32,11 +31,9 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        // dd(123);
         $this->guard()->logout();
         return redirect()->route('admin.login');
     }
-
     /**
      * Get the guard to be used during authentication.
      *

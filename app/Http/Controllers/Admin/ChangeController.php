@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\admin\AdminRequest;
 class ChangeController extends Controller
 {
-    
     public function changeform()
     {
         return view('admin.change');

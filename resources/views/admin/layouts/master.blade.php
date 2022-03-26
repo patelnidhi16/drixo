@@ -28,7 +28,10 @@
           @include('admin.layouts.header');
          
             @include('admin.layouts.sidebar');
-       
+       <br>
+       <br>
+       <br>
+
             @yield('content');
 
           

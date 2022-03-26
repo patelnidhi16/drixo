@@ -12,7 +12,7 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+
     <button class="btn btn-primary"><a href="{{route('admin.forget')}}" class="btn btn-success" target="_blank">Forget</a></button>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

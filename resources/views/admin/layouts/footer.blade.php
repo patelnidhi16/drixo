@@ -1,9 +1,4 @@
 <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                2019 &copy; Shreyu. All Rights Reserved. Crafted with <i class='uil uil-heart text-danger font-size-12'></i> by <a href="https://coderthemes.com/" target="_blank">Coderthemes</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+    <center>
+                    © 2018 <b>Drixo</b> <span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign.</span>
+    </center> </footer>
