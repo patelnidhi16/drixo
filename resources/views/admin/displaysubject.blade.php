@@ -104,20 +104,18 @@
                                             <td> {{ $user->id }}</td>
                                             <td> {{ $user->subject_name }}</td>
                                             <td><img src=" {{asset('assets/'.$user->image)}}" style="height: 50px; width:50px;">
-                                               
                                             </td>
                                             <td><button dataid="{{ $user->id }}"
                                                     class="delete btn btn-danger">Delete</button>&nbsp;&nbsp;<button
                                                     data-target="#edit" data-toggle="modal" dataid="{{ $user->id }}"
                                                     class="edit btn btn-success" data-backdrop="static"
-                                                    data-keyboard="false">Edit</button>&nbsp;&nbsp;<button
-                                                    dataid="{{ $user->id }}" class="delete btn btn-primary">Add
-                                                    Question</button></td>
+                                                    data-keyboard="false">Edit</button>&nbsp;&nbsp;<a
+                                                    dataid="{{ $user->id }}" class="add btn btn-primary" href="{{url('admin/questions',['id'=> $user->id])}}">Add
+                                                    Question</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div> <!-- end col -->

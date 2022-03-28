@@ -43,8 +43,6 @@
                                                 <input class="form-control" id="subject_name"
                                                     placeholder="Enter your subjectname" name="subject_name" type="text"
                                                     value=""><br>
-
-
                                             </div>
                                         </div>
                                         <div class="form-group mt-4">
@@ -55,10 +53,8 @@
                                                         <i class="icon-dual" data-feather="lock"></i>
                                                     </span>
                                                 </div>
-
                                                 <input class="form-control" id="image" name="image" type="file"
                                                     value=""><br>
-
                                             </div>
                                         </div>
 

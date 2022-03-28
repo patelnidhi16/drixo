@@ -28,12 +28,15 @@ use App\Http\Controllers\admin\StudentController;
     Route::get('student',[StudentController::class,'student'])->name('student');
     Route::get('status', [StudentController::class, 'status']);
     Route::get('approve', [StudentController::class, 'approve'])->name('approve');
-    Route::get('question', [StudentController::class, 'question'])->name('question');
+   
     Route::get('subject', [StudentController::class, 'subject'])->name('subject');
     Route::post('subject', [StudentController::class, 'addsubject'])->name('addsubject');
     Route::get('displaysubject', [StudentController::class, 'displaysubject'])->name('displaysubject');
     Route::get('delete', [StudentController::class, 'delete'])->name('delete');
     Route::get('edit', [StudentController::class, 'edit'])->name('edit');
     Route::post('update', [StudentController::class, 'update'])->name('update');
-
+    Route::get('question', [StudentController::class, 'question'])->name('question');
+    Route::post('question', [StudentController::class, 'storequestion']);
+    Route::get('questions/{id}', [StudentController::class, 'questions'])->name('questions');
+    Route::post('questions/{id}', [StudentController::class, 'storequestions']);
 });

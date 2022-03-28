@@ -4,6 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ApproveMail;
+use App\Models\Answer;
+use App\Models\Option;
+use App\Models\Question;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,10 +27,7 @@ class StudentController extends Controller
         $user->save();
         
     }
-    public function question(Request $request)
-    {
-      return view('admin.question');
-    }
+    
     public function subject(Request $request)
     {
       return view('admin.subject');
@@ -90,5 +90,49 @@ class StudentController extends Controller
       ]);
       }
     }
+  public function question(Request $request)
+  {
+    return view('admin.question');
   }
+  public function storequestion(Request $request)
+  {
+  dd($request->all());
+  
+  }
+  public function questions($id)
+  {
+  $id=$id;
+    return view('admin.questions',compact('id'));
+  }
+  public function storequestions(Request $request)
+  {
+   
+    $len = count($request->question);
+
+    for($i=1;$i<=$len;$i++) {
+    $a= Question::create([
+        'subject_id'=>$request->id,
+        'question'=>$request->question[$i]
+     ]);
+     $questionid= $a->id;
+     $x= Option::create([
+        'question_id' => $questionid,
+        'option1'=>$request->option1[$i],
+        'option2'=>$request->option2[$i],
+        'option3'=>$request->option3[$i],
+        'option4'=>$request->option4[$i],
+      ]);
+   Answer::create([
+        'question_id'=> $questionid,
+        'answer'=>$request->ans[$i],
+   ]);
+   return view('admin.questions');
+    }  
+
+     
+     
+    
+  }
+  
+}
   
