@@ -39,4 +39,5 @@ use App\Http\Controllers\admin\StudentController;
     Route::post('question', [StudentController::class, 'storequestion']);
     Route::get('questions/{id}', [StudentController::class, 'questions'])->name('questions');
     Route::post('questions/{id}', [StudentController::class, 'storequestions']);
+    Route::get('displayquestion', [StudentController::class, 'displayquestion'])->name('displayquestion');
 });

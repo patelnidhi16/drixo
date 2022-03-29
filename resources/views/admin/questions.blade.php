@@ -63,22 +63,7 @@
                 },
                
             },
-            //  submitHandler: function(form) {
-            //     $.ajax({
-            //         url: '{{ route('admin.questions') }}',
-            //         type: 'POST',
-            //         data: new FormData(form),
-            //         processData: false,
-            //         contentType: false,
-            //         success: function(data) {
-            //             alert(1);
-            //             swal("Good job!", "You clicked the button!", "success", {
-            //                 button: "Aww yiss!",
-            //             });
-            //         },
-
-            //     });
-            // },
+            
         });
          $('form.subject').on('click', function(event) {
                 $('.question').each(function() {
@@ -99,10 +84,11 @@
                 
                
             });
+
+           
         $('.total').change(function(e) {
                     e.preventDefault();
                     var total = $(this).val();
-                    alert(total);
                     display = "";
                     for (var i = 1; i <= total; i++) {
                         display += ` <div class="input-group input-group-merge mb-3" >
@@ -171,6 +157,6 @@
                     display+=` <button class="btn btn-primary" type="submit">Submit</button>`;
                     $('#parents').append(display);
                 });
-        
+       
     </script>
 @endpush
