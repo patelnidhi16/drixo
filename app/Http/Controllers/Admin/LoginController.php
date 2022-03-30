@@ -17,10 +17,6 @@ class LoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
     }
 
-    public function showLoginForm(Request $request)
-    {
-        return view('admin.login');
-    }
     protected function attemptLogin(Request $request)
     {
         return $this->guard()->attempt(
@@ -28,7 +24,11 @@ class LoginController extends Controller
             $request->filled('remember')
         );
     }
-
+    
+    public function showLoginForm(Request $request)
+    {
+        return view('admin.login');
+    }
     public function logout(Request $request)
     {
         $this->guard()->logout();

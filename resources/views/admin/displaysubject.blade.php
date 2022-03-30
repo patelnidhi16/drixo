@@ -81,12 +81,11 @@
                     <h5 class="page-title">Subject List</h5>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-
+                            <a class="btn btn-primary float-right mb-3" href="/admin/subject" >Add Subject</a>
                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
@@ -103,14 +102,16 @@
                                         <tr>
                                             <td> {{ $user->id }}</td>
                                             <td> {{ $user->subject_name }}</td>
-                                            <td><img src=" {{asset('assets/'.$user->image)}}" style="height: 50px; width:50px;">
-                                            </td>
+                                            <td><img src="{{asset('/public/'.$user->image)}}"  style="height: 50px; width:50px;">
+                                            </td>s
                                             <td><button dataid="{{ $user->id }}"
                                                     class="delete btn btn-danger">Delete</button>&nbsp;&nbsp;<button
                                                     data-target="#edit" data-toggle="modal" dataid="{{ $user->id }}"
                                                     class="edit btn btn-success" data-backdrop="static"
                                                     data-keyboard="false">Edit</button>&nbsp;&nbsp;<a
                                                     dataid="{{ $user->id }}" class="add btn btn-primary" href="{{url('admin/questions',['id'=> $user->id])}}">Add
+                                                    Question</a>&nbsp;&nbsp;<a
+                                                    dataid="{{ $user->id }}" class="add_question btn btn-success" href="{{url('admin/questionlist',['id'=> $user->id])}}">View
                                                     Question</a></td>
                                         </tr>
                                     @endforeach
@@ -149,7 +150,7 @@
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
-                            url: '{{ route('admin.delete') }}',
+                            url: '{{ route("admin.delete") }}',
                             type: 'get',
                             data: {
                                 id: id
@@ -174,12 +175,13 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '{{ route('admin.edit') }}',
+                url: '{{ route("admin.edit") }}',
                 type: 'get',
                 data: {
                     id: id
                 },
                 success: function(data) {
+                    console.log(data);
                     $('#subject_name').val(data.subject_name);
                     $('#id').val(data.id);
                     $('#old_image').val(data.image);
@@ -207,7 +209,7 @@
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 },
-                                url: '{{ route('admin.update') }}',
+                                url: '{{ route("admin.update") }}',
                                 type: 'POST',
                                 data: new FormData(form),
                                 processData: false,

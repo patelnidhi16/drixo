@@ -14,7 +14,7 @@ class AddStatusToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('status')->after('password')->nullable();
+            $table->string('status')->after('password')->nullable()->comment('0 - rejected 1 - approve');
         });
     }
 

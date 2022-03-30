@@ -35,9 +35,10 @@ use App\Http\Controllers\admin\StudentController;
     Route::get('delete', [StudentController::class, 'delete'])->name('delete');
     Route::get('edit', [StudentController::class, 'edit'])->name('edit');
     Route::post('update', [StudentController::class, 'update'])->name('update');
-    Route::get('question', [StudentController::class, 'question'])->name('question');
-    Route::post('question', [StudentController::class, 'storequestion']);
+    
     Route::get('questions/{id}', [StudentController::class, 'questions'])->name('questions');
     Route::post('questions/{id}', [StudentController::class, 'storequestions']);
-    Route::get('displayquestion', [StudentController::class, 'displayquestion'])->name('displayquestion');
+    Route::get('questionlist/{id}', [StudentController::class, 'questionlist'])->name('questionlist');
+    Route::get('editquestion', [StudentController::class, 'editquestion'])->name('editquestion');
+    Route::post('updatequestion', [StudentController::class, 'updatequestion'])->name('updatequestion');
 });

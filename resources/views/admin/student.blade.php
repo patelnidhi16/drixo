@@ -18,6 +18,7 @@
                         </div>
                     </div>
                     <div class="row">
+                        
                         <table class="table">
                             <thead>
                                 <tr>
@@ -34,10 +35,12 @@
                                         <td> {{ $user->name }}</td>
                                         <td> {{ $user->email }}</td>
                                         <td>
-                                                 <input data-id="{{ $user->id }}" class="toggle-class" type="checkbox"
-                                                    data-onstyle="success" data-offstyle="danger"
-                                                   data-toggle="toggle" data-on="Approve"  data-off="Requested" {{ $user->status ? 'checked' : '' }}>
-                                        </td>
+                                           @if($user->status==0)
+                                               <button class="request badge badge-pill badge-danger" dataid="{{$user->id}}">Rejected</button>
+                                               @else
+                                               <button class="request badge badge-pill badge-success" dataid="{{$user->id}}">Approve</button>
+                                               @endif                                       
+                                            </td>
                                      
                                     </tr>
                                 @endforeach
@@ -62,19 +65,30 @@
 
     <script>
     
-        $('.toggle-class').change(function() {
-            var status = $(this).prop('checked') == true ? 1 : 0;
-            var user_id = $(this).data('id');
+        $(document).on('click','.request',function() {
+            var id = $(this).attr('dataid');
+            var a = $(this);
             $.ajax({
                 type: "GET",
                 url: 'status',
                 data: {
-                    status: status,
-                    user_id: user_id
+                    
+                    id: id
                 },
                 success: function(data) {
-                    window.location = '{{ route('admin.approve') }}'
-                    // window.location.href = "/student";
+                    console.log(data.status);
+                    if(data.status == 0)
+                    {
+                        a.html("Rejected");
+                        a.removeClass("badge-success");
+                        a.addClass("badge-danger");
+                    }
+                    else{
+                        
+                        a.html("Approve");
+                        a.removeClass("badge-danger");
+                        a.addClass("badge-success");
+                    }
                 }
             });
 

@@ -12,4 +12,7 @@ class Question extends Model
         'subject_id',
         'question',
     ];
+    public function getoption(){
+        return $this->hasMany('App\Models\Option');
+    }
 }

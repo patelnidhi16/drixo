@@ -66,106 +66,16 @@
                         <span> Student </span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('admin.subject')}}">
-                        <i data-feather="calendar"></i>
-                        <span> Add Subject </span>
-                    </a>
-                </li>
+               
                 <li>
                     <a href="{{route('admin.displaysubject')}}">
                         <i data-feather="calendar"></i>
-                        <span> View Subject </span>
+                        <span>  Subject </span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('admin.question')}}">
-                        <i data-feather="calendar"></i>
-                        <span> Question </span>
-                    </a>
-                </li>
+              
                
-                <li class="menu-title">Components</li>
-                <li>
-                    <a href="javascript: void(0);">
-                        <i data-feather="package"></i>
-                        <span> UI Elements </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li>
-                            <a href="components-bootstrap.html">Bootstrap UI</a>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);" aria-expanded="false">Icons
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="nav-third-level" aria-expanded="false">
-                                <li>
-                                    <a href="icons-feather.html">Feather Icons</a>
-                                </li>
-                                <li>
-                                    <a href="icons-unicons.html">Unicons Icons</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="widgets.html">Widgets</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" aria-expanded="false">
-                        <i data-feather="file-text"></i>
-                        <span> Forms </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li>
-                            <a href="forms-basic.html">Basic Elements</a>
-                        </li>
-                        <li>
-                            <a href="forms-advanced.html">Advanced</a>
-                        </li>
-                        <li>
-                            <a href="forms-validation.html">Validation</a>
-                        </li>
-                        <li>
-                            <a href="forms-wizard.html">Wizard</a>
-                        </li>
-                        <li>
-                            <a href="forms-editor.html">Editor</a>
-                        </li>
-                        <li>
-                            <a href="forms-file-uploads.html">File Uploads</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="charts-apex.html" aria-expanded="false">
-                        <i data-feather="pie-chart"></i>
-                        <span> Charts </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" aria-expanded="false">
-                        <i data-feather="grid"></i>
-                        <span> Tables </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li>
-                            <a href="tables-basic.html">Basic</a>
-                        </li>
-                        <li>
-                            <a href="tables-datatables.html">Advanced</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+              
         </div>
         <!-- End Sidebar -->
         <div class="clearfix"></div>
