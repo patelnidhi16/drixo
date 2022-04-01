@@ -44,7 +44,7 @@
                                                         <input class="option form-control "
                                                             placeholder="option {{ $i }}" name="option1[{{$i}}]"
                                                             type="text" >
-                                                            <input type="radio" name="ans" value="{{$i}}">
+                                                            
                                                     </div>
                                                 </div>
                                             @endfor
@@ -207,12 +207,3 @@
     </script>
 @endpush
 
-{{-- <div class="input-group input-group-merge" style="margin-bottom: 10px;">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">` + q + `
-                                                    </span>
-                                                </div>
-                                                <input class="form-control" id="question" placeholder="Enter Question"
-                                                    name="question" type="text" value="">
-                                                     <button type="button" class="btn btn-danger mx-3">-</button> 
-                                            </div> --}}

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\admin;
 
+
+use App\DataTables\StudentDataTable;
+use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use App\Mail\ApproveMail;
 use App\Models\Answer;
@@ -12,22 +15,27 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Whoops\Run;
 
 class StudentController extends Controller
 {
-    public function student()
+    public function student(UserDataTable $UserDataTable)
     {
-        $data = User::get();
-        return view('admin.student', compact('data'));
+        $student = User::get();
+        return $UserDataTable->render('admin.student',compact('student'));
+
+        // return view('admin.student', compact('data'));
     }
     public function status(Request $request)
     {
+      
         $user = User::find($request->id);
         if ($user->status == 1) {
 
             $user->status = 0;
         } else {
             $user->status = 1;
+            Mail::to('nidhipatel1632001@gmail.com')->send(new ApproveMail());
         }
         $user->save();
         return $user;
@@ -37,11 +45,7 @@ class StudentController extends Controller
     {
         return view('admin.subject');
     }
-    public function displaysubject(Request $request)
-    {
-        $subject = Subject::get();
-        return view('admin.displaysubject', compact('subject'));
-    }
+   
     public function addsubject(Request $request)
     {
         $detail = $request->file('image');
@@ -52,15 +56,7 @@ class StudentController extends Controller
         ]);
         $request->image->storeAs('public/', $name_of_image);
         $request->image->move('public/', $name_of_image);
-
         return view('admin.subject');
-    }
-    public function approve()
-    {
-        Mail::to('nidhipatel1632001@gmail.com')->send(new ApproveMail());
-        return back();
-        // $data = User::get();
-        // return view('admin.student', compact('data'));
     }
     public function delete(Request $request)
     {
@@ -74,7 +70,12 @@ class StudentController extends Controller
         $data = Subject::find($id);
         return $data;
     }
-
+    public function displaysubject(StudentDataTable $StudentDataTable)
+    {
+        $user = Subject::get();
+        return $StudentDataTable->render('admin.displaysubject',compact('user'));
+       
+    }
     public function update(Request $request)
     {
         if (isset($request->image)) {
@@ -105,10 +106,12 @@ class StudentController extends Controller
     }
     public function storequestions(Request $request)
     {
+       
         $len = count($request->question);
         for ($i = 1; $i <= $len; $i++) {
             $a = Question::create([
                 'subject_id' => $request->id,
+                'title'=>$request->title,
                 'question' => $request->question[$i]
             ]);
 
@@ -141,7 +144,6 @@ class StudentController extends Controller
     }
     public function questionlist($id)
     {
-
         $question = Question::where('subject_id', $id)->get()->toArray();
         for ($i = 0; $i < count($question); $i++) {
 
@@ -152,7 +154,8 @@ class StudentController extends Controller
             $answer[] = Answer::where('question_id', $question[$i]['id'])->get()->toArray();;
         }
 
-        // $answer= Subject::find(1)->getanswer->toArray();
+      
+        // return $QuestionlistDataTable->render('admin.displayquestion',compact('question', 'option', 'answer'));
         return view('admin.displayquestion', compact('question', 'option', 'answer'));
     }
     public function editquestion(Request $request)

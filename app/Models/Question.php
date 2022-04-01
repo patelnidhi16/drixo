@@ -10,7 +10,9 @@ class Question extends Model
     use HasFactory;
     protected $fillable = [
         'subject_id',
+        'title',
         'question',
+        
     ];
     public function getoption(){
         return $this->hasMany('App\Models\Option');

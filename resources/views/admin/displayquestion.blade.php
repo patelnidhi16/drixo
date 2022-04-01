@@ -19,7 +19,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST"  accept-charset="UTF-8"  class="question_update authentication-form">
+                <form method="POST" accept-charset="UTF-8" class="question_update authentication-form">
                     @csrf
                     <div class="form-group mt-4" id="parent">
                         <input type="hidden" class="id" name="id">
@@ -49,12 +49,12 @@
                 <button class="btn btn-primary btn-block col-4 ml-3" type="submit" id="submit_btn">
                     Update Question
                 </button>
-            <button type="button" class="btn btn-secondary col-2 mx-1 exit" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary col-2 mx-1 exit" data-dismiss="modal">Close</button>
 
             </div>
             </form>
         </div>
-     
+
     </div>
 </div>
 </div>
@@ -124,9 +124,8 @@
                                     @endforeach
 
                                     <td>
-                                        
-                                        <button class="update btn btn-primary" dataid="{{$questions['id']}}" data-toggle="modal" data-target="#exampleModal"  data-backdrop="static"
-                                                    data-keyboard="false">Edit</button>
+
+                                        <button class="update btn btn-primary" dataid="{{$questions['id']}}" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false">Edit</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -149,14 +148,20 @@
 <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js') }}">
 </script>
 <script src="{{ asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js') }}"></script>
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
-    $('.exit').click(function(){
-       $('.ans').attr('checked', false);
+    $('.exit').click(function() {
+        $('.ans').attr('checked', false);
     });
+  
     $('.update').click(function() {
         var id = $(this).attr('dataid');
         alert(id);
+
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -167,14 +172,14 @@
                 id: id
             },
             success: function(data) {
-           
+
                 $('.question').val(data[0]);
                 $('.id').val(data[3]);
                 $('.option1').val(data[1][0]);
                 $('.option2').val(data[1][1]);
                 $('.option3').val(data[1][2]);
                 $('.option4').val(data[1][3]);
-                $(".answer"+data[2]).each(function() {
+                $(".answer" + data[2]).each(function() {
                     $(this).attr('checked', true);
                 });
             }
@@ -182,31 +187,44 @@
 
     });
     $('.question_update').validate({
-            // rules: {
-            //     subject_name: {
-            //         required: true,
-            //     },
 
-            // },
-            submitHandler: function(form) {
-                
-                            $.ajax({
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                },
-                                url: '{{ route("admin.updatequestion") }}',
-                                type: 'POST',
-                                data: new FormData(form),
-                                processData: false,
-                                contentType: false,
-                                success: function(data) {
-                                    $('#exampleModal').modal('hide');
-                                    
-                                },
-                            });
-                      
+        submitHandler: function(form) {
+            swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
 
-            }
-        });
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url: '{{ route("admin.updatequestion") }}',
+                            type: 'POST',
+                            data: new FormData(form),
+                            processData: false,
+                            contentType: false,
+                            success: function(data) {
+                                $('#exampleModal').modal('hide');
+
+                            },
+                        });
+                        swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Your imaginary file is safe!");
+                        $('#exampleModal').modal('hide');
+                    }
+                });
+
+
+
+        }
+    });
 </script>
 @endpush
