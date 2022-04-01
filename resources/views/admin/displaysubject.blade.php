@@ -120,12 +120,9 @@
 </script>
 
 {!! $dataTable->scripts() !!}
-
 <script>
-      $(document).on('click', '.add_question', function() {
-        alert(1);
-        var id = $(this).attr('dataid');
-        alert(id);
+
+
     $('.subject').validate({
         rules: {
             'question[]': {
@@ -138,24 +135,11 @@
                 required: true,
             },
         },
-        submitHandler: function(form) {
-            $.ajax({
-                url: "{{ route('admin.questions'," + id + ")}}",
-                type: 'POST',
-                data: new FormData(form),
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    swal("Good job!", "You clicked the button!", "success", {
-                        button: "Aww yiss!",
-                    });
-                },
-
-            });
-        }
+       
     });
-    });
-     
+     $(document).on('click','.display',function(){
+         alert($(this).attr('dataid'));
+     });
     $(document).on('click','.delete',function() {
         var id = $(this).attr('dataid');
         swal({
@@ -180,6 +164,7 @@
                             swal("Poof! Your imaginary file has been deleted!", {
                                 icon: "success",
                             });
+                            $('#student-table').DataTable().ajax.reload();
                         }
                     });
 
@@ -191,7 +176,6 @@
     });
     $(document).on('click','.edit',function() {
         id = $(this).attr('dataid');
-
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -240,7 +224,7 @@
                                 swal("Poof! Your imaginary file has been updated!", {
                                     icon: "success",
                                 });
-                                window.location.reload()
+                                $('#student-table').DataTable().ajax.reload();
                             },
                         });
                     } else {

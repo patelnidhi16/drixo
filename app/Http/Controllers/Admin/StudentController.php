@@ -104,9 +104,8 @@ class StudentController extends Controller
         $id = $id;
         return view('admin.questions', compact('id'));
     }
-    public function storequestions(Request $request)
+    public function storequestions(Request $request,StudentDataTable $StudentDataTable)
     {
-       
         $len = count($request->question);
         for ($i = 1; $i <= $len; $i++) {
             $a = Question::create([
@@ -141,10 +140,16 @@ class StudentController extends Controller
                 'answer' => $request->ans[$i],
             ]);
         }
+        // echo '<script>alert("YOUR DATA SUBMITTED SUCCESSFULLY")</script>';
+        $user = Subject::get();
+       
+        return $StudentDataTable->render('admin.displaysubject',compact('user'));
     }
     public function questionlist($id)
-    {
+    { 
+      
         $question = Question::where('subject_id', $id)->get()->toArray();
+       
         for ($i = 0; $i < count($question); $i++) {
 
             $option[] = Option::where('question_id', $question[$i]['id'])->get()->toArray();
@@ -167,7 +172,6 @@ class StudentController extends Controller
         for ($i = 0; $i < 4; $i++) {
             $option[] = ($options[$i]['option']);
         }
-
         $answers = Answer::where('question_id', $id)->first();
         $answer = $answers['answer'];
         return [$question, $option, $answer, $id];
@@ -190,5 +194,12 @@ class StudentController extends Controller
         Answer::where('question_id', $request->id)->update([
             'answer' => $request->answer,
         ]);
+    }
+    public function alltest($id){
+       
+       $x= Question::select('title')->groupby('title')->get()->toArray();
+       dd($x);
+    return view('admin.alltest',compact('x'));
+        // Question::
     }
 }

@@ -3,142 +3,142 @@
 <!-- Button trigger modal -->
 
 <style>
-    .error {
-        color: red;
-    }
+      .error {
+            color: red;
+      }
 </style>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="exit close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+      <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="exit close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                  <div class="modal-body">
+                        <form method="POST" accept-charset="UTF-8" class="question_update authentication-form">
+                              @csrf
+                              <div class="form-group mt-4" id="parent">
+                                    <input type="hidden" class="id" name="id">
+                                    <div class="input-group input-group-merge">
+                                          <div class="input-group-prepend" style=" height: 40px;">
+                                                <span class=" input-group-text">
+                                                      <b>Q</b>
+                                                </span>
+
+                                          </div>
+                                          <input class="question form-control mb-3" name="question" type="text">
+                                    </div>
+                                    @for ($i = 1; $i <= 4; $i++) <div class="form-group">
+                                          <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                      <span class="input-group-text">
+                                                            <input type="radio" name="answer" class="answer{{$i}} ans" value="{{$i}}">
+                                                      </span>
+                                                </div>
+                                                <input class="option{{$i}} form-control " name="option[{{$i}}]" type="text">
+                                          </div>
+                              </div>
+                              @endfor
+
+                  </div>
+                  <div class="form-group mb-0 text-center row">
+                        <button class="btn btn-primary btn-block col-4 ml-3" type="submit" id="submit_btn">
+                              Update Question
+                        </button>
+                        <button type="button" class="btn btn-secondary col-2 mx-1 exit" data-dismiss="modal">Close</button>
+
+                  </div>
+                  </form>
             </div>
-            <div class="modal-body">
-                <form method="POST" accept-charset="UTF-8" class="question_update authentication-form">
-                    @csrf
-                    <div class="form-group mt-4" id="parent">
-                        <input type="hidden" class="id" name="id">
-                        <div class="input-group input-group-merge">
-                            <div class="input-group-prepend" style=" height: 40px;">
-                                <span class=" input-group-text">
-                                    <b>Q</b>
-                                </span>
 
-                            </div>
-                            <input class="question form-control mb-3" name="question" type="text">
-                        </div>
-                        @for ($i = 1; $i <= 4; $i++) <div class="form-group">
-                            <div class="input-group input-group-merge">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <input type="radio" name="answer" class="answer{{$i}} ans" value="{{$i}}">
-                                    </span>
-                                </div>
-                                <input class="option{{$i}} form-control " name="option[{{$i}}]" type="text">
-                            </div>
-                    </div>
-                    @endfor
-
-            </div>
-            <div class="form-group mb-0 text-center row">
-                <button class="btn btn-primary btn-block col-4 ml-3" type="submit" id="submit_btn">
-                    Update Question
-                </button>
-                <button type="button" class="btn btn-secondary col-2 mx-1 exit" data-dismiss="modal">Close</button>
-
-            </div>
-            </form>
-        </div>
-
-    </div>
+      </div>
 </div>
 </div>
 <div class="page-content-wrapper" style="margin-left:250px;">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="float-right page-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Drixo</a></li>
-                        <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                        <li class="breadcrumb-item active">Datatable</li>
-                    </ol>
-                </div>
-                <h5 class="page-title">Subject List</h5>
+      <div class="container-fluid">
+            <div class="row">
+                  <div class="col-sm-12">
+                        <div class="float-right page-breadcrumb">
+                              <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Drixo</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                                    <li class="breadcrumb-item active">Datatable</li>
+                              </ol>
+                        </div>
+                        <h5 class="page-title">Subject List</h5>
+                  </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card m-b-30">
-                    <div class="card-body">
+            <div class="row">
+                  <div class="col-12">
+                        <div class="card m-b-30">
+                              <div class="card-body">
+                                    <table id="datatable-buttons abc" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                          <thead>
+                                                <tr>
+                                                      <th>ID</th>
+                                                      <th>Question</th>
+                                                      <th>Option1</th>
+                                                      <th>Option2</th>
+                                                      <th>Option3</th>
+                                                      <th>Option4</th>
+                                                      <th>Answer</th>
+                                                      <th>Action</th>
 
-                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Question</th>
-                                    <th>Option1</th>
-                                    <th>Option2</th>
-                                    <th>Option3</th>
-                                    <th>Option4</th>
-                                    <th>Answer</th>
-                                    <th>Action</th>
+                                                </tr>
+                                          </thead>
+                                          <tbody>
 
-                                </tr>
-                            </thead>
-                            <tbody>
+                                                @foreach($question as $questions)
+                                                <tr>
+                                                      <td>{{$questions['id']}}</td>
+                                                      <td>{{$questions['question']}}</td>
+                                                      <td>{{$questions['title']}}</td>
+                                                      @foreach($option as $options)
+                                                      @if($questions['id']==$options[0]['question_id'])
+                                                      <td>
+                                                            {{$options[0]['option']}}
+                                                      </td>
+                                                      <td>
+                                                            {{$options[1]['option']}}
+                                                      </td>
+                                                      <td>
+                                                            {{$options[2]['option']}}
+                                                      </td>
+                                                      <td>
+                                                            {{$options[3]['option']}}
+                                                      </td>
+                                                      @endif
+                                                      @endforeach
+                                                      @foreach($answer as $answers)
+                                                      @if($questions['id']==$answers[0]['question_id'])
+                                                      <td>
+                                                            {{$answers[0]['answer']}}
+                                                      </td>
 
-                                @foreach($question as $questions)
-                                <tr>
-                                    <td>{{$questions['id']}}</td>
-                                    <td>{{$questions['question']}}</td>
-                                    @foreach($option as $options)
-                                    @if($questions['id']==$options[0]['question_id'])
-                                    <td>
-                                        {{$options[0]['option']}}
-                                    </td>
-                                    <td>
-                                        {{$options[1]['option']}}
-                                    </td>
-                                    <td>
-                                        {{$options[2]['option']}}
-                                    </td>
-                                    <td>
-                                        {{$options[3]['option']}}
-                                    </td>
-                                    @endif
-                                    @endforeach
-                                    @foreach($answer as $answers)
-                                    @if($questions['id']==$answers[0]['question_id'])
-                                    <td>
-                                        {{$answers[0]['answer']}}
-                                    </td>
+                                                      @endif
+                                                      @endforeach
 
-                                    @endif
-                                    @endforeach
+                                                      <td>
 
-                                    <td>
+                                                            <button class="update btn btn-primary" dataid="{{$questions['id']}}" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false">Edit</button>
+                                                      </td>
+                                                </tr>
+                                                @endforeach
 
-                                        <button class="update btn btn-primary" dataid="{{$questions['id']}}" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false">Edit</button>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                          </tbody>
 
-                            </tbody>
+                                    </table>
+                              </div>
+                        </div>
+                  </div> <!-- end col -->
+            </div> <!-- end row -->
 
-                        </table>
-                    </div>
-                </div>
-            </div> <!-- end col -->
-        </div> <!-- end row -->
-
-    </div><!-- container fluid -->
+      </div><!-- container fluid -->
 
 </div> <!-- Page content Wrapper -->
 
@@ -154,77 +154,75 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-    $('.exit').click(function() {
-        $('.ans').attr('checked', false);
-    });
-  
-    $('.update').click(function() {
-        var id = $(this).attr('dataid');
-        alert(id);
+      $('.exit').click(function() {
+            $('.ans').attr('checked', false);
+      });
 
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: '{{ route("admin.editquestion") }}',
-            type: 'get',
-            data: {
-                id: id
-            },
-            success: function(data) {
+      $('.update').click(function() {
+            var id = $(this).attr('dataid');
+            alert(id);
 
-                $('.question').val(data[0]);
-                $('.id').val(data[3]);
-                $('.option1').val(data[1][0]);
-                $('.option2').val(data[1][1]);
-                $('.option3').val(data[1][2]);
-                $('.option4').val(data[1][3]);
-                $(".answer" + data[2]).each(function() {
-                    $(this).attr('checked', true);
-                });
+            $.ajax({
+                  headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  url: '{{ route("admin.editquestion") }}',
+                  type: 'get',
+                  data: {
+                        id: id
+                  },
+                  success: function(data) {
+
+                        $('.question').val(data[0]);
+                        $('.id').val(data[3]);
+                        $('.option1').val(data[1][0]);
+                        $('.option2').val(data[1][1]);
+                        $('.option3').val(data[1][2]);
+                        $('.option4').val(data[1][3]);
+                        $(".answer" + data[2]).each(function() {
+                              $(this).attr('checked', true);
+                        });
+                  }
+            });
+
+      });
+      $('.question_update').validate({
+
+            submitHandler: function(form) {
+                  swal({
+                              title: "Are you sure?",
+                              text: "Once deleted, you will not be able to recover this imaginary file!",
+                              icon: "warning",
+                              buttons: true,
+                              dangerMode: true,
+
+                        })
+                        .then((willDelete) => {
+                              if (willDelete) {
+                                    $.ajax({
+                                          headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                          },
+                                          url: '{{ route("admin.updatequestion") }}',
+                                          type: 'POST',
+                                          data: new FormData(form),
+                                          processData: false,
+                                          contentType: false,
+                                          success: function(data) {
+                                                $('#exampleModal').modal('hide');
+
+                                          },
+                                    });
+                                    swal("Poof! Your imaginary file has been deleted!", {
+                                          icon: "success",
+                                    });
+                              } else {
+                                    swal("Your imaginary file is safe!");
+                                    $('#exampleModal').modal('hide');
+                              }
+                        });
+
             }
-        });
-
-    });
-    $('.question_update').validate({
-
-        submitHandler: function(form) {
-            swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this imaginary file!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            url: '{{ route("admin.updatequestion") }}',
-                            type: 'POST',
-                            data: new FormData(form),
-                            processData: false,
-                            contentType: false,
-                            success: function(data) {
-                                $('#exampleModal').modal('hide');
-
-                            },
-                        });
-                        swal("Poof! Your imaginary file has been deleted!", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("Your imaginary file is safe!");
-                        $('#exampleModal').modal('hide');
-                    }
-                });
-
-
-
-        }
-    });
+      });
 </script>
 @endpush

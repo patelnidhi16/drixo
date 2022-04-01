@@ -42,4 +42,6 @@ use App\Http\Controllers\admin\StudentController;
     Route::get('questionlist/{id}', [StudentController::class, 'questionlist'])->name('questionlist');
     Route::get('editquestion', [StudentController::class, 'editquestion'])->name('editquestion');
     Route::post('updatequestion', [StudentController::class, 'updatequestion'])->name('updatequestion');
+    Route::get('alltest/{id}', [StudentController::class, 'alltest'])->name('alltest');
+
 });

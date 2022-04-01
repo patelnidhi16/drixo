@@ -131,10 +131,8 @@
                         button: "Aww yiss!",
                     });
                 },
-
             });
         },
-
     });
 </script>
 @endpush

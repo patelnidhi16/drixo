@@ -29,7 +29,7 @@
                                         <option value="50">50</option>
                                     </select>
                                     <div class="input-group input-group-merge">
-                                            <input class="form-control mb-3" id="title" placeholder="Enter Trst Title" name="title" type="text"><br>
+                                            <input class="form-control mb-3" id="title" placeholder="Enter Test Title" name="title" type="text"><br>
                                         </div>
                                     <div id="parents">
                                     </div>
