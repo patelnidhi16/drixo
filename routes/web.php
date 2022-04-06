@@ -19,22 +19,15 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/master', function () {
-    return view('layouts.master');
+Route::get('/index', function () {
+    return view('front.layouts.master');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::get('/calander', function () {
-    return view('calander');
-})->name('calander');
-
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/test', [StudentController::class, 'test'])->name('test');
 
 
 

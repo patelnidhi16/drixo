@@ -26,8 +26,8 @@ use App\Http\Controllers\admin\StudentController;
             return view('admin.calander');
         })->name('calander');
     Route::get('student',[StudentController::class,'student'])->name('student');
-    Route::get('status', [StudentController::class, 'status']);
-    Route::get('approve', [StudentController::class, 'approve'])->name('approve');
+    // Route::get('status', [StudentController::class, 'status']);
+    // Route::get('approve', [StudentController::class, 'approve'])->name('approve');
    
     Route::get('subject', [StudentController::class, 'subject'])->name('subject');
     Route::post('subject', [StudentController::class, 'addsubject'])->name('addsubject');
@@ -43,5 +43,9 @@ use App\Http\Controllers\admin\StudentController;
     Route::get('editquestion', [StudentController::class, 'editquestion'])->name('editquestion');
     Route::post('updatequestion', [StudentController::class, 'updatequestion'])->name('updatequestion');
     Route::get('alltest/{id}', [StudentController::class, 'alltest'])->name('alltest');
-
+    Route::get('display_title/{id}/{title}', [StudentController::class, 'display_title'])->name('display_title');
+    Route::get('assign_test', [StudentController::class, 'assign_test'])->name('assign_test');
+    Route::get('select_subject', [StudentController::class, 'select_subject'])->name('select_subject');
+    Route::get('select_title', [StudentController::class, 'select_title'])->name('select_title');
+// 
 });

@@ -21,17 +21,18 @@ class UserDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function($user){
-                if($user->status==0){
-                return "<button class='request badge badge-pill badge-danger' dataid='$user->id'>Rejected</button>";
-                }
-                else{
+            ->addColumn('<input type="checkbox" id="all">', function($user){
+                // if($user->status==0){
+                // return "<button class='request badge badge-pill badge-danger' dataid='$user->id'>Rejected</button>";
+                // }
+                // else{
 
-                    return "<button class='request badge badge-pill badge-success' dataid='$user->id'>Approve</button>";
-                }
-                
+                //     return "<button class='request badge badge-pill badge-success' dataid='$user->id'>Approve</button>";
+                // }
+                return "<input type='checkbox' dataid='$user->id' name='assign_test[]' class='assign_test'>";
+            
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['<input type="checkbox" id="all">'])
             ->addIndexColumn();
     }
 
@@ -77,14 +78,14 @@ class UserDataTable extends DataTable
     {
         return [
             
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('email'),
-            Column::computed('action')
+            Column::computed('<input type="checkbox" id="all">')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
+            Column::make('id'),
+            Column::make('name'),
+            Column::make('email'),
         ];
     }
 
@@ -98,3 +99,5 @@ class UserDataTable extends DataTable
         return 'User_' . date('YmdHis');
     }
 }
+
+  

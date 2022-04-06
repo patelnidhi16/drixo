@@ -8,18 +8,23 @@
       }
 </style>
 
+<!-- Button trigger modal -->
+<br>
+<br>
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                  <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="exit close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                        </button>
-                  </div>
-                  <div class="modal-body">
-                        <form method="POST" accept-charset="UTF-8" class="question_update authentication-form">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" accept-charset="UTF-8" class="question_update authentication-form">
                               @csrf
                               <div class="form-group mt-4" id="parent">
                                     <input type="hidden" class="id" name="id">
@@ -28,7 +33,6 @@
                                                 <span class=" input-group-text">
                                                       <b>Q</b>
                                                 </span>
-
                                           </div>
                                           <input class="question form-control mb-3" name="question" type="text">
                                     </div>
@@ -53,11 +57,13 @@
 
                   </div>
                   </form>
-            </div>
-
       </div>
+      
+    </div>
+  </div>
 </div>
-</div>
+
+
 <div class="page-content-wrapper" style="margin-left:250px;">
       <div class="container-fluid">
             <div class="row">
@@ -69,7 +75,8 @@
                                     <li class="breadcrumb-item active">Datatable</li>
                               </ol>
                         </div>
-                        <h5 class="page-title">Subject List</h5>
+                        <h5 class="page-title">Test Name:-{{$question[0]['title']}}</h5>
+        
                   </div>
             </div>
 
@@ -96,8 +103,8 @@
                                                 @foreach($question as $questions)
                                                 <tr>
                                                       <td>{{$questions['id']}}</td>
+                                                    
                                                       <td>{{$questions['question']}}</td>
-                                                      <td>{{$questions['title']}}</td>
                                                       @foreach($option as $options)
                                                       @if($questions['id']==$options[0]['question_id'])
                                                       <td>
@@ -122,13 +129,11 @@
 
                                                       @endif
                                                       @endforeach
-
-                                                      <td>
-
-                                                            <button class="update btn btn-primary" dataid="{{$questions['id']}}" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false">Edit</button>
-                                                      </td>
+                                                    <td><button type="button" class="edit btn btn-success"  data-toggle="modal" data-target="#exampleModal" dataid="{{$questions['id']}}">Edit</button></td>
                                                 </tr>
                                                 @endforeach
+
+                                                
 
                                           </tbody>
 
@@ -154,14 +159,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-      $('.exit').click(function() {
-            $('.ans').attr('checked', false);
-      });
-
-      $('.update').click(function() {
-            var id = $(this).attr('dataid');
-            alert(id);
-
+  $(document).on('click','.edit',function(){
+    var id = $(this).attr('dataid');
             $.ajax({
                   headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -184,9 +183,8 @@
                         });
                   }
             });
-
-      });
-      $('.question_update').validate({
+  });
+ $('.question_update').validate({
 
             submitHandler: function(form) {
                   swal({

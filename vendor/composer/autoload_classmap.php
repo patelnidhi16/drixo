@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\DataTables\\StudentDataTable' => $baseDir . '/app/DataTables/StudentDataTable.php',
+    'App\\DataTables\\TitleDataTable' => $baseDir . '/app/DataTables/TitleDataTable.php',
     'App\\DataTables\\UserDataTable' => $baseDir . '/app/DataTables/UserDataTable.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Admin\\ChangeController' => $baseDir . '/app/Http/Controllers/Admin/ChangeController.php',
@@ -26,6 +27,7 @@ return array(
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\ResetController' => $baseDir . '/app/Http/Controllers/ResetController.php',
     'App\\Http\\Controllers\\admin\\StudentController' => $baseDir . '/app/Http/Controllers/Admin/StudentController.php',
+    'App\\Http\\Controllers\\front\\dashboard' => $baseDir . '/app/Http/Controllers/front/dashboard.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -45,6 +47,7 @@ return array(
     'App\\Models\\Answer' => $baseDir . '/app/Models/Answer.php',
     'App\\Models\\Option' => $baseDir . '/app/Models/Option.php',
     'App\\Models\\Question' => $baseDir . '/app/Models/Question.php',
+    'App\\Models\\Student' => $baseDir . '/app/Models/Student.php',
     'App\\Models\\Subject' => $baseDir . '/app/Models/Subject.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

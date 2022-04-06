@@ -94,10 +94,7 @@
 
 <!-- App js -->
 <script src="http://127.0.0.1:8000/assets/js/app.min.js"></script>
-
-
 <script>
-
 </script>
 @endsection
 @push('script')
@@ -108,7 +105,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-   
     $('#subject').validate({
         rules: {
             subject_name: {
@@ -127,9 +123,19 @@
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                    swal("Good job!", "You clicked the button!", "success", {
+                   
+                    swal({
+                        title: "Good job!",
+                        text: "You clicked the button!",
+                        type: "success",
                         button: "Aww yiss!",
-                    });
+                        timer: 5000
+                    }),
+                    function() {
+                        location.reload(true);
+                        tr.hide();
+                    };
+                    window.location.href = '/admin/displaysubject';
                 },
             });
         },

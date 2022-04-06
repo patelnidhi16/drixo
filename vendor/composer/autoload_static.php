@@ -593,6 +593,7 @@ class ComposerStaticInitcaf03429b0fa447bebd0971b06857f7e
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\DataTables\\StudentDataTable' => __DIR__ . '/../..' . '/app/DataTables/StudentDataTable.php',
+        'App\\DataTables\\TitleDataTable' => __DIR__ . '/../..' . '/app/DataTables/TitleDataTable.php',
         'App\\DataTables\\UserDataTable' => __DIR__ . '/../..' . '/app/DataTables/UserDataTable.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Admin\\ChangeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ChangeController.php',
@@ -611,6 +612,7 @@ class ComposerStaticInitcaf03429b0fa447bebd0971b06857f7e
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\ResetController' => __DIR__ . '/../..' . '/app/Http/Controllers/ResetController.php',
         'App\\Http\\Controllers\\admin\\StudentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/StudentController.php',
+        'App\\Http\\Controllers\\front\\dashboard' => __DIR__ . '/../..' . '/app/Http/Controllers/front/dashboard.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -630,6 +632,7 @@ class ComposerStaticInitcaf03429b0fa447bebd0971b06857f7e
         'App\\Models\\Answer' => __DIR__ . '/../..' . '/app/Models/Answer.php',
         'App\\Models\\Option' => __DIR__ . '/../..' . '/app/Models/Option.php',
         'App\\Models\\Question' => __DIR__ . '/../..' . '/app/Models/Question.php',
+        'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
         'App\\Models\\Subject' => __DIR__ . '/../..' . '/app/Models/Subject.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

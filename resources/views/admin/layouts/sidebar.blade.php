@@ -59,23 +59,19 @@
                         <span> Dashboard </span>
                     </a>
                 </li>
-              
                 <li>
                     <a href="{{route('admin.student')}}">
                         <i data-feather="calendar"></i>
                         <span> Student </span>
                     </a>
                 </li>
-               
                 <li>
                     <a href="{{route('admin.displaysubject')}}">
                         <i data-feather="calendar"></i>
                         <span>  Subject </span>
                     </a>
                 </li>
-              
-               
-              
+
         </div>
         <!-- End Sidebar -->
         <div class="clearfix"></div>

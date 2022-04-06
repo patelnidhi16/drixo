@@ -83,6 +83,8 @@
                     </ol>
                 </div>
                 <h5 class="page-title">Subject List</h5>
+<a class="btn btn-primary float-right m-3" href="{{route('admin.subject')}}">Add Subject</a>
+
             </div>
         </div>
         <div class="row">
@@ -137,9 +139,7 @@
         },
        
     });
-     $(document).on('click','.display',function(){
-         alert($(this).attr('dataid'));
-     });
+   
     $(document).on('click','.delete',function() {
         var id = $(this).attr('dataid');
         swal({
