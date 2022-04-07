@@ -14,4 +14,7 @@ class Student extends Model
         'title',
         'status'
     ];
+    public function getsubject(){
+        return $this->hasMany(Subject::class,'id','subject_id');
+    }
 }

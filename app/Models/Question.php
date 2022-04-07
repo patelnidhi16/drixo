@@ -15,6 +15,11 @@ class Question extends Model
         
     ];
     public function getoption(){
-        return $this->hasMany('App\Models\Option');
+        return $this->hasMany(Option::class,'question_id','id');
     }
+    public function getsubject(){
+        return $this->hasMany(Subject::class,'id','subject_id');
+    }
+   
+   
 }

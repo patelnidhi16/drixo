@@ -2,7 +2,7 @@
 @section('content')
 
 <head>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+<meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         .error {
             color: red;
