@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
-
+use App\DataTables\AttempttestDataTable;
 use App\DataTables\StudentDataTable;
 use App\DataTables\TitleDataTable;
 use App\DataTables\UserDataTable;
@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Result;
 use PhpParser\Node\Stmt\Else_;
 use Whoops\Run;
 
@@ -275,12 +276,25 @@ class StudentController extends Controller
 
         $id = Auth::guard('web')->user()->id;
         $test = Student::with('getsubject')->where('student_id', $id)->get()->toArray();
+        $result = Result::where('user_id', $id)->get()->toArray();
         // dd($test);
 
         // $y= Subject::select('subject_name')->where('id',$x[0]['subject_id'])->get()->toArray();
 
-        return view('front.dashboard.content', compact('test'));
+        return view('front.dashboard.index', compact('test','result'));
     }
+    // public function index(Request $request)
+    // {
+
+    //     $id = Auth::guard('web')->user()->id;
+    //     $test = Student::with('getsubject')->where('student_id', $id)->get()->toArray();
+    //     $result = Result::where('user_id', $id)->get()->toArray();
+    //     // dd($test);
+
+    //     // $y= Subject::select('subject_name')->where('id',$x[0]['subject_id'])->get()->toArray();
+
+    //     return view('front.dashboard.content', compact('test','result'));
+    // }
     public function test($id, $title)
     {
         $question = Question::with('getoption', 'getsubject')->where('subject_id', $id)->where('title', $title)->get()->toArray();
@@ -293,16 +307,15 @@ class StudentController extends Controller
     {
 
         $title = $request->title;
-        // dd($title);
         $subject_id = $request->subject_id;
         $subject_name = $request->subject_name;
-
 
         $id = Auth::user()->id;
         $x = Student::where('student_id', $id)->where('title', $title)->where('subject_id', $subject_id)->update([
             'status' => '0',
         ]);
         foreach ($request->answer as $key => $value) {
+
             Submission::create([
                 'user_id' => $id,
                 'question_id' => $key,
@@ -311,26 +324,50 @@ class StudentController extends Controller
                 'answer' => $value,
             ]);
         }
-        return view('front.dashboard.result', compact('subject_name', 'title'));
-        //    }
-        //        foreach ($request->answer as $key=>$value) {
-        //    $x= Answer::select('answer')->where('question_id',$key)->get()->toArray();
-        //   if($x[0]['answer']==$value){
-        //       print_r(1);
-        //   }
-        //   else{
-        //       print_r(2);
-        //   }
-        //    }
+        $x = Submission::with('getanswer')->where('user_id', $id)->where('title', $title)->where('subject', $subject_name)->get()->toArray();
+        $mark = 0;
+        foreach ($x as $value) {
+            print_r(1);
+            if ($value['getanswer'][0]['answer'] == $x[0]['answer']) {
+                $mark++;
+            }
+        }
+        Result::create([
+            'user_id' => $id,
+            'subject' => $subject_name,
+            'title' => $title,
+            'result' => $mark,
+            'status' => '0',
+        ]);
+        return redirect()->route('index');
     }
-    public function result($subject, $title)
+    // public function result($subject, $title)
+    // {
+    //     $user_id = Auth::user()->id;
+    //     $x = Submission::with('getanswer')->where('user_id', $user_id)->where('title', $title)->where('subject', $subject)->get()->toArray();
+    //     $mark = 0;
+    //     foreach ($x as $value) {
+    //         if ($value['getanswer'][0]['answer'] == $x[0]['answer']) {
+    //             $mark++;
+    //         }
+    //     }
+    //     dd($mark);
+    // }
+    public function result(AttempttestDataTable $Submission)
     {
-        $user_id = Auth::user()->id;
-        $x = Submission::where('user_id', $user_id)->where('title', $title)->where('subject', $subject)->get();
-        // dd($x[0]->question_id);
-        foreach ($x as $key => $value) {
-           $y= Submission::with('getanswer')->where('question_id',$value->question_id)->get()->toArray();
-        //    dd($y[0]['getanswer'][0]['answer']);
+        $student = Result::get();
+        return $Submission->render('admin.result', compact('student'));
+    }
+    public function displayresult(Request $request)
+    {
+        foreach ($request->id as $key => $value) {
+            $x = Result::where('id', $value)->get()->toArray();
+            foreach ($x as $detail) {
+                print_r($value);
+                $x= Result::where('id', $value)->update([
+                    'status'=>'1',
+                ]);
+            }
         }
     }
 }

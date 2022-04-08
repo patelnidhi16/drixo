@@ -47,5 +47,7 @@ use App\Http\Controllers\admin\StudentController;
     Route::get('assign_test', [StudentController::class, 'assign_test'])->name('assign_test');
     Route::get('select_subject', [StudentController::class, 'select_subject'])->name('select_subject');
     Route::get('select_title', [StudentController::class, 'select_title'])->name('select_title');
+    Route::get('result', [StudentController::class, 'result'])->name('result');
+    Route::get('/displayresult', [StudentController::class, 'displayresult'])->name('displayresult');
 // 
 });

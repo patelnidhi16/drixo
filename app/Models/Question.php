@@ -20,6 +20,7 @@ class Question extends Model
     public function getsubject(){
         return $this->hasMany(Subject::class,'id','subject_id');
     }
-   
-   
+    public function getans(){
+        return $this->hasMany(Answer::class,'question_id','id');
+    }
 }

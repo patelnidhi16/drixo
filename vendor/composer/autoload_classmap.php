@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\DataTables\\AttempttestDataTable' => $baseDir . '/app/DataTables/AttempttestDataTable.php',
     'App\\DataTables\\StudentDataTable' => $baseDir . '/app/DataTables/StudentDataTable.php',
     'App\\DataTables\\TitleDataTable' => $baseDir . '/app/DataTables/TitleDataTable.php',
     'App\\DataTables\\UserDataTable' => $baseDir . '/app/DataTables/UserDataTable.php',
@@ -47,6 +48,7 @@ return array(
     'App\\Models\\Answer' => $baseDir . '/app/Models/Answer.php',
     'App\\Models\\Option' => $baseDir . '/app/Models/Option.php',
     'App\\Models\\Question' => $baseDir . '/app/Models/Question.php',
+    'App\\Models\\Result' => $baseDir . '/app/Models/Result.php',
     'App\\Models\\Student' => $baseDir . '/app/Models/Student.php',
     'App\\Models\\Subject' => $baseDir . '/app/Models/Subject.php',
     'App\\Models\\Submission' => $baseDir . '/app/Models/Submission.php',

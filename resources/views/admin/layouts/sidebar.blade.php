@@ -62,13 +62,49 @@
                 <li>
                     <a href="{{route('admin.student')}}">
                         <i data-feather="calendar"></i>
-                        <span> Student </span>
+                        <span> Assign Test </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.displaysubject')}}">
                         <i data-feather="calendar"></i>
                         <span>  Subject </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i data-feather="calendar"></i>
+                        <span>  Students </span> 
+                        <!-- display user table -->
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i data-feather="calendar"></i>
+                        <span>  List Assign Test Student </span> 
+                        <!-- display student table -->
+                    </a>
+                </li>
+                <li>
+                <li>
+                    <a href="{{route('admin.result')}}">
+                        <i data-feather="calendar"></i>
+                        <span>  Attemt Test </span>
+                        <!-- display student table but status = 0 -->
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i data-feather="calendar"></i>
+                        <span>  Not attemt Test </span>
+                        <!-- display student table but status = 1 -->
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i data-feather="calendar"></i>
+                        <span>  Questions </span>
+                        <!-- list all question -->
                     </a>
                 </li>
 

@@ -592,6 +592,7 @@ class ComposerStaticInitcaf03429b0fa447bebd0971b06857f7e
 
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\DataTables\\AttempttestDataTable' => __DIR__ . '/../..' . '/app/DataTables/AttempttestDataTable.php',
         'App\\DataTables\\StudentDataTable' => __DIR__ . '/../..' . '/app/DataTables/StudentDataTable.php',
         'App\\DataTables\\TitleDataTable' => __DIR__ . '/../..' . '/app/DataTables/TitleDataTable.php',
         'App\\DataTables\\UserDataTable' => __DIR__ . '/../..' . '/app/DataTables/UserDataTable.php',
@@ -632,6 +633,7 @@ class ComposerStaticInitcaf03429b0fa447bebd0971b06857f7e
         'App\\Models\\Answer' => __DIR__ . '/../..' . '/app/Models/Answer.php',
         'App\\Models\\Option' => __DIR__ . '/../..' . '/app/Models/Option.php',
         'App\\Models\\Question' => __DIR__ . '/../..' . '/app/Models/Question.php',
+        'App\\Models\\Result' => __DIR__ . '/../..' . '/app/Models/Result.php',
         'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
         'App\\Models\\Subject' => __DIR__ . '/../..' . '/app/Models/Subject.php',
         'App\\Models\\Submission' => __DIR__ . '/../..' . '/app/Models/Submission.php',
