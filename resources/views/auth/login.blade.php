@@ -162,20 +162,20 @@
 
 
                         <div class="form-check">
-
-                            @if (Route::has('password.request'))
+                        @if (Route::has('password.request'))
                             <a class="btn btn-link" href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
                             @endif
+                           
                             @if (Route::has('register'))
-
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-
+                            <p>Don't have an account?
+                            <a class="nav-link" href="{{ route('register') }}"> {{ __('Register') }}</a>
+</p>
                             @endif
                             <!-- <button type="submit" class="btn btn-login ">Submit</button> -->
                         </div>
-                        <button type="submit" class="btn btn-login float-right  ">
+                        <button type="submit" class="btn btn-login float-center  ">
                             {{ __('Login') }}
                         </button>
 
