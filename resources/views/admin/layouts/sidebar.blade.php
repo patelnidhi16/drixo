@@ -101,7 +101,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('admin.all')}}">
                         <i data-feather="calendar"></i>
                         <span>  Questions </span>
                         <!-- list all question -->

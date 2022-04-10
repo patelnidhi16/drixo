@@ -96,7 +96,7 @@
         if ($(this).prop('checked')==true){
             $("input:checkbox[class=assign_test]").each(function() {
             $(this).prop('checked', true);
-        });student
+        });
         }else{
             $("input:checkbox[class=assign_test]").each(function() {
             $(this).prop('checked', false);

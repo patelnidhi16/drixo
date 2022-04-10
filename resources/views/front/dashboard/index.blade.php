@@ -191,18 +191,17 @@
 
 <!------------------ Hover Effect Style : Demo - 14 --------------->
 <div class="container mt-40">
-    <h3 class="text-center">Hover Effect Style : Demo - 14</h3>
+  
     <div class="row mt-30">
         <div class="col-md-4 col-sm-6">
             <div class="box14">
                 <img class="pic-1" src="https://images.unsplash.com/photo-1534644107580-3a4dbd494a95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80">
                 <div class="box-content">
                     <h3 class="title">Exam</h3>
-                    <span class="post">Click to View Exam</span>
+                   
                     <ul class="icon">
-                        <li><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li><a href="#"><i class="fa fa-link"></i></a></li>
-                    </ul>
+                        <li><span class="post"><a href="{{route('displaytest')}}" style=" width: 150px; ">Click to View Exam</a></span></li>
+                    </ul> 
                 </div>
             </div>
         </div>
@@ -211,38 +210,16 @@
                 <img class="pic-1" src="https://www.gannett-cdn.com/presto/2021/05/24/PDEM/ba1f5eac-45ff-4cc3-a500-7e5380f93ec0-DSC_9770.jpg?crop=3853%2C2168%2Cx0%2Cy456&width=1200">
                 <div class="box-content" class="aa">
                     <h3 class="title">Result</h3>
-                    <span class="viewExam post"><a href="google.com"  >Click to View Result</a></span>
                     <ul class="icon">
-                        <li><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li><a href="#"><i class="fa fa-link"></i></a></li>
+                        <li><span class="post"><a href="{{route('displaystudentresult')}}" style=" width: 150px; ">Click to View Result</a></span></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="box14">
-                <img class="pic-1" src="https://www.w3schools.com/bootstrap4/img_avatar5.png">
-                <div class="box-content">
-                    <h3 class="title">Kristiana</h3>
-                    <span class="post">Web Designer</span>
-                    <ul class="icon">
-                        <li><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li><a href="#"><i class="fa fa-link"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
+      
     </div>
 </div>
 <script src="{{asset('https://code.jquery.com/jquery-3.4.1.min.js')}}"></script>
-<script>
-    $(document).ready(function(){
-        
-        $(document).on('click','.viewExam',function(){
-            alert("click");
-        });
-      
-    })
-</script>
+
+  
 @endsection
