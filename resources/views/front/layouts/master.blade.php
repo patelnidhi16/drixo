@@ -25,7 +25,6 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('front/assets/css/bootstrap.min.css')}}" rel="stylesheet">
-
     <!-- Template Stylesheet -->
     <link href="{{asset('front/assets/css/style.css')}}" rel="stylesheet">
     <style>
@@ -62,8 +61,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
-                    <h1 class="mb-4">Welcome to eLEARNING</h1>
+                    <h6 class="section-title bg-white text-start text-primary pe-3">Welcome</h6>
+                    <h1 class="mb-4">eLEARNING</h1>
                     <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
                     <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                     <div class="row gy-2 gx-4 mb-4">

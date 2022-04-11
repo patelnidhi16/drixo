@@ -238,11 +238,10 @@
 <script src="{{asset('https://code.jquery.com/jquery-3.4.1.min.js')}}"></script>
 <script>
     $(document).ready(function(){
-        
-        $(document).on('click','.viewExam',function(){
-            alert("click");
+        $(document).find('.box-content').children('.viewExam').click(function(){
+            alert(1);
         });
-      
-    })
+       
+    });
 </script>
 @endsection
