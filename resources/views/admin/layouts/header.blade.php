@@ -3,8 +3,7 @@
                     <!-- LOGO -->
                     <a href="index.html" class="navbar-brand mr-0 mr-md-2 logo">
                         <span class="logo-lg">
-                            <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
-                            <span class="d-inline h5 ml-1 text-logo">Shreyu</span>
+                        <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
                         </span>
                         <span class="logo-sm">
                             <img src="{{asset('assets/images/logo.png')}}" alt="" height="24">

@@ -96,7 +96,7 @@
         if ($(this).prop('checked')==true){
             $("input:checkbox[class=assign_test]").each(function() {
             $(this).prop('checked', true);
-        });student
+        });
         }else{
             $("input:checkbox[class=assign_test]").each(function() {
             $(this).prop('checked', false);
@@ -182,7 +182,7 @@ else {
                     // console.log(value);
                     user.push(value);
                 });
-                swal("you already assign this test for "+user+" id user. so you are not able to reasign this test ");
+                swal("you already assign this test for "+user+" id user. so you are not able to reasign this test. remaining student have assign test");
             }
         });
 

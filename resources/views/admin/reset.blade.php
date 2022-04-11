@@ -35,10 +35,9 @@
                             <div class="row">
                                 <div class="col-6 p-5">
                                     <div class="mx-auto mb-5">
-                                        <a href="index.html">
-                                            <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
-                                            <h3 class="d-inline align-middle ml-1 text-logo">Shreyu</h3>
-                                        </a>
+                                    <span class="logo-lg">
+                                            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
+                                        </span>
                                     </div>
 
                                     <h6 class="h5 mb-0 mt-4">Reset Password</h6>
@@ -61,7 +60,11 @@
 
                                             </div>
                                         </div>
-
+                                        <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <p class="text-muted">Back to <a href="{{route('admin.login')}}" class="text-primary font-weight-bold ml-1">Login</a></p>
+                        </div> <!-- end col -->
+                    </div>
                                         <div class="form-group mb-0 text-center">
                                             <button class="btn btn-primary btn-block" type="submit" id="submit_btn"> Submit</button>
                                         </div>
@@ -85,11 +88,7 @@
                     </div>
                     <!-- end card -->
 
-                    <div class="row mt-3">
-                        <div class="col-12 text-center">
-                            <p class="text-muted">Back to <a href="{{route('admin.login')}}" class="text-primary font-weight-bold ml-1">Login</a></p>
-                        </div> <!-- end col -->
-                    </div>
+                   
                     <!-- end row -->
 
                 </div> <!-- end col -->
@@ -111,6 +110,7 @@
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js')}}"></script>
 <script src="{{asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js')}}"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
 <script>
     $('#submit_btn').click(function() {

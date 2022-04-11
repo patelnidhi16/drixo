@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\DataTables\AttempttestDataTable;
 use App\DataTables\StudentDataTable;
@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Result;
-use PhpParser\Node\Stmt\Else_;
-use Whoops\Run;
+
 
 class StudentController extends Controller
 {
@@ -113,27 +112,7 @@ class StudentController extends Controller
     public function storequestions(Request $request, StudentDataTable $StudentDataTable)
     {
         $x = Subject::where('id', $request->id)->first();
-        // $request->validate([
-        //     'title'=>'required|unique:questions,title,$request->id'
-        // ]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //     dd($request->id);
-        //        $subject=$x->subject_name;
-        //    dd(1);
         $len = count($request->question);
         for ($i = 1; $i <= $len; $i++) {
             $a = Question::create([
@@ -226,24 +205,27 @@ class StudentController extends Controller
     }
     public function assign_test(Request $request)
     {
+        $email = Auth::guard('web')->user()->email;
+
         $len = count($request->id);
-        // for ($i = 0; $i < $len; $i++) {
-        //     $x = Student::where('title', $request->title)->where('subject_id', $request->subject_id)->first();
-        //    dd($x);
-        //     if($x==null){
-        //         dd($i);
-        //         Student::create([
-        //                         'student_id' => $request->id[$i],
-        //                         'subject_id' => $request->subject_id,
-        //                         'title' => $request->title,
-        //                         'status' => '1',
-        //                     ]);
-        //     //     //     Mail::to($user->email)->send(new ApproveMail());
+        for ($i = 0; $i < $len; $i++) {
+            $x = Student::where('title', $request->title)->where('subject_id', $request->subject_id)->first();
+          
+            if($x==null){
+            
+                $y=Student::create([
+                                'student_id' => $request->id[$i],
+                                'subject_id' => $request->subject_id,
+                                'title' => $request->title,
+                                'status' => '1',
+                            ]);
+                         
+                    Mail::to($email)->send(new ApproveMail());
 
-        //     }
+            }
 
 
-        // }
+        }
         $user = [];
         foreach ($request->id as $id) {
             $x = Student::where('student_id', $id)->where('title', $request->title)->where('subject_id', $request->subject_id)->first();
@@ -274,33 +256,21 @@ class StudentController extends Controller
     public function index(Request $request)
     {
 
+        return view('front.dashboard.index');
+    }
+    public function displaytest(Request $request)
+    {
         $id = Auth::guard('web')->user()->id;
+
         $test = Student::with('getsubject')->where('student_id', $id)->get()->toArray();
         $result = Result::where('user_id', $id)->get()->toArray();
-        // dd($test);
 
-        // $y= Subject::select('subject_name')->where('id',$x[0]['subject_id'])->get()->toArray();
-
-        return view('front.dashboard.index', compact('test','result'));
+        return view('front.dashboard.displaytest', compact('test', 'result'));
     }
-    // public function index(Request $request)
-    // {
-
-    //     $id = Auth::guard('web')->user()->id;
-    //     $test = Student::with('getsubject')->where('student_id', $id)->get()->toArray();
-    //     $result = Result::where('user_id', $id)->get()->toArray();
-    //     // dd($test);
-
-    //     // $y= Subject::select('subject_name')->where('id',$x[0]['subject_id'])->get()->toArray();
-
-    //     return view('front.dashboard.content', compact('test','result'));
-    // }
     public function test($id, $title)
     {
         $question = Question::with('getoption', 'getsubject')->where('subject_id', $id)->where('title', $title)->get()->toArray();
-        // dd($question);
-        // dd($question[0]['getsubject'][0]['subject_name']);
-        // dd($question[0]['getoption']);
+
         return view('front.dashboard.test', compact('question'));
     }
     public function storerecord(Request $request)
@@ -327,7 +297,7 @@ class StudentController extends Controller
         $x = Submission::with('getanswer')->where('user_id', $id)->where('title', $title)->where('subject', $subject_name)->get()->toArray();
         $mark = 0;
         foreach ($x as $value) {
-            print_r(1);
+
             if ($value['getanswer'][0]['answer'] == $x[0]['answer']) {
                 $mark++;
             }
@@ -339,20 +309,9 @@ class StudentController extends Controller
             'result' => $mark,
             'status' => '0',
         ]);
-        return redirect()->route('index');
+        return view('front.dashboard.displaysubmission');
+        // return redirect()->route('index');
     }
-    // public function result($subject, $title)
-    // {
-    //     $user_id = Auth::user()->id;
-    //     $x = Submission::with('getanswer')->where('user_id', $user_id)->where('title', $title)->where('subject', $subject)->get()->toArray();
-    //     $mark = 0;
-    //     foreach ($x as $value) {
-    //         if ($value['getanswer'][0]['answer'] == $x[0]['answer']) {
-    //             $mark++;
-    //         }
-    //     }
-    //     dd($mark);
-    // }
     public function result(AttempttestDataTable $Submission)
     {
         $student = Result::get();
@@ -363,11 +322,26 @@ class StudentController extends Controller
         foreach ($request->id as $key => $value) {
             $x = Result::where('id', $value)->get()->toArray();
             foreach ($x as $detail) {
-                print_r($value);
-                $x= Result::where('id', $value)->update([
-                    'status'=>'1',
+
+                $x = Result::where('id', $value)->update([
+                    'status' => '1',
                 ]);
             }
         }
+    }
+
+    public function displaystudentresult()
+    {
+        $id = Auth::guard('web')->user()->id;
+        $result =  Result::where('id', $id)->where('status', 1)->get();
+        return view('front.dashboard.displaymark', compact('result'));
+    }
+    public function all()
+    {
+        $subject = Subject::all();
+        return view('admin.displayallsubject', compact('subject'));
+    }
+    public function subjectdetail($id){
+        return view('admin.subjectdetail',compact('id'));
     }
 }

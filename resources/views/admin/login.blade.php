@@ -34,60 +34,59 @@
                             <div class="row">
                                 <div class="col-md-6 p-5">
                                     <div class="mx-auto mb-5">
-                                        <a href="#">
-                                            <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
-                                            <h3 class="d-inline align-middle ml-1 text-logo">Shreyu</h3>
-                                        </a>
+                                        <span class="logo-lg">
+                                            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
+                                        </span>
                                     </div>
 
                                     <h6 class="h5 mb-0 mt-4">Welcome back!</h6>
                                     <p class="text-muted mt-1 mb-4">Enter your email address and password to
                                         access admin panel.</p>
-                                        {{Form::open(array('route'=>'admin.login','method'=>'POST','id'=>'login','class'=>"authentication-form"))}}
+                                    {{Form::open(array('route'=>'admin.login','method'=>'POST','id'=>'login','class'=>"authentication-form"))}}
 
-                                        <div class="form-group">
+                                    <div class="form-group">
                                         {{Form::label('email','Email Address',array('class'=>'form-control-label'))}}
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                        <i class="icon-dual" data-feather="mail"></i>
-                                                    </span>
-                                                </div>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="icon-dual" data-feather="mail"></i>
+                                                </span>
+                                            </div>
                                             {{Form::text('email',$value=old('email'),array('class' => 'form-control','id'=>"email",'placeholder'=>"hello@coderthemes.com"))}}<br>
 
-                                                @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
-                                            </div>
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
+                                    </div>
 
-                                        <div class="form-group mt-4">
+                                    <div class="form-group mt-4">
                                         {{Form::label('password','Password',array('class'=>'form-control-label'))}}
 
-                                            <a href="{{route('admin.reset')}}" class="float-right  text-unline-dashed ml-1 text-primary font-weight-bold ml-1">Forgot your password?</a>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                        <i class="icon-dual" data-feather="lock"></i>
-                                                    </span>
-                                                </div>
+                                        <a href="{{route('admin.reset')}}" class="float-right  text-unline-dashed ml-1 text-primary font-weight-bold ml-1">Forgot your password?</a>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="icon-dual" data-feather="lock"></i>
+                                                </span>
+                                            </div>
                                             {{Form::password('password',array('class' => 'form-control','id'=>"password",'placeholder'=>"Enter your password"))}}<br>
 
-                                                @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
-                                            </div>
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
+                                    </div>
 
-                                        <div class="form-group mb-0 text-center">
-                                            <button class="btn btn-primary btn-block" type="submit"> Log In
-                                            </button>
-                                        </div>
-                                        {{Form::close()}}
+                                    <div class="form-group mb-0 text-center">
+                                        <button class="btn btn-primary btn-block" type="submit"> Log In
+                                        </button>
+                                    </div>
+                                    {{Form::close()}}
 
 
                                 </div>
@@ -128,7 +127,7 @@
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js')}}"></script>
 <script src="{{asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js')}}"></script>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 <script>
     $('#submit_btn').click(function() {
         $('span').html(" ");

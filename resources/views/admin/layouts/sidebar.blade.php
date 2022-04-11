@@ -37,7 +37,7 @@
                 <div class="dropdown-divider"></div>
 
                 <a href="{{ route('admin.logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">>
+                                         document.getElementById('logout-form').submit();">
                     <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
                     <span>Logout</span>
                 </a>
@@ -101,7 +101,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('admin.all')}}">
                         <i data-feather="calendar"></i>
                         <span>  Questions </span>
                         <!-- list all question -->

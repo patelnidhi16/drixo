@@ -36,10 +36,9 @@
                             <div class="row">
                                 <div class="col-md-6 p-5">
                                     <div class="mx-auto mb-5">
-                                        <a href="index.html">
-                                            <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
-
-                                        </a>
+                                    <span class="logo-lg">
+                                            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
+                                        </span>
                                     </div>
 
                                     <h6 class="h5 mb-0 mt-4">Forget Password</h6>
