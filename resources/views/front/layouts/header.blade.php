@@ -16,8 +16,7 @@
             @if(Auth::user()!=null)
             <a href="{{route('displaytest')}}" class="nav-item nav-link">Test</a>
             <a href="{{route('displaystudentresult')}}" class="nav-item nav-link">Result</a>
-
-@endif
+            @endif
             @guest
             @if (Route::has('register'))
             <a href="{{route('register')}}" class="nav-item nav-link">Register</a>

@@ -14,17 +14,16 @@
                                 <li class="breadcrumb-item active">Datatable</li>
                             </ol>
                         </div>
-                        <h5 class="page-title">Student List</h5>
+                        <h5 class="page-title">Assign Test</h5>
                     </div>
                 </div>
                 <div class="card mx-5">
                     <div class="card-body ">
-                        
+                       
                         <div class="row">
                             <div class="table-responsive">
                                 {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
                             </div>
-                            <button type="button" class="float-right btn btn-primary " id="assign_test" >Send Mail</button>
                             <!-- end col-12 -->
                         </div>
                     </div>
@@ -50,8 +49,35 @@
 
 {!! $dataTable->scripts() !!}
 <script>
+    // $(document).on('click', '.request', function() {
+    //     var id = $(this).attr('dataid');
+    //     var a = $(this);
+    //     $.ajax({
+    //         type: "GET",
+    //         url: 'status',
+    //         data: {
 
+    //             id: id
+    //         },
+    //         success: function(data) {
+    //             console.log(data.status);
+    //             if (data.status == 0) {
+    //                 a.html("Rejected");
+    //                 a.removeClass("badge-success");
+    //                 a.addClass("badge-danger");
+    //             } else {
 
+    //                 a.html("Approve");
+    //                 a.removeClass("badge-danger");
+    //                 a.addClass("badge-success");
+    //             }
+    //         }
+    //     });
 
+    // });
+
+        
+  
+  
 </script>
 @endpush

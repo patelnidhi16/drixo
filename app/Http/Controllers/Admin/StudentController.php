@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\AssigntestDataTable;
+use App\DataTables\AssigntestListDataTable;
 use App\DataTables\AttempttestDataTable;
+use App\DataTables\NotAttemptDataTable;
+use App\DataTables\ReturnresultDataTable;
 use App\DataTables\StudentDataTable;
+use App\DataTables\StudentsDataTable;
+use App\DataTables\SubjectDataTable;
+use App\DataTables\SubmissionDataTable;
 use App\DataTables\TitleDataTable;
+use App\DataTables\TitleTestDataTable;
 use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\Eligible_Student;
@@ -26,7 +34,12 @@ use Carbon\Carbon;
 
 class StudentController extends Controller
 {
-    public function student(UserDataTable $UserDataTable)
+    public function assigntest(AssigntestDataTable $AssigntestDataTable)
+    {
+        $student = User::get();
+        return $AssigntestDataTable->render('admin.assigntest', compact('student'));
+    }
+    public function student(StudentsDataTable $UserDataTable)
     {
         $student = User::get();
         return $UserDataTable->render('admin.student', compact('student'));
@@ -52,7 +65,7 @@ class StudentController extends Controller
         return view('admin.subject');
     }
 
-    public function addsubject(Request $request, StudentDataTable $StudentDataTable)
+    public function addsubject(Request $request, SubjectDataTable $StudentDataTable)
     {
         $detail = $request->file('image');
         $name_of_image = $detail->getClientOriginalName();
@@ -76,7 +89,7 @@ class StudentController extends Controller
         $data = Subject::find($id);
         return $data;
     }
-    public function displaysubject(StudentDataTable $StudentDataTable)
+    public function displaysubject(SubjectDataTable $StudentDataTable)
     {
         $user = Subject::get();
         return $StudentDataTable->render('admin.displaysubject', compact('user'));
@@ -109,7 +122,7 @@ class StudentController extends Controller
         $id = $id;
         return view('admin.questions', compact('id'));
     }
-    public function storequestions(Request $request, StudentDataTable $StudentDataTable)
+    public function storequestions(Request $request, SubjectDataTable $StudentDataTable)
     {
         $x = Subject::where('id', $request->id)->first();
 
@@ -182,7 +195,7 @@ class StudentController extends Controller
             'answer' => $request->answer,
         ]);
     }
-    public function alltest($id, TitleDataTable $TitleDatatable)
+    public function alltest($id, TitleTestDataTable $TitleTestDataTable)
     {
         $title = Question::where('subject_id', $id)->groupby('title')->get();
         $subject_name = Subject::where('id', $id)->first()->subject_name;
@@ -206,7 +219,6 @@ class StudentController extends Controller
     public function assign_test(Request $request)
     {
         $email = Auth::guard('web')->user()->email;
-
         $len = count($request->id);
         for ($i = 0; $i < $len; $i++) {
             $x = Student::where('title', $request->title)->where('subject_id', $request->subject_id)->first();
@@ -252,28 +264,27 @@ class StudentController extends Controller
     }
     public function index(Request $request)
     {
-
         return view('front.dashboard.index');
     }
     public function displaytest(Request $request)
     {
         $id = Auth::guard('web')->user()->id;
         $test = Student::with('getsubject')->where('student_id', $id)->get()->toArray();
-        $result = Result::where('user_id', $id)->get()->toArray();
-        return view('front.dashboard.displaytest', compact('test', 'result'));
+        return view('front.dashboard.displaytest', compact('test'));
     }
     public function test($id, $title)
     {
-        $student_id = Auth::guard('web')->user()->id;
 
+        $student_id = Auth::guard('web')->user()->id;
+        $question = Question::with('getoption', 'getsubject')->where('subject_id', $id)->where('title', $title)->get()->toArray();
+        $min = count($question);
         $start_time = Carbon::now('Asia/Kolkata')->format('M d,Y H:i:s');
 
-        $end_time = Carbon::now('Asia/Kolkata')->addMinutes(1)->format('M d,Y H:i:s');
+        $end_time = Carbon::now('Asia/Kolkata')->addMinutes($min)->format('M d,Y H:i:s');
         Student::where('student_id', $student_id)->where('title', $title)->update([
             'start_time' => $start_time,
             'end_time' => $end_time,
         ]);
-        $question = Question::with('getoption', 'getsubject')->where('subject_id', $id)->where('title', $title)->get()->toArray();
         $route = route('viewquestion', ['id' => $id, 'title' => $title]);
         return $route;
     }
@@ -288,6 +299,7 @@ class StudentController extends Controller
     }
     public function storerecord(Request $request)
     {
+
         $title = $request->title;
         $subject_id = $request->subject_id;
         $subject_name = $request->subject_name;
@@ -302,6 +314,7 @@ class StudentController extends Controller
 
             foreach ($request->answer as $key => $value) {
 
+
                 Submission::create([
                     'user_id' => $id,
                     'question_id' => $key,
@@ -311,13 +324,16 @@ class StudentController extends Controller
                 ]);
             }
             $x = Submission::with('getanswer')->where('user_id', $id)->where('title', $title)->where('subject', $subject_name)->get()->toArray();
+            // dd($x);
             $mark = 0;
             foreach ($x as $value) {
 
-                if ($value['getanswer'][0]['answer'] == $x[0]['answer']) {
+
+                if ($value['getanswer'][0]['answer'] == $value['answer']) {
                     $mark++;
                 }
             }
+
             Result::create([
                 'user_id' => $id,
                 'subject' => $subject_name,
@@ -329,10 +345,10 @@ class StudentController extends Controller
         return view('front.dashboard.displaysubmission');
         // return redirect()->route('index');
     }
-    public function result(AttempttestDataTable $Submission)
+    public function result(ReturnresultDataTable $ReturnresultDataTable)
     {
         $student = Result::get();
-        return $Submission->render('admin.result', compact('student'));
+        return $ReturnresultDataTable->render('admin.result', compact('student'));
     }
     public function displayresult(Request $request)
     {
@@ -355,22 +371,41 @@ class StudentController extends Controller
 
         return view('front.dashboard.displaymark', compact('result'));
     }
-    public function all()
-    {
-        $subject = Subject::all();
-        return view('admin.displayallsubject', compact('subject'));
-    }
+    // public function all()
+    // {
+    //     $subject = Subject::all();
+    //     return view('admin.displayallsubject', compact('subject'));
+    // }
     public function subjectdetail($id)
     {
         return view('admin.subjectdetail', compact('id'));
     }
     public function viewresponse($subject, $title)
     {
-
+        $id = Auth::guard('web')->user()->id;
+        // dd($id);
         $x = Subject::where('subject_name', $subject)->get()->toArray();
         $subject_id = $x[0]['id'];
-        $question = Question::with('getoption', 'getsubject', 'getans','getanswer')->where('subject_id', $subject_id)->where('title', $title)->get()->toArray();
-    //    dd($question[0]['getanswer'][0]['answer']);
-        return view('front.dashboard.viewresponse', compact('question'));
+        $question = Question::with('getoption', 'getsubject', 'getans', 'getanswer')->where('subject_id', $subject_id)->where('title', $title)->get()->toArray();
+        // dd($question);
+        $result = Result::where('user_id', $id)->where('subject', $subject)->orderBy('id', 'asc')->get()->toArray();
+        // dd($result);
+        return view('front.dashboard.viewresponse', compact('question', 'result', 'id'));
+    }
+    public function attempt_test(SubmissionDataTable $SubmissionDataTable)
+    {
+        $student = Result::get();
+        return $SubmissionDataTable->render('admin.attempt_test', compact('student'));
+    }
+    public function notattempt_test(NotAttemptDataTable $NotAttemptDataTable)
+    {
+        $student = Student::where('status','1')->get()->toArray();
+        return $NotAttemptDataTable->render('admin.notattempt_test', compact('student'));
+    }
+    public function assigntest_list(AssigntestListDataTable $AssigntestListDataTable)
+    {
+        
+        $student = Student::get();
+        return $AssigntestListDataTable->render('admin.assigntest_list', compact('student'));
     }
 }

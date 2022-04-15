@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class StudentDataTable extends DataTable
+class SubjectDataTable extends DataTable
 {
     /**
      * Build DataTable class.

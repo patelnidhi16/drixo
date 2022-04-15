@@ -31,7 +31,6 @@
                         <div class="card-body p-0">
                             <div class="row">
                                 <div class="col-md-12 p-5">
-
                                     <form method="POST" action="" accept-charset="UTF-8" class="subject" class="authentication-form">
                                         @csrf
                                         <input type="hidden" value="{{$id}}" name="id">
@@ -39,10 +38,10 @@
                                             <input class="form-control mb-3" id="title" placeholder="Enter Test Title" name="title" type="text"><br>
                                         </div>
                                         @error('title')
-                                                <span >
-                                                   {{ $message }}
-                                                </span>
-                                                @enderror
+                                        <span>
+                                            {{ $message }}
+                                        </span>
+                                        @enderror
                                         <select class="total form-control mb-3" name="no_of_question">
                                             <option value="">Select No. of Question</option>
                                             <option value="2">2</option>
@@ -52,7 +51,6 @@
                                             <option value="25">25</option>
                                             <option value="50">50</option>
                                         </select>
-                                        
                                         <div id="parents">
                                         </div>
                                     </form>
@@ -87,7 +85,7 @@
             },
             'title': {
                 required: true,
-                unique:true,
+                unique: true,
             },
 
         },
@@ -114,7 +112,6 @@
     $i = 0;
     $('.total').change(function(e) {
         e.preventDefault();
-
         var total = $(this).val();
         display = "";
         if ($i == 0) {

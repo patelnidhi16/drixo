@@ -187,9 +187,7 @@
 
 </style>
 
-
-
-<!------------------ Hover Effect Style : Demo - 14 --------------->
+@if(Auth::user()!=null)
 <div class="container mt-40">
   
     <div class="row mt-30">
@@ -218,6 +216,7 @@
         </div>
     </div>
 </div>
+@endif
 <script src="{{asset('https://code.jquery.com/jquery-3.4.1.min.js')}}"></script>
 
   

@@ -31,8 +31,6 @@ Auth::routes();
 Route::get('/index', [StudentController::class, 'index'])->name('index');
 Route::get('/displaytest', [StudentController::class, 'displaytest'])->name('displaytest');
 Route::get('/displaystudentresult', [StudentController::class, 'displaystudentresult'])->name('displaystudentresult');
-
-
 Route::get('/test/{id}/{title}', [StudentController::class, 'test'])->name('test');
 Route::get('/viewquestion/{id}/{title}', [StudentController::class, 'viewquestion'])->name('viewquestion');
 Route::get('/viewresponse/{subject}/{title}', [StudentController::class, 'viewresponse'])->name('viewresponse');

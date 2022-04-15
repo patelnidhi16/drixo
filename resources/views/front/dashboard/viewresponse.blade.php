@@ -130,19 +130,31 @@
       background: #FFF;
       color: #06BBCC;
     }
+    .label{
+      font-weight: 900 !important;
+    }
+    .mark{
+      background-color: #06BBCC;
+    font-size: 30px;
+    margin-left: 1024px;
+}
+    
   </style>
 </head>
 <div class="container-xxl">
   <div class="container">
     <div class="row g-4">
       <div class="card">
-
       <div class="card-header text-center text-capitalize" style="color:#181d38; font-size: x-large;">{{$question[0]['getsubject'][0]['subject_name']}}</div>
       
         <div class="card-body">
+          <div class="mark btn btn-primary lg-5 d-none d-lg-block col-2" style="background-color: #06BBCC;">Total Mark:{{$result[0]['result']}}</div>
           <span id=displayTime style="color: red; margin-left:570px; font-size:20px;"></span>
           <form id="exam" method="POST" action="/storerecord">
             @csrf
+          @php
+        $id=$id-1;
+          @endphp
             @foreach($question as $questions)
             <div class="privew">
               <div class="questionsBox">
@@ -151,8 +163,8 @@
                   @php $i=1; @endphp
                   @foreach($questions['getoption'] as $opt)
                   <li>
-                    <label>
-                      <input type="radio" name="answer[{{$questions['id']}}]" value="{{$i}}" class="answer" disabled  @if( $questions["getans"][0]["answer"]==$i) id="abc"  @endif  @if($questions['getanswer'][0]['answer']==$i) checked @endif dataid="{{$questions['getanswer'][0]['answer']}}"> {{$opt['option']}}</label>
+                    <label class="label">
+                      <input type="radio" name="answer[{{$questions['id']}}]" value="{{$i}}" class="answer" disabled  @if( $questions["getans"][0]["answer"]==$i) id="abc"  @endif  @if($questions['getanswer'][$id]['answer']==$i) checked @endif > {{$opt['option']}}</label>
                   </li>
                   @php $i++; @endphp
                   @endforeach
@@ -160,8 +172,6 @@
               </div>
             </div>
             @endforeach
-            <div class="card-footer text-muted"> <button class="btn btn-primary btn-block" type="submit" id="submit_btn">Submit
-              </button> </div>
           </form>
         </div>
       </div>
@@ -173,13 +183,13 @@
 @push('front_script')
 <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js') }}"></script>
 <script>
-  $('input:radio[id="abc"]').each(function() {
-      $(this).parent('label').css("border", "3px solid green");
-      console.log($(this).val());
+    $('input:radio[class="answer"]:checked').each(function(){
+    $(this).parent('label').css("border", "3px solid red");
+    console.log($(this).attr('dataid'));
   });
-  $('input:radio[class="answer"]:checked').each(function(){
-    // console.log($(this).val());
-    // console.log($(this).attr('dataid'));
+  $('input:radio[id="abc"]').each(function() {
+    $(this).parent('label').css("border", "3px solid green");
+      console.log($(this).val());
   });
 </script>
 @endpush

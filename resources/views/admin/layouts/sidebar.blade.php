@@ -1,4 +1,3 @@
-
 <div class="left-side-menu">
     <div class="media user-profile mt-2 mb-2">
         <img src="{{asset('assets/images/users/avatar-7.jpg')}}" class="avatar-sm rounded-circle mr-2" alt="Shreyu" />
@@ -20,7 +19,7 @@
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                     <i data-feather="settings" class="icon-dual icon-xs mr-2"></i>
                     <span>Settings</span>
-                </a>  
+                </a>
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                     <i data-feather="help-circle" class="icon-dual icon-xs mr-2"></i>
                     <span>Support</span>
@@ -60,53 +59,67 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('admin.displaysubject')}}">
+                        <i data-feather="calendar"></i>
+                        <span> Subject </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('admin.student')}}">
+
+                        <i data-feather="calendar"></i>
+                        <span> Student </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.assigntest')}}">
                         <i data-feather="calendar"></i>
                         <span> Assign Test </span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('admin.displaysubject')}}">
+                    <a href="{{route('admin.assigntest_list')}}">
                         <i data-feather="calendar"></i>
-                        <span>  Subject </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i data-feather="calendar"></i>
-                        <span>  Students </span> 
-                        <!-- display user table -->
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i data-feather="calendar"></i>
-                        <span>  List Assign Test Student </span> 
+                        <span>  Assign Test Student List</span>
                         <!-- display student table -->
                     </a>
                 </li>
-                <li>
+              
                 <li>
                     <a href="{{route('admin.result')}}">
                         <i data-feather="calendar"></i>
-                        <span>  Attemt Test </span>
+                        <span>  Result </span>
                         <!-- display student table but status = 0 -->
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <i data-feather="calendar"></i>
-                        <span>  Not attemt Test </span>
-                        <!-- display student table but status = 1 -->
+                        <span> Return Result </span>
+                        <!-- display student table but status = 0 -->
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('admin.all')}}">
+                    <a href="{{route('admin.attempt_test')}}">
                         <i data-feather="calendar"></i>
-                        <span>  Questions </span>
-                        <!-- list all question -->
+                        <span> Attemt Test </span>
+                        <!-- display student table but status = 0 -->
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.notattempt_test')}}">
+
+                        <i data-feather="calendar"></i>
+                        <span> Not attemt Test </span>
+                        <!-- display student table but status = 1 -->
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="#">
+                        <i data-feather="calendar"></i>
+                        <span> Questions </span>
+                    </a>
+                </li> -->
 
         </div>
         <!-- End Sidebar -->

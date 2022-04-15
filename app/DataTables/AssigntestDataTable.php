@@ -2,16 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Question;
-use App\Models\Subject;
-use PhpOffice\PhpSpreadsheet\Chart\Title as ChartTitle;
+use App\Models\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class TitleDataTable extends DataTable
+class AssigntestDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,20 +21,28 @@ class TitleDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function($user){
-                return "<a class='display_title btn btn-primary' title='{{$user->title}}' dataid='{{$user->subject_id}}' href='{{route('admin.display_title',[$user->subject_id,$user->title])}}'>View Question</a>";
+            ->addColumn('<input type="checkbox" id="all">', function($user){
+                // if($user->status==0){
+                // return "<button class='request badge badge-pill badge-danger' dataid='$user->id'>Rejected</button>";
+                // }
+                // else{
+
+                //     return "<button class='request badge badge-pill badge-success' dataid='$user->id'>Approve</button>";
+                // }
+                return "<input type='checkbox' dataid='$user->id' name='assign_test[]' class='assign_test'>";
+            
             })
-            ->rawColumns(['action'])
-    ->addIndexColumn();
-    }  
+            ->rawColumns(['<input type="checkbox" id="all">'])
+            ->addIndexColumn();
+    }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Title $model
+     * @param \App\Models\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Question $model)
+    public function query(User $model)
     {
         return $model->newQuery();
     }
@@ -49,7 +55,7 @@ class TitleDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('title-table')
+                    ->setTableId('user-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -72,13 +78,14 @@ class TitleDataTable extends DataTable
     {
         return [
             
-            Column::make('id'),
-            Column::make('title'),
-            Column::computed('action')
+            Column::computed('<input type="checkbox" id="all">')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(80)
+                  ->width(60)
                   ->addClass('text-center'),
+            Column::make('id'),
+            Column::make('name'),
+            Column::make('email'),
         ];
     }
 
@@ -89,6 +96,8 @@ class TitleDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Title_' . date('YmdHis');
+        return 'User_' . date('YmdHis');
     }
 }
+
+  

@@ -43,7 +43,6 @@
         </div>
     </div>
     <!-- Spinner End -->
-
     @include('front.layouts.header')
 
     <!-- Service Start -->

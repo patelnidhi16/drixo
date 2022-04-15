@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/calander', function () {
         return view('admin.calander');
     })->name('calander');
+    Route::get('assigntest', [StudentController::class, 'assigntest'])->name('assigntest');
     Route::get('student', [StudentController::class, 'student'])->name('student');
     // Route::get('status', [StudentController::class, 'status']);
     // Route::get('approve', [StudentController::class, 'approve'])->name('approve');
@@ -44,13 +45,14 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('alltest/{id}', [StudentController::class, 'alltest'])->name('alltest');
     Route::get('display_title/{id}/{title}', [StudentController::class, 'display_title'])->name('display_title');
     Route::get('assign_test', [StudentController::class, 'assign_test'])->name('assign_test');
+    Route::get('attempt_test', [StudentController::class, 'attempt_test'])->name('attempt_test');
+    Route::get('assigntest_list', [StudentController::class, 'assigntest_list'])->name('assigntest_list');
+    Route::get('notattempt_test', [StudentController::class, 'notattempt_test'])->name('notattempt_test');
+    Route::get('return_result', [StudentController::class, 'return_result'])->name('return_result');
     Route::get('select_subject', [StudentController::class, 'select_subject'])->name('select_subject');
     Route::get('select_title', [StudentController::class, 'select_title'])->name('select_title');
     Route::get('result', [StudentController::class, 'result'])->name('result');
     Route::get('/displayresult', [StudentController::class, 'displayresult'])->name('displayresult');
-  
     Route::get('/all', [StudentController::class, 'all'])->name('all');
     Route::get('/subjectdetail/{id}', [StudentController::class, 'subjectdetail'])->name('subjectdetail');
-
-
 });

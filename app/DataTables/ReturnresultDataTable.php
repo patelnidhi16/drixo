@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Attempttest;
-use App\Models\Submission;
+use App\Models\Student;
 use App\Models\Result;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AttempttestDataTable extends DataTable
+class ReturnresultDataTable extends DataTable
 {
     /**
      * Build DataTable class.

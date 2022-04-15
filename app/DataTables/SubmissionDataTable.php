@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\Result;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UserDataTable extends DataTable
+class SubmissionDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,33 +20,20 @@ class UserDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
-            ->addColumn('<input type="checkbox" id="all">', function($user){
-                // if($user->status==0){
-                // return "<button class='request badge badge-pill badge-danger' dataid='$user->id'>Rejected</button>";
-                // }
-                // else{
-
-                //     return "<button class='request badge badge-pill badge-success' dataid='$user->id'>Approve</button>";
-                // }
-                return "<input type='checkbox' dataid='$user->id' name='assign_test[]' class='assign_test'>";
-            
-            })
-            ->rawColumns(['<input type="checkbox" id="all">'])
-            ->addIndexColumn();
+            ->eloquent($query);
+           
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\Submission $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Result $model)
     {
         return $model->newQuery();
     }
-
     /**
      * Optional method if you want to use html builder.
      *
@@ -55,7 +42,7 @@ class UserDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('user-table')
+                    ->setTableId('submission-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -78,14 +65,11 @@ class UserDataTable extends DataTable
     {
         return [
             
-            Column::computed('<input type="checkbox" id="all">')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('name'),
-            Column::make('email'),
+            Column::make('user_id'),
+            Column::make('subject'),
+            Column::make('title'),
+            Column::make('result'),
         ];
     }
 
@@ -96,8 +80,6 @@ class UserDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'User_' . date('YmdHis');
+        return 'Submission_' . date('YmdHis');
     }
 }
-
-  

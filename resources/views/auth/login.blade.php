@@ -162,16 +162,16 @@
 
 
                         <div class="form-check">
-                        @if (Route::has('password.request'))
+                            @if (Route::has('password.request'))
                             <a class="btn btn-link" href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
                             @endif
-                           
+
                             @if (Route::has('register'))
                             <p>Don't have an account?
-                            <a class="nav-link" href="{{ route('register') }}"> {{ __('Register') }}</a>
-</p>
+                                <a class="nav-link" href="{{ route('register') }}"> {{ __('Register') }}</a>
+                            </p>
                             @endif
                             <!-- <button type="submit" class="btn btn-login ">Submit</button> -->
                         </div>
@@ -191,7 +191,7 @@
                         </ol>
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" >
+                                <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg">
                                 <div class="carousel-caption d-none d-md-block">
                                     <div class="banner-text">
                                         <h2>This is Heaven</h2>
@@ -200,7 +200,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg" >
+                                <img class="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg">
                                 <div class="carousel-caption d-none d-md-block">
                                     <div class="banner-text">
                                         <h2>This is Heaven</h2>
@@ -209,7 +209,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block img-fluid" src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg" >
+                                <img class="d-block img-fluid" src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg">
                                 <div class="carousel-caption d-none d-md-block">
                                     <div class="banner-text">
                                         <h2>This is Heaven</h2>
@@ -243,5 +243,5 @@
         },
 
     });
-    </script>
+</script>
 @endpush
