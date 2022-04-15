@@ -12,10 +12,10 @@ class Subject extends Model
         'subject_name',
         'image',
     ];
-    public function getquestion(){
-        return $this->hasMany('App\Models\Question');
+  
+    public function getsubjectid(){
+        return $this->hasMany(Subject::class,'id','subject_name');
     }
-   
   
 
 }

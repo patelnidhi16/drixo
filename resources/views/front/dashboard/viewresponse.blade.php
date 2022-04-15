@@ -136,18 +136,13 @@
   <div class="container">
     <div class="row g-4">
       <div class="card">
-        <div class="card-header text-center text-capitalize" style="color:#181d38; font-size: x-large;">{{$question[0]['getsubject'][0]['subject_name']}}</div>
+
+      <div class="card-header text-center text-capitalize" style="color:#181d38; font-size: x-large;">{{$question[0]['getsubject'][0]['subject_name']}}</div>
+      
         <div class="card-body">
           <span id=displayTime style="color: red; margin-left:570px; font-size:20px;"></span>
-          <center>
-            <p id="demo" style="color:red;"></p>
-          </center>
           <form id="exam" method="POST" action="/storerecord">
             @csrf
-            <input type="hidden" value="{{$question[0]['getsubject'][0]['subject_name']}}" name="subject_name">
-            <input type="hidden" value="{{$question[0]['subject_id']}}" name="subject_id">
-            <input type="hidden" value="{{$question[0]['title']}}" name="title">
-            <input type="hidden" value="{{$end_time}}" name="end_time" id='end_time'>
             @foreach($question as $questions)
             <div class="privew">
               <div class="questionsBox">
@@ -157,7 +152,7 @@
                   @foreach($questions['getoption'] as $opt)
                   <li>
                     <label>
-                      <input type="radio" name="answer[{{$questions['id']}}]" value="{{$i}}" id="answerGroup_0"> {{$opt['option']}}</label>
+                      <input type="radio" name="answer[{{$questions['id']}}]" value="{{$i}}" class="answer" disabled  @if( $questions["getans"][0]["answer"]==$i) id="abc"  @endif  @if($questions['getanswer'][0]['answer']==$i) checked @endif dataid="{{$questions['getanswer'][0]['answer']}}"> {{$opt['option']}}</label>
                   </li>
                   @php $i++; @endphp
                   @endforeach
@@ -170,28 +165,21 @@
           </form>
         </div>
       </div>
+      </div>
     </div>
   </div>
 </div>
 @endsection
+@push('front_script')
 <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js') }}"></script>
 <script>
-  $(document).ready(function() {
-    var a = $('#end_time').val();
-    var countDownDate = new Date(a).getTime()
-    var x = setInterval(function() {
-      var now = new Date().getTime();
-      var distance = countDownDate - now;
-      // console.log(distance);
-      if (distance == 0) {
-        alert("your test time is over");
-        $('#exam').submit();
-      }
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
-    });
+  $('input:radio[id="abc"]').each(function() {
+      $(this).parent('label').css("border", "3px solid green");
+      console.log($(this).val());
+  });
+  $('input:radio[class="answer"]:checked').each(function(){
+    // console.log($(this).val());
+    // console.log($(this).attr('dataid'));
   });
 </script>
+@endpush

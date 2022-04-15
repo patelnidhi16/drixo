@@ -208,7 +208,7 @@
                         $('#password').nextAll('span').html(value.cpassword[0]);
                         $('#currentpassword').nextAll('span').html(value.currentpassword[0]);
                     });
-
+php
 
                 },
                 success: function(data) {

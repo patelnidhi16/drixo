@@ -17,22 +17,44 @@
                         <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
                         <h5 class="mb-3">{{$user['getsubject'][0]['subject_name']}}</h5>
                         <p>{{$user['title']}}</p>
-                        <a type="button" style="background-color:#06bbcc; color:white;" class="view" href="{{route('test',['id'=>$user['subject_id'],'title'=>$user['title']])}}">View Test</a>
+                        <a type="button" style="background-color:#06bbcc; color:white;" class="view" dataid="{{$user['subject_id']}}" title="{{$user['title']}}">View Test</a>
+                        <!-- <a type="button" style="background-color:#06bbcc; color:white;" class="view" href="{{route('test',['id'=>$user['subject_id'],'title'=>$user['title']])}}">View Test</a> -->
                     </div>
                 </div>
             </div>
-            @else 
+            @else
             @if($loop->first)
             <h4 style="text-align:center">No test is assign</h3>
-            @endif
-            @endif
-            @endforeach
-            @else
-            <h4 style="text-align:center">No test is assign</h3>
-            @endif
+                @endif
+                @endif
+                @endforeach
+                @else
+                <h4 style="text-align:center">No test is assign</h3>
+                    @endif
         </div>
     </div>
 </div>
-
-
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).on('click', '.view', function() {
+        var id = $(this).attr('dataid');
+        var title = $(this).attr('title');
+        //    alert(id);
+        $.ajax({
+            url: "test/" + id + "/" + title,
+            type: 'GET',
+            data: {
+                id: id,
+                title: title
+            },
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                // console.log(data);
+                window.location.href = data;
+            },
+        });
+    });
+</script>

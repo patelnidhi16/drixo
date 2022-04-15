@@ -36,7 +36,7 @@
 </head>
 
 <body>
-    <!-- Spinner Start -->          
+    <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
@@ -44,8 +44,8 @@
     </div>
     <!-- Spinner End -->
 
-@include('front.layouts.header')
-    
+    @include('front.layouts.header')
+
     <!-- Service Start -->
     @yield('content')
     <!-- Service End -->
@@ -63,8 +63,11 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <h6 class="section-title bg-white text-start text-primary pe-3">Welcome </h6>
                     <h1 class="mb-4"> eLEARNING</h1>
-                    <p class="mb-4">eLEARNING is really an interesting platform for testing student knowledge. </p><p>It will provide student to an online interface where they give quizzes online. It may contain MCQs format as designed by the admin .</p><p>The other interface will be controlled by the admin who will responsible to create, design and update the quizzes.</p><p> The users or students will enter their credential to login and solve a quiz of their choice. </p>
-                     <div class="row gy-2 gx-4 mb-4">
+                    <p class="mb-4">eLEARNING is really an interesting platform for testing student knowledge. </p>
+                    <p>It will provide student to an online interface where they give quizzes online. It may contain MCQs format as designed by the admin .</p>
+                    <p>The other interface will be controlled by the admin who will responsible to create, design and update the quizzes.</p>
+                    <p> The users or students will enter their credential to login and solve a quiz of their choice. </p>
+                    <div class="row gy-2 gx-4 mb-4">
                         <div class="col-sm-6">
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Assesment</p>
                         </div>
@@ -80,9 +83,9 @@
                         <div class="col-sm-6">
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Notify when Assign new Quiz</p>
                         </div>
-                       
+
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -103,7 +106,7 @@
                         <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
                             <a class="position-relative d-block overflow-hidden" href="">
                                 <img class="img-fluid" src="{{asset('front/assets/img/cat-1.jpg')}}" alt="">
-                  
+
                                 <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
                                     <h5 class="m-0">Web Design</h5>
                                     <small class="text-primary">49 Courses</small>
@@ -394,6 +397,8 @@
     <!-- sudo composer update --ignore-platform-reqs -->
     <!-- Template Javascript -->
     <script src="{{asset('front/assets/js/main.js')}}"></script>
+    @stack('front_script')
+
 </body>
 
 </html>

@@ -6,7 +6,8 @@
     </div>
     <div class="container-xxl">
         <div class="container">
-            <div class="row g-4">      
+            <div class="row g-4">
+
                 @if(count($result)>0)
                 @foreach($result as $user )
                 @if($user['status']==1)
@@ -16,6 +17,9 @@
                             <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
                             <h5 class="mb-3">{{$user['subject']}}</h5>
                             <p>{{$user['title']}}</p>
+                        <!-- <a type="button" style="background-color:#06bbcc; color:white;" class="view" subject="{{$user['subject']}}" title="{{$user['title']}}">View Test</a> -->
+                        <a type="button" style="background-color:#06bbcc; color:white;" class="view" href="{{route('viewresponse',['subject'=>$user['subject'],'title'=>$user['title']])}}">View Test</a>
+
                             {{$user['result']}}
                         </div>
                     </div>
@@ -30,3 +34,29 @@
         </div>
     </div>
     @endsection
+<script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js') }}"></script>
+
+    <script>
+        
+    // $(document).on('click', '.view', function() {
+    //     alert(1);
+    //     var subject = $(this).attr('subject');
+    //     var title = $(this).attr('title');
+    //     //    alert(id);
+    //     $.ajax({
+    //         url: "viewresponse/" + subject + "/" + title,
+    //         type: 'GET',
+    //         data: {
+    //             subject: subject,
+    //             title: title
+    //         },
+    //         processData: false,
+    //         contentType: false,
+    //         success: function(data) {
+    //             // console.log(data);
+    //             window.location.href = data;
+    //         },
+    //     });
+    // });
+
+    </script>

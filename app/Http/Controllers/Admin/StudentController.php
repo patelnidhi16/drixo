@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Result;
-
+use Carbon\Carbon;
 
 class StudentController extends Controller
 {
@@ -210,21 +210,18 @@ class StudentController extends Controller
         $len = count($request->id);
         for ($i = 0; $i < $len; $i++) {
             $x = Student::where('title', $request->title)->where('subject_id', $request->subject_id)->first();
-          
-            if($x==null){
-            
-                $y=Student::create([
-                                'student_id' => $request->id[$i],
-                                'subject_id' => $request->subject_id,
-                                'title' => $request->title,
-                                'status' => '1',
-                            ]);
-                         
-                    Mail::to($email)->send(new ApproveMail());
 
+            if ($x == null) {
+
+                $y = Student::create([
+                    'student_id' => $request->id[$i],
+                    'subject_id' => $request->subject_id,
+                    'title' => $request->title,
+                    'status' => '1',
+                ]);
+
+                Mail::to($email)->send(new ApproveMail());
             }
-
-
         }
         $user = [];
         foreach ($request->id as $id) {
@@ -261,54 +258,74 @@ class StudentController extends Controller
     public function displaytest(Request $request)
     {
         $id = Auth::guard('web')->user()->id;
-
         $test = Student::with('getsubject')->where('student_id', $id)->get()->toArray();
         $result = Result::where('user_id', $id)->get()->toArray();
-
         return view('front.dashboard.displaytest', compact('test', 'result'));
     }
     public function test($id, $title)
     {
+        $student_id = Auth::guard('web')->user()->id;
+
+        $start_time = Carbon::now('Asia/Kolkata')->format('M d,Y H:i:s');
+
+        $end_time = Carbon::now('Asia/Kolkata')->addMinutes(1)->format('M d,Y H:i:s');
+        Student::where('student_id', $student_id)->where('title', $title)->update([
+            'start_time' => $start_time,
+            'end_time' => $end_time,
+        ]);
+        $question = Question::with('getoption', 'getsubject')->where('subject_id', $id)->where('title', $title)->get()->toArray();
+        $route = route('viewquestion', ['id' => $id, 'title' => $title]);
+        return $route;
+    }
+    public function viewquestion($id, $title)
+    {
+        $student_id = Auth::guard('web')->user()->id;
+        $x = Student::where('student_id', $student_id)->where('title', $title)->select('end_time')->first()->toArray();
+        $end_time = $x['end_time'];
         $question = Question::with('getoption', 'getsubject')->where('subject_id', $id)->where('title', $title)->get()->toArray();
 
-        return view('front.dashboard.test', compact('question'));
+        return view('front.dashboard.test', compact('question', 'end_time'));
     }
     public function storerecord(Request $request)
     {
-
         $title = $request->title;
         $subject_id = $request->subject_id;
         $subject_name = $request->subject_name;
-
         $id = Auth::user()->id;
         $x = Student::where('student_id', $id)->where('title', $title)->where('subject_id', $subject_id)->update([
             'status' => '0',
         ]);
-        foreach ($request->answer as $key => $value) {
 
-            Submission::create([
+        if ($request->answer) {
+
+
+
+            foreach ($request->answer as $key => $value) {
+
+                Submission::create([
+                    'user_id' => $id,
+                    'question_id' => $key,
+                    'subject' => $subject_name,
+                    'title' => $title,
+                    'answer' => $value,
+                ]);
+            }
+            $x = Submission::with('getanswer')->where('user_id', $id)->where('title', $title)->where('subject', $subject_name)->get()->toArray();
+            $mark = 0;
+            foreach ($x as $value) {
+
+                if ($value['getanswer'][0]['answer'] == $x[0]['answer']) {
+                    $mark++;
+                }
+            }
+            Result::create([
                 'user_id' => $id,
-                'question_id' => $key,
                 'subject' => $subject_name,
                 'title' => $title,
-                'answer' => $value,
+                'result' => $mark,
+                'status' => '0',
             ]);
         }
-        $x = Submission::with('getanswer')->where('user_id', $id)->where('title', $title)->where('subject', $subject_name)->get()->toArray();
-        $mark = 0;
-        foreach ($x as $value) {
-
-            if ($value['getanswer'][0]['answer'] == $x[0]['answer']) {
-                $mark++;
-            }
-        }
-        Result::create([
-            'user_id' => $id,
-            'subject' => $subject_name,
-            'title' => $title,
-            'result' => $mark,
-            'status' => '0',
-        ]);
         return view('front.dashboard.displaysubmission');
         // return redirect()->route('index');
     }
@@ -333,7 +350,9 @@ class StudentController extends Controller
     public function displaystudentresult()
     {
         $id = Auth::guard('web')->user()->id;
-        $result =  Result::where('id', $id)->where('status', 1)->get();
+
+        $result =  Result::where('user_id', $id)->where('status', 1)->get();
+
         return view('front.dashboard.displaymark', compact('result'));
     }
     public function all()
@@ -341,7 +360,17 @@ class StudentController extends Controller
         $subject = Subject::all();
         return view('admin.displayallsubject', compact('subject'));
     }
-    public function subjectdetail($id){
-        return view('admin.subjectdetail',compact('id'));
+    public function subjectdetail($id)
+    {
+        return view('admin.subjectdetail', compact('id'));
+    }
+    public function viewresponse($subject, $title)
+    {
+
+        $x = Subject::where('subject_name', $subject)->get()->toArray();
+        $subject_id = $x[0]['id'];
+        $question = Question::with('getoption', 'getsubject', 'getans','getanswer')->where('subject_id', $subject_id)->where('title', $title)->get()->toArray();
+    //    dd($question[0]['getanswer'][0]['answer']);
+        return view('front.dashboard.viewresponse', compact('question'));
     }
 }

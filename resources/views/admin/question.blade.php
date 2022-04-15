@@ -72,8 +72,6 @@
                                             </div>
                                         </div>
                                        
-                                       
-
                                         <div class="form-group mb-0 text-center">
                                             <button class="btn btn-primary btn-block col-2" type="submit" id="submit_btn">
                                                 Add Quiz

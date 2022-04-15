@@ -12,7 +12,9 @@ class Student extends Model
         'student_id',
         'subject_id',
         'title',
-        'status'
+        'status',
+        'start_time',
+        'end_time'
     ];
     public function getsubject(){
         return $this->hasMany(Subject::class,'id','subject_id');

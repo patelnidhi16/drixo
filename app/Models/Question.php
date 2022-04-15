@@ -23,4 +23,7 @@ class Question extends Model
     public function getans(){
         return $this->hasMany(Answer::class,'question_id','id');
     }
+    public function getanswer(){
+        return $this->hasMany(Submission::class,'question_id','id');
+    }
 }

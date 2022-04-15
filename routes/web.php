@@ -27,13 +27,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/index', [StudentController::class, 'index'])->name('index');
 Route::get('/displaytest', [StudentController::class, 'displaytest'])->name('displaytest');
 Route::get('/displaystudentresult', [StudentController::class, 'displaystudentresult'])->name('displaystudentresult');
 
 
 Route::get('/test/{id}/{title}', [StudentController::class, 'test'])->name('test');
+Route::get('/viewquestion/{id}/{title}', [StudentController::class, 'viewquestion'])->name('viewquestion');
+Route::get('/viewresponse/{subject}/{title}', [StudentController::class, 'viewresponse'])->name('viewresponse');
 Route::post('/storerecord', [StudentController::class, 'storerecord'])->name('storerecord');
 Route::get('/result/{subject}/{title}', [StudentController::class, 'result'])->name('result');
 
