@@ -27,11 +27,13 @@ class Eligible_Student extends HttpFormRequest
      */
     public function rules(Request $request)
     {
+        // dd($request->all());
+   
         return [
-            'title' => ['required', Rule::unique('students')->where(function ($query)  {
-                for ($i=0; $i < count($this->id); $i++) { 
-                    return $query->where('subject_id', $this->id[$i])->where('title', $this->title)->where('subject_id', $this->subject_id);
-                }
+            'title' => ['required', Rule::unique('questions')->where(function ($query)  {
+                // for ($i=0; $i < count($this->id); $i++) { 
+                    return $query->where('subject_id', $this->id)->where('title', $this->title);
+                // }
             })],
         ];
     }

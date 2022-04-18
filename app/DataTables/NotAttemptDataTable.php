@@ -22,7 +22,6 @@ class NotAttemptDataTable extends DataTable
         return datatables()
             ->eloquent($query);
     }
-
     /**
      * Get query source of dataTable.
      *
@@ -31,7 +30,7 @@ class NotAttemptDataTable extends DataTable
      */
     public function query(Student $model)
     {
-        return $model->newQuery();
+        return $model->where('status','1');
     }
 
     /**

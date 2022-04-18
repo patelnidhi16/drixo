@@ -31,18 +31,20 @@
                         <div class="card-body p-0">
                             <div class="row">
                                 <div class="col-md-12 p-5">
-                                    <form method="POST" action="" accept-charset="UTF-8" class="subject" class="authentication-form">
+
+                                    <form method="POST" action="" accept-charset="UTF-8" class="subject" class="authentication-form" id="question">
                                         @csrf
-                                        <input type="hidden" value="{{$id}}" name="id">
+                                        <input type="hidden" id="id" value="{{$id}}">
                                         <div class="input-group input-group-merge">
                                             <input class="form-control mb-3" id="title" placeholder="Enter Test Title" name="title" type="text"><br>
+                                            <span style="color: red;"></span>
                                         </div>
                                         @error('title')
-                                        <span>
+                                        <span style="color:red;">
                                             {{ $message }}
                                         </span>
                                         @enderror
-                                        <select class="total form-control mb-3" name="no_of_question">
+                                        <!-- <select class="total form-control mb-3" name="no_of_question">
                                             <option value="">Select No. of Question</option>
                                             <option value="2">2</option>
                                             <option value="5">5</option>
@@ -50,7 +52,8 @@
                                             <option value="20">20</option>
                                             <option value="25">25</option>
                                             <option value="50">50</option>
-                                        </select>
+                                        </select> -->
+                                        <input type="number" class="total form-control mb-3" name="no_of_question" min="1">
                                         <div id="parents">
                                         </div>
                                     </form>
@@ -70,26 +73,48 @@
 @endsection
 @push('script')
 <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js') }}"></script>
-<script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js') }}">
-</script>
-<script src="{{ asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js') }}"></script>
+<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+
+<!-- <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js') }}">
+</script> -->
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    $('.subject').validate({
-        rules: {
-            'question[]': {
-                required: true,
+    $(document).on('click', '.abc', function() {
+        id = $('#id').val();
+
+        $('.subject').validate({
+            rules: {
+                'question[]': {
+                    required: true,
+                },
+                'option1[]': {
+                    required: true,
+                },
+                // 'title': {
+                //     required: true,
+                // },
             },
-            'option1[]': {
-                required: true,
-            },
-            'title': {
-                required: true,
-                unique: true,
+            submitHandler: function(form) {
+                $.ajax({
+                    url: "/admin/questions/"+id+"/a",
+                    type: 'POST',
+                    data: new FormData(form),
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        alert(1);
+                    },
+                    error:function(error){
+                        console.log();
+                        $('#question').find('[name=title]').nextAll('span').html(error.responseJSON.errors.title[0]);
+                    }
+                });
+
             },
 
-        },
-
+        });
     });
     $('form.subject').on('click', function(event) {
         $('.question').each(function() {
@@ -124,7 +149,7 @@
                                             </div>
                                       <div class="input-group-prepend" style=" height: 40px;"></div>
                                     <input class="question form-control"  placeholder="Enter Question ` +
-                    i + `" name="question[` + i + `]" type="text"style="margin-right: 10px;">
+                    i + `" name="question[` + i + `]" type="text"style="margin-right: 10px;" value="{{old('question[` + i + `]')}}">
                                 </div>
                                     <div class="form-group">
                                         <div class="input-group input-group-merge">
@@ -182,7 +207,7 @@
 
 
             }
-            display += ` <button class="btn btn-primary" type="submit">Submit</button>`;
+            display += ` <button class="abc btn btn-primary" type="submit">Submit</button>`;
 
             $('#parents').append(display);
         } else {
@@ -264,7 +289,7 @@
 
 
                             }
-                            display += ` <button class="btn btn-primary" type="submit">Submit</button>`;
+                            display += ` <button class="abc btn btn-primary" type="submit">Submit</button>`;
 
                             $('#parents').append(display);
                             swal("Poof! Your imaginary file has been deleted!", {
@@ -342,13 +367,9 @@
 
                                   `;
                 }
-                display += ` <button class="btn btn-primary" type="submit">Submit</button>`;
+                display += ` <button class="abc btn btn-primary" type="submit">Submit</button>`;
                 $('#parents').append(display);
             }
-
-
-
-
 
         }
         $i++;;

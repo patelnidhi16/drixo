@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Result;
 use Carbon\Carbon;
+use Illuminate\Routing\Route;
 
 class StudentController extends Controller
 {
@@ -119,11 +120,33 @@ class StudentController extends Controller
 
     public function questions($id)
     {
+    //    dd(1);
+        $id = $id;
+        $route = route('admin.displayquestions',$id);
+        // dd($route);
+        return $route;
+    }
+    public function displayquestions($id)
+    {
         $id = $id;
         return view('admin.questions', compact('id'));
     }
-    public function storequestions(Request $request, SubjectDataTable $StudentDataTable)
+    public function questiontitle(Request $request)
     {
+    dd(1);
+        dd($request->all());
+        // $id = $id;
+        return view('admin.questions', compact('id'));
+    }
+
+    public function storequestions(Eligible_Student  $request, SubjectDataTable $StudentDataTable)
+    {
+    //    $x= Question::where('subject_id', $request->id)->where('title', $request->title)->get()->toArray();
+    //    if($x){
+    //     echo '<script>alert("this title is already taken")</script>';
+    //    }else{
+    //        dd(2);
+    //    }
         $x = Subject::where('id', $request->id)->first();
 
         $len = count($request->question);
@@ -309,11 +332,7 @@ class StudentController extends Controller
         ]);
 
         if ($request->answer) {
-
-
-
             foreach ($request->answer as $key => $value) {
-
 
                 Submission::create([
                     'user_id' => $id,
@@ -371,11 +390,7 @@ class StudentController extends Controller
 
         return view('front.dashboard.displaymark', compact('result'));
     }
-    // public function all()
-    // {
-    //     $subject = Subject::all();
-    //     return view('admin.displayallsubject', compact('subject'));
-    // }
+   
     public function subjectdetail($id)
     {
         return view('admin.subjectdetail', compact('id'));
@@ -400,12 +415,14 @@ class StudentController extends Controller
     public function notattempt_test(NotAttemptDataTable $NotAttemptDataTable)
     {
         $student = Student::where('status','1')->get()->toArray();
+      
         return $NotAttemptDataTable->render('admin.notattempt_test', compact('student'));
     }
     public function assigntest_list(AssigntestListDataTable $AssigntestListDataTable)
     {
-        
         $student = Student::get();
-        return $AssigntestListDataTable->render('admin.assigntest_list', compact('student'));
+        $subject = Subject::get();
+
+        return $AssigntestListDataTable->render('admin.assigntest_list', compact('student','subject'));
     }
 }

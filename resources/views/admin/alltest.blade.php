@@ -3,7 +3,7 @@
 <!-- Button trigger modal -->
 @push('style')
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
-<link rel="stylesheet" href='path/to/font-awesome/css/font-awesome.min.css'>
+<!-- <link rel="stylesheet" href='path/to/font-awesome/css/font-awesome.min.css'> -->
 <style>
     .error {
         color: red;

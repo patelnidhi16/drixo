@@ -28,7 +28,7 @@ class SubjectDataTable extends DataTable
                 $result = '<div class="btn-group">';
                 $result .= "<button dataid='$user->id' class='rounded delete btn btn-danger mr-2 ' style='height:40px'>Delete</button>";
                 $result .= "<button data-target='#edit' data-toggle='modal' dataid=' $user->id ' class='rounded edit btn btn-success mr-2' data-backdrop='static' data-keyboard='false'style='height:40px' >Edit</button>";
-                $result .= "<a dataid=' $user->id ' class='rounded add btn btn-primary col-4 mr-2 ' style='height:40px; width: 180px;' href='".route('admin.questions',$user->id)."'>Add Question</a>";
+                $result .= "<a dataid=' $user->id ' class='add_question rounded add btn btn-primary col-4 mr-2 ' style='height:40px; width: 180px;'>Add Question</a>";
                 // $result .= "<a dataid='$user->id' class='rounded add_question btn btn-info mr-2' style='height:40px;width: 120px;' href='".route('admin.questionlist', $user->id)."'>View Question</a>";
                 $result .= "<a dataid='$user->id' class='rounded display btn btn-success mr-2' href='".route('admin.alltest', $user->id)."' style='height:40px;'>View Test</a>";
                 

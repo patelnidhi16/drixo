@@ -19,9 +19,15 @@
                 </div>
                 <div class="card mx-5">
                     <div class="card-body ">
-                       
+
                         <div class="row">
                             <div class="table-responsive">
+                                <select class="form-control col-3" id="subject">
+                                    <option>Select Subject Id</option>
+                                    @foreach($subject as $sub)
+                                    <option>{{$sub['id']}}</option>
+                                    @endforeach
+                                </select>
                                 {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
                             </div>
                             <!-- end col-12 -->
@@ -49,6 +55,7 @@
 
 {!! $dataTable->scripts() !!}
 <script>
+    alert(1);
     // $(document).on('click', '.request', function() {
     //     var id = $(this).attr('dataid');
     //     var a = $(this);
@@ -56,7 +63,6 @@
     //         type: "GET",
     //         url: 'status',
     //         data: {
-
     //             id: id
     //         },
     //         success: function(data) {
@@ -75,9 +81,29 @@
     //     });
 
     // });
-
+    $(function () {
+      alert($('#subject').val());
+      var table = $('.data-table').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: {
+            url: "{{ route('admin.assigntest_list') }}",
+            data: {
+                  d = $('#subject').val(),
+              }
+          },
+          columns: [
+              {data: 'id', name: 'id'},
+              {data: 'name', name: 'name'},
+              {data: 'email', name: 'email'},
+              {data: 'approved', name: 'approved'},
+          ]
+      });
+    
+      $('#approved').change(function(){
+          table.draw();
+      });
         
-  
-  
+    });
 </script>
 @endpush

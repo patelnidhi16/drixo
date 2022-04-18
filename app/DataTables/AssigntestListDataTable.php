@@ -32,6 +32,7 @@ class AssigntestListDataTable extends DataTable
      */
     public function query(Student $model)
     {
+        
         return $model->newQuery();
     }
 

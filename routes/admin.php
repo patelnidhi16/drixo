@@ -37,8 +37,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('edit', [StudentController::class, 'edit'])->name('edit');
     Route::post('update', [StudentController::class, 'update'])->name('update');
     Route::get('questions/{id}', [StudentController::class, 'questions'])->name('questions');
+    Route::get('displayquestions/{id}', [StudentController::class, 'displayquestions'])->name('displayquestions');
     Route::get('question', [StudentController::class, 'question'])->name('question');
-    Route::post('questions/{id}', [StudentController::class, 'storequestions']);
+    Route::post('questions/{id}/{title}', [StudentController::class, 'storequestions'])->name('storequestion');
     Route::get('questionlist/{id}', [StudentController::class, 'questionlist'])->name('questionlist');
     Route::get('editquestion', [StudentController::class, 'editquestion'])->name('editquestion');
     Route::post('updatequestion', [StudentController::class, 'updatequestion'])->name('updatequestion');

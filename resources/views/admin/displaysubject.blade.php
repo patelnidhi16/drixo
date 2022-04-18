@@ -3,13 +3,11 @@
 <!-- Button trigger modal -->
 @push('style')
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
-<link rel="stylesheet" href='path/to/font-awesome/css/font-awesome.min.css'>
+<!-- <link rel="stylesheet" href='path/to/font-awesome/css/font-awesome.min.css'> -->
 <style>
-       
     .error {
         color: red;
     }
-
 </style>
 @endpush
 <!-- Modal -->
@@ -37,8 +35,6 @@
                                 </span>
                             </div>
                             <input class="form-control" id="subject_name" placeholder="Enter your subjectname" name="subject_name" type="text" value=""><br>
-
-
                         </div>
                     </div>
                     <div class="form-group mt-4">
@@ -83,7 +79,7 @@
                     </ol>
                 </div>
                 <h5 class="page-title">Subject List</h5>
-<a class="btn btn-primary float-right m-3" href="{{route('admin.subject')}}">Add Subject</a>
+                <a class="btn btn-primary float-right m-3" href="{{route('admin.subject')}}">Add Subject</a>
 
             </div>
         </div>
@@ -92,10 +88,10 @@
                 <div class="card m-b-30">
                     <div class="card-body">
 
-                      
+
                         <div class="table-responsive">
-{!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
-</div>
+                            {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
+                        </div>
                     </div>
                 </div>
             </div> <!-- end col -->
@@ -118,13 +114,11 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-  
+
 </script>
 
 {!! $dataTable->scripts() !!}
 <script>
-
-
     $('.subject').validate({
         rules: {
             'question[]': {
@@ -137,10 +131,10 @@
                 required: true,
             },
         },
-       
+
     });
-   
-    $(document).on('click','.delete',function() {
+
+    $(document).on('click', '.delete', function() {
         var id = $(this).attr('dataid');
         swal({
                 title: "Are you sure?",
@@ -174,7 +168,7 @@
             });
 
     });
-    $(document).on('click','.edit',function() {
+    $(document).on('click', '.edit', function() {
         id = $(this).attr('dataid');
         $.ajax({
             headers: {
@@ -233,6 +227,26 @@
                 });
 
         }
+    });
+   
+    $(document).on('click','.add_question',function(){
+      id=$(this).attr('dataid');
+     alert(id);
+      $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "questions/" + id ,
+            type: 'get',
+            data: {
+                id: id
+            },
+            success: function(data) {
+                window.location.href=data;
+                console.log(data);
+              alert(1)
+            }
+        });
     });
 </script>
 @endpush
