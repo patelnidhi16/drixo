@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Student;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -30,12 +31,16 @@ class AssigntestListDataTable extends DataTable
      * @param \App\Models\AssigntestList $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Student $model)
+    public function query(Student $model, Request $request )
     {
-        
-        return $model->newQuery();
-    }
+        if($request->subject_id){
+          return $model->where('subject_id',$request->subject_id);
+         
+        }else{
 
+            return $model->newQuery();
+        }
+    }
     /**
      * Optional method if you want to use html builder.
      *
@@ -66,7 +71,6 @@ class AssigntestListDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            
             Column::make('id'),
             Column::make('student_id'),
             Column::make('subject_id'),

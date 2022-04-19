@@ -14,5 +14,6 @@ class Result extends Model
         'title',
         'result',
         'status',
+        'total_mark',
     ];
 }

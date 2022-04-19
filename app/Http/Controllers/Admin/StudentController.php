@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Result;
 use Carbon\Carbon;
 use Illuminate\Routing\Route;
-
+use PDF;
 class StudentController extends Controller
 {
     public function assigntest(AssigntestDataTable $AssigntestDataTable)
@@ -241,7 +241,8 @@ class StudentController extends Controller
     }
     public function assign_test(Request $request)
     {
-        $email = Auth::guard('web')->user()->email;
+        $email = Auth::guard('admin')->user();
+        // dd($email);
         $len = count($request->id);
         for ($i = 0; $i < $len; $i++) {
             $x = Student::where('title', $request->title)->where('subject_id', $request->subject_id)->first();
@@ -326,6 +327,9 @@ class StudentController extends Controller
         $title = $request->title;
         $subject_id = $request->subject_id;
         $subject_name = $request->subject_name;
+$totalmark=Question::where('subject_id',$subject_id)->where('title',$title)->get();
+$total=count($totalmark);
+// dd($total);
         $id = Auth::user()->id;
         $x = Student::where('student_id', $id)->where('title', $title)->where('subject_id', $subject_id)->update([
             'status' => '0',
@@ -345,8 +349,8 @@ class StudentController extends Controller
             $x = Submission::with('getanswer')->where('user_id', $id)->where('title', $title)->where('subject', $subject_name)->get()->toArray();
             // dd($x);
             $mark = 0;
+          
             foreach ($x as $value) {
-
 
                 if ($value['getanswer'][0]['answer'] == $value['answer']) {
                     $mark++;
@@ -359,10 +363,10 @@ class StudentController extends Controller
                 'title' => $title,
                 'result' => $mark,
                 'status' => '0',
+                'total_mark'=>$total
             ]);
         }
         return view('front.dashboard.displaysubmission');
-        // return redirect()->route('index');
     }
     public function result(ReturnresultDataTable $ReturnresultDataTable)
     {
@@ -418,11 +422,27 @@ class StudentController extends Controller
       
         return $NotAttemptDataTable->render('admin.notattempt_test', compact('student'));
     }
-    public function assigntest_list(AssigntestListDataTable $AssigntestListDataTable)
+    public function assigntest_list(AssigntestListDataTable $AssigntestListDataTable, Request $request)
     {
         $student = Student::get();
         $subject = Subject::get();
-
         return $AssigntestListDataTable->render('admin.assigntest_list', compact('student','subject'));
+    }
+    public function viewresult(){
+        $id=Auth::guard('web')->user()->id;
+        $result=Result::where('user_id',$id)->get();
+        return view('front.dashboard.viewresult',compact('result'));
+    }
+    public function pdf(){
+      
+
+        $id=Auth::guard('web')->user()->id;
+        $result=Result::where('user_id',$id)->get();
+
+        $data ='Welcome to Tutsmake.com';
+            
+      
+      $pdf = PDF::loadView('front.dashboard.viewresult', compact('result'));
+        return $pdf->download('dashboard.pdf');
     }
 }

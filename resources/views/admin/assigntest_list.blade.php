@@ -1,4 +1,8 @@
 @extends('admin.layouts.master')
+@push('style')
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+@endpush
 @section('content')
 <div id="wrapper">
     <div class="content-page">
@@ -22,8 +26,8 @@
 
                         <div class="row">
                             <div class="table-responsive">
-                                <select class="form-control col-3" id="subject">
-                                    <option>Select Subject Id</option>
+                                <select class="form-control col-3" id="subject_filter">
+                                    <option>Select Subject </option>
                                     @foreach($subject as $sub)
                                     <option>{{$sub['id']}}</option>
                                     @endforeach
@@ -46,64 +50,26 @@
 </div>
 @endsection
 @push('script')
-<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script> -->
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+
+   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 {!! $dataTable->scripts() !!}
 <script>
-    alert(1);
-    // $(document).on('click', '.request', function() {
-    //     var id = $(this).attr('dataid');
-    //     var a = $(this);
-    //     $.ajax({
-    //         type: "GET",
-    //         url: 'status',
-    //         data: {
-    //             id: id
-    //         },
-    //         success: function(data) {
-    //             console.log(data.status);
-    //             if (data.status == 0) {
-    //                 a.html("Rejected");
-    //                 a.removeClass("badge-success");
-    //                 a.addClass("badge-danger");
-    //             } else {
-
-    //                 a.html("Approve");
-    //                 a.removeClass("badge-danger");
-    //                 a.addClass("badge-success");
-    //             }
-    //         }
-    //     });
-
-    // });
-    $(function () {
-      alert($('#subject').val());
-      var table = $('.data-table').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: {
-            url: "{{ route('admin.assigntest_list') }}",
-            data: {
-                  d = $('#subject').val(),
-              }
-          },
-          columns: [
-              {data: 'id', name: 'id'},
-              {data: 'name', name: 'name'},
-              {data: 'email', name: 'email'},
-              {data: 'approved', name: 'approved'},
-          ]
-      });
-    
-      $('#approved').change(function(){
-          table.draw();
-      });
+    $(document).ready(function(){
         
-    });
+        $('#assigntestlist-table').on('preXhr.dt', function(e, settings, data) {
+           console.log(data);
+            data.subject_id = $('#subject_filter').val();
+            console.log('=================', $('#subject_filter').val());
+        });
+        $("#subject_filter").change(function(){
+        
+            window.LaravelDataTables['assigntestlist-table'].draw();
+            
+        });
+    })
+    
 </script>
+
 @endpush

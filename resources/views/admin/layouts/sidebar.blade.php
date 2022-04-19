@@ -84,21 +84,20 @@
                         <!-- display student table -->
                     </a>
                 </li>
-              
                 <li>
                     <a href="{{route('admin.result')}}">
-                        <i data-feather="calendar"></i>
-                        <span>  Result </span>
-                        <!-- display student table but status = 0 -->
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
                         <i data-feather="calendar"></i>
                         <span> Return Result </span>
                         <!-- display student table but status = 0 -->
                     </a>
                 </li>
+                <!-- <li>
+                    <a href="">
+                        <i data-feather="calendar"></i>
+                        <span> Return Result </span>
+                        display student table but status = 0
+                    </a>
+                </li> -->
                 <li>
                     <a href="{{route('admin.attempt_test')}}">
                         <i data-feather="calendar"></i>

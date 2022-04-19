@@ -6,13 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-gd": "*",
+        "barryvdh/laravel-dompdf": "^1.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "illuminate/support": "^8.75",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.3",
+        "sabberworm/php-css-parser": "^8.4",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

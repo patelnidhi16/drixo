@@ -20,7 +20,7 @@
                         <!-- <a type="button" style="background-color:#06bbcc; color:white;" class="view" subject="{{$user['subject']}}" title="{{$user['title']}}">View Test</a> -->
                         <a type="button" style="background-color:#06bbcc; color:white;" class="view" href="{{route('viewresponse',['subject'=>$user['subject'],'title'=>$user['title']])}}">View Test</a>
 
-                            {{$user['result']}}
+                           
                         </div>
                     </div>
                 </div>
