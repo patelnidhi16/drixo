@@ -6,7 +6,7 @@
                         <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
                         </span>
                         <span class="logo-sm">
-                            <img src="{{asset('assets/images/logo.png')}}" alt="" height="24">
+                        <i class="fa fa-book me-3"></i>
                         </span>
                     </a>
 

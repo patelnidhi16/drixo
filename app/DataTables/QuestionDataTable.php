@@ -2,15 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Student;
-use Illuminate\Http\Request;
+use App\Models\Question;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AssigntestListDataTable extends DataTable
+class QuestionDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,28 +20,21 @@ class AssigntestListDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query);
-           
+            ->eloquent($query)
+            ->addColumn('action', 'question.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\AssigntestList $model
+     * @param \App\Models\Question $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Student $model, Request $request )
+    public function query(Question $model)
     {
-        if($request->subject_id && $request->title==''){
-            return $model->where('subject_id',$request->subject_id);
-          }
-         else if($request->subject_id && $request->title){
-            return $model->where('subject_id',$request->subject_id)->where('title',$request->title);
-          }
-          else{
-            return $model->newQuery();
-          }
+        return $model->with('getoption')->get();
     }
+
     /**
      * Optional method if you want to use html builder.
      *
@@ -51,7 +43,7 @@ class AssigntestListDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('assigntestlist-table')
+                    ->setTableId('question-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -73,10 +65,15 @@ class AssigntestListDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('student_id'),
-            Column::make('subject_id'),
-            Column::make('title'),
+            Column::make('add your columns'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
         ];
     }
 
@@ -87,6 +84,6 @@ class AssigntestListDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'AssigntestList_' . date('YmdHis');
+        return 'Question_' . date('YmdHis');
     }
 }

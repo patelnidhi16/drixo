@@ -104,10 +104,11 @@
                     processData: false,
                     contentType: false,
                     success: function(data) {
-                        alert(1);
+                        alert( "Question Addded Successfully!");
+                        window.location.href="/admin/displaysubject";
                     },
                     error:function(error){
-                        console.log();
+                        console.log(error.responseJSON.errors.title[0]);
                         $('#question').find('[name=title]').nextAll('span').html(error.responseJSON.errors.title[0]);
                     }
                 });

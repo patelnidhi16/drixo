@@ -153,18 +153,23 @@
           <form id="exam" method="POST" action="/storerecord">
             @csrf
           @php
-        $id=$id-1;
-          @endphp
-            @foreach($question as $questions)
-            <div class="privew">
-              <div class="questionsBox">
-                <div class="questions">{{$questions['question']}}</div>
-                <ul class="answerList">
-                  @php $i=1; @endphp
-                  @foreach($questions['getoption'] as $opt)
-                  <li>
-                    <label class="label">
-                      <input type="radio" name="answer[{{$questions['id']}}]" value="{{$i}}" class="answer" disabled  @if( $questions["getans"][0]["answer"]==$i) id="abc"  @endif  @if($questions['getanswer'][$id]['answer']==$i) checked @endif > {{$opt['option']}}</label>
+          
+        
+        
+        @endphp
+        @foreach($question as $questions)
+        <div class="privew">
+          <div class="questionsBox">
+            <div class="questions">{{$questions['question']}}</div>
+            <ul class="answerList">
+              @php $i=1; @endphp
+              
+              @foreach($questions['getoption'] as $opt)
+              <li>
+                <label class="label">
+               
+             
+                      <input type="radio" name="answer[{{$questions['id']}}]" value="{{$i}}" class="answer" disabled  @if( $questions["getans"][0]["answer"]==$i) id="abc"  @endif  @foreach($questions['getanswer'] as $abc) @if($abc['user_id']==$id) @if($abc['answer'] == $i)checked @endif @endif  @endforeach > {{$opt['option']}}</label>
                   </li>
                   @php $i++; @endphp
                   @endforeach

@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Student;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -28,9 +29,18 @@ class NotAttemptDataTable extends DataTable
      * @param \App\Models\NotAttempt $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Student $model)
+    public function query(Student $model,Request $request)
     {
-        return $model->where('status','1');
+       
+        if($request->subject_id && $request->title==''){
+            return $model->where('subject_id',$request->subject_id)->where('status','1');
+          }
+         else if($request->subject_id && $request->title){
+            return $model->where('subject_id',$request->subject_id)->where('title',$request->title)->where('status','1');
+          }
+          else{
+              return $model->where('status','1');
+          }
     }
 
     /**

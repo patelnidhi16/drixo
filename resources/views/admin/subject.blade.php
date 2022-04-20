@@ -9,44 +9,44 @@
         }
     </style>
 </head>
-<div class="account-pages my-5" style="margin-left: 250px;">
-    <div class="container">
+<div class="account-pages my-5" style="margin-left: 259px; margin-top: 120px !important;">
+    <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-xl-10">
-                <div class="card">
-                    <div class="card-body p-0">
+           
+            <div class="col-xl-10 ">
+                <div class="card mt-5">
+                    <div class="card-body p-0 ">
                         <div class="row">
                             <div class="col-md-6 p-5">
                                 <div class="mx-auto mb-5">
                                     <a href="index.html">
-                                        <img src="http://127.0.0.1:8000/assets/images/logo.png" alt="" height="24" />
+                                    <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
 
                                     </a>
                                 </div>
-
-                                <h6 class="h5 mb-0 mt-4">Add Subject</h6>
+                                <h6 class="h5 mb-0 mt-5">Add Subject</h6>
                                 <br><br>
                                 <form method="POST" action="" accept-charset="UTF-8" id="subject" class="authentication-form">
                                     @csrf
-                                    <div class="form-group mt-4">
+                                    <div class="form-group">
                                         <label for="subject_name" class="form-control-label">Subject Name
                                         </label>
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
 
-                                                    <i class="icon-image" data-feather="lock"></i>
+                                                <span class="iconify" data-icon="ri:lock-password-fill"></span>
                                                 </span>
                                             </div>
                                             <input class="form-control" id="subject_name" placeholder="Enter your subjectname" name="subject_name" type="text" value=""><br>
                                         </div>
                                     </div>
-                                    <div class="form-group mt-4">
+                                    <div class="form-group">
                                         <label for="image" class="form-control-label">image</label>
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
-                                                    <i class="icon-dual" data-feather="lock"></i>
+                                                <span class="iconify" data-icon="bi:image"></span>
                                                 </span>
                                             </div>
                                             <input class="form-control" id="image" name="image" type="file" value=""><br>
@@ -104,6 +104,7 @@
 <script src="{{ asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 <script>
     $('#subject').validate({
         rules: {

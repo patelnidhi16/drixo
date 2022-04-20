@@ -278,12 +278,21 @@ class StudentController extends Controller
     }
     public function select_subject()
     {
+        
         $subject = Subject::get();
         return $subject;
     }
     public function select_title(Request $request)
     {
+       
         $title = Question::where('subject_id', $request->id)->groupby('title')->get();
+        return $title;
+    }
+    public function filter_title(Request $request)
+    {
+        $x=Subject::where('subject_name',$request->subject)->first();
+      
+        $title = Question::where('subject_id', $x->id)->groupby('title')->get();
         return $title;
     }
     public function index(Request $request)
@@ -350,9 +359,9 @@ $total=count($totalmark);
             // dd($x);
             $mark = 0;
           
-            foreach ($x as $value) {
-
-                if ($value['getanswer'][0]['answer'] == $value['answer']) {
+            foreach ($x as $value) {    
+               
+            if ($value['getanswer'][0]['answer'] == $value['answer']) {
                     $mark++;
                 }
             }
@@ -371,7 +380,8 @@ $total=count($totalmark);
     public function result(ReturnresultDataTable $ReturnresultDataTable)
     {
         $student = Result::get();
-        return $ReturnresultDataTable->render('admin.result', compact('student'));
+        $subject=Subject::get();
+        return $ReturnresultDataTable->render('admin.result', compact('student','subject'));
     }
     public function displayresult(Request $request)
     {
@@ -407,20 +417,23 @@ $total=count($totalmark);
         $subject_id = $x[0]['id'];
         $question = Question::with('getoption', 'getsubject', 'getans', 'getanswer')->where('subject_id', $subject_id)->where('title', $title)->get()->toArray();
         // dd($question);
-        $result = Result::where('user_id', $id)->where('subject', $subject)->orderBy('id', 'asc')->get()->toArray();
+        $result = Result::where('user_id', $id)->where('subject', $subject)->orderBy('user_id', 'asc')->get()->toArray();
         // dd($result);
         return view('front.dashboard.viewresponse', compact('question', 'result', 'id'));
     }
     public function attempt_test(SubmissionDataTable $SubmissionDataTable)
     {
         $student = Result::get();
-        return $SubmissionDataTable->render('admin.attempt_test', compact('student'));
+        $subject = Subject::get();
+
+        return $SubmissionDataTable->render('admin.attempt_test', compact('student','subject'));
     }
     public function notattempt_test(NotAttemptDataTable $NotAttemptDataTable)
     {
         $student = Student::where('status','1')->get()->toArray();
+        $subject = Subject::get();
       
-        return $NotAttemptDataTable->render('admin.notattempt_test', compact('student'));
+        return $NotAttemptDataTable->render('admin.notattempt_test', compact('student','subject'));
     }
     public function assigntest_list(AssigntestListDataTable $AssigntestListDataTable, Request $request)
     {
@@ -430,19 +443,23 @@ $total=count($totalmark);
     }
     public function viewresult(){
         $id=Auth::guard('web')->user()->id;
-        $result=Result::where('user_id',$id)->get();
-        return view('front.dashboard.viewresult',compact('result'));
+        $name=Auth::guard('web')->user()->name;
+            $result=Result::where('user_id',$id)->get();
+        return view('front.dashboard.viewresult',['result'=>$result,'name'=>$name]);
+    }
+    public function downloadresult(){
+        $id=Auth::guard('web')->user()->id;
+        $name=Auth::guard('web')->user()->name;
+      
+            $result=Result::where('user_id',$id)->get();
+        return view('front.dashboard.downloadresult',['result'=>$result,'name'=>$name]);
     }
     public function pdf(){
-      
-
         $id=Auth::guard('web')->user()->id;
         $result=Result::where('user_id',$id)->get();
-
-        $data ='Welcome to Tutsmake.com';
-            
-      
-      $pdf = PDF::loadView('front.dashboard.viewresult', compact('result'));
+        $name=Auth::guard('web')->user()->name;
+        
+      $pdf = PDF::loadView('front.dashboard.downloadresult', compact('result','name'));
         return $pdf->download('dashboard.pdf');
     }
 }

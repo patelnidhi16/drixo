@@ -16,6 +16,6 @@ class Submission extends Model
         'answer',
     ];
     public function getanswer(){
-        return $this->hasMany(Answer::class,'id','question_id');
+        return $this->hasMany(Answer::class,'question_id','question_id');
     }
 }

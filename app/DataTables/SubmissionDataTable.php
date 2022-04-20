@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Result;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -30,9 +31,17 @@ class SubmissionDataTable extends DataTable
      * @param \App\Models\Submission $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Result $model)
+    public function query(Result $model,Request $request)
     {
-        return $model->newQuery();
+        if($request->subject && $request->title==''){
+            return $model->where('subject',$request->subject);
+          }
+         else if($request->subject && $request->title){
+            return $model->where('subject',$request->subject)->where('title',$request->title);
+          }
+          else{
+              return $model->newQuery();
+          }
     }
     /**
      * Optional method if you want to use html builder.

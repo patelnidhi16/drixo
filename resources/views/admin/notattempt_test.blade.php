@@ -19,7 +19,17 @@
                 </div>
                 <div class="card mx-5">
                     <div class="card-body ">
-                       
+                    <div class="row">
+                    <select class="form-control col-2 ml-5" id="subject_filter">
+                                    <option>Select Subject </option>
+                                    @foreach($subject as $sub)
+                                    <option>{{$sub['id']}}</option>
+                                    @endforeach
+                                </select>
+                                <select id="title_filter" class="form-control col-2 ml-5">
+                                <option value=''>Select Subject First</option>
+                                </select>
+                        </div>
                         <div class="row">
                             <div class="table-responsive">
                                 
@@ -76,7 +86,51 @@
     //     });
 
     // });
+$(document).ready(function(){
 
-  
+    $('#notattempt-table').on('preXhr.dt', function(e, settings, data) {
+        data.subject_id = $('#subject_filter').val();
+        console.log(data.subject);
+            data.title = $('#title_filter').val();
+            console.log(data.title);
+
+        });
+      
+       
+        $("#subject_filter").change(function(){
+            window.LaravelDataTables['notattempt-table'].draw();
+            
+        });
+        $("#title_filter").change(function(){
+            window.LaravelDataTables['notattempt-table'].draw();
+            
+        });
+        $(document).on('change', '#subject_filter', function() {
+           
+        var id = $(this).val();
+      
+        $.ajax({
+            type: "GET",
+            url: '{{route("admin.select_title")}}',
+            data: {
+                id: id,
+            },
+            success: function(data) {
+              
+               console.log(data);
+                display = "<option value=''>Select title</option>";
+                $.each(data, function(key, value) {
+                   
+                    console.log(value.title);
+
+                    display += '<option value="' + value.title + '">' + value.title +
+                        "</option>";
+                });
+                $('#title_filter').html(display);
+            }
+        });
+    });
+});
+
 </script>
 @endpush

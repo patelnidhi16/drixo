@@ -24,7 +24,7 @@
                             <div class="table-responsive">
                                 {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
                             </div>
-                            <button type="button" class="float-right btn btn-primary " id="assign_test" >Send Mail</button>
+                           
                             <!-- end col-12 -->
                         </div>
                     </div>

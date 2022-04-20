@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('return_result', [StudentController::class, 'return_result'])->name('return_result');
     Route::get('select_subject', [StudentController::class, 'select_subject'])->name('select_subject');
     Route::get('select_title', [StudentController::class, 'select_title'])->name('select_title');
+    Route::get('filter_title', [StudentController::class, 'filter_title'])->name('filter_title');
     Route::get('result', [StudentController::class, 'result'])->name('result');
     Route::get('/displayresult', [StudentController::class, 'displayresult'])->name('displayresult');
     Route::get('/all', [StudentController::class, 'all'])->name('all');

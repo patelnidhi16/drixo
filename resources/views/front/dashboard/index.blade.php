@@ -198,7 +198,7 @@
                     <h3 class="title">Exam</h3>
                    
                     <ul class="icon">
-                        <li><span class="post"><a href="{{route('displaytest')}}" style=" width: 150px; ">Click to View Exam</a></span></li>
+                        <li><span class="post"><a href="{{route('displaytest')}}" style=" width: 150px; "> Click to View Exam</a></span></li>
                     </ul> 
                 </div>
             </div>

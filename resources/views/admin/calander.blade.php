@@ -8,11 +8,11 @@
         <!-- LOGO -->
         <a href="index.html" class="navbar-brand mr-0 mr-md-2 logo">
             <span class="logo-lg">
-                <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
+            <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
                 <span class="d-inline h5 ml-1 text-logo">Shreyu</span>
             </span>
             <span class="logo-sm">
-                <img src="{{asset('assets/images/logo.png')}}" alt="" height="24">
+            <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
             </span>
         </a>
 
@@ -701,7 +701,7 @@
 
 <!-- Calendar init -->
 <script src="{{asset('assets/js/pages/calendar.init.js')}}"></script>
-<link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
+<link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
 
 <!-- Plugin css -->
 <link href="{{asset('assets/libs/fullcalendar-core/main.min.css')}}" rel="stylesheet" type="text/css" />

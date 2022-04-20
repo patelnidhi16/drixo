@@ -37,7 +37,9 @@ Route::get('/viewresponse/{subject}/{title}', [StudentController::class, 'viewre
 Route::post('/storerecord', [StudentController::class, 'storerecord'])->name('storerecord');
 Route::get('/result/{subject}/{title}', [StudentController::class, 'result'])->name('result');
 Route::get('/viewresult', [StudentController::class, 'viewresult'])->name('viewresult');
+Route::get('/downloadresult', [StudentController::class, 'downloadresult'])->name('downloadresult');
 Route::get('/pdf', [StudentController::class, 'pdf'])->name('pdf');
+
 
 
 

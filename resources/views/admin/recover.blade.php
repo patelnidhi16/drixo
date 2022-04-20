@@ -3,14 +3,14 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Shreyu - Admin & Dashboard Template</title>
+        <title>eLearning</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
+        <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
 
         <!-- App css -->
         <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
@@ -31,7 +31,7 @@
                                     <div class="col-6 p-5">
                                         <div class="mx-auto mb-5">
                                             <a href="index.html">
-                                                <img src="assets/images/logo.png" alt="" height="24" />
+                                            <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
                                                 <h3 class="d-inline align-middle ml-1 text-logo">Shreyu</h3>
                                             </a>
                                         </div>

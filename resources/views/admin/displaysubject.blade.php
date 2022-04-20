@@ -15,7 +15,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Subject Detail</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -42,7 +42,7 @@
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    <i class="icon-dual" data-feather="lock"></i>
+                                    <span class="iconify" data-icon="bi:image-fill"></span>
                                 </span>
                             </div>
 
@@ -113,6 +113,7 @@
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 <script>
 
 </script>
@@ -231,7 +232,6 @@
    
     $(document).on('click','.add_question',function(){
       id=$(this).attr('dataid');
-     alert(id);
       $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -244,7 +244,7 @@
             success: function(data) {
                 window.location.href=data;
                 console.log(data);
-              alert(1)
+            
             }
         });
     });

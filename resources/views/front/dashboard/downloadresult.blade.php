@@ -15,7 +15,6 @@
 
 <body>
 
-  <a class="btn btn-primary float-right m-3" href="{{route('pdf')}}">Download</a>
 
 <br>
   <center>

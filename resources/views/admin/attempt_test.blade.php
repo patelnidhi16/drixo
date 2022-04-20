@@ -19,7 +19,17 @@
                 </div>
                 <div class="card mx-5">
                     <div class="card-body ">
-                       
+                    <div class="row">
+                    <select class="form-control col-2 ml-5" id="subject_filter">
+                                    <option>Select Subject </option>
+                                    @foreach($subject as $sub)
+                                    <option>{{$sub['subject_name']}}</option>
+                                    @endforeach
+                                </select>
+                                <select id="title_filter" class="form-control col-2 ml-5">
+                                <option value=''>Select Subject First</option>
+                                </select>
+                        </div>
                         <div class="row">
                             <div class="table-responsive">
                                 {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
@@ -49,34 +59,52 @@
 
 {!! $dataTable->scripts() !!}
 <script>
-    // $(document).on('click', '.request', function() {
-    //     var id = $(this).attr('dataid');
-    //     var a = $(this);
-    //     $.ajax({
-    //         type: "GET",
-    //         url: 'status',
-    //         data: {
+  $(document).ready(function(){
 
-    //             id: id
-    //         },
-    //         success: function(data) {
-    //             console.log(data.status);
-    //             if (data.status == 0) {
-    //                 a.html("Rejected");
-    //                 a.removeClass("badge-success");
-    //                 a.addClass("badge-danger");
-    //             } else {
+  
 
-    //                 a.html("Approve");
-    //                 a.removeClass("badge-danger");
-    //                 a.addClass("badge-success");
-    //             }
-    //         }
-    //     });
+    $('#submission-table').on('preXhr.dt', function(e, settings, data) {
+            console.log(data);
+            data.subject = $('#subject_filter').val();
+            data.title = $('#title_filter').val();
 
-    // });
+        });
+      
+       
+        $("#subject_filter").change(function(){
+            window.LaravelDataTables['submission-table'].draw();
+            
+        });
+        $("#title_filter").change(function(){
+            window.LaravelDataTables['submission-table'].draw();
+            
+        });
+        $(document).on('change', '#subject_filter', function() {
+           
+        var subject = $(this).val();
+      
+        $.ajax({
+            type: "GET",
+            url: '{{route("admin.filter_title")}}',
+            data: {
+                subject: subject,
+            },
+            success: function(data) {
+              
+               
+                display = "<option value=''>Select title</option>";
+                $.each(data, function(key, value) {
+                   
+                    console.log(value.title);
 
-        
+                    display += '<option value="' + value.title + '">' + value.title +
+                        "</option>";
+                });
+                $('#title_filter').html(display);
+            }
+        });
+    });
+});
   
   
 </script>
