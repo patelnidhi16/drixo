@@ -37,7 +37,7 @@
                                 <div class="col-md-6 p-5">
                                     <div class="mx-auto mb-5">
                                     <span class="logo-lg">
-                                            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
+                                            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLearning</h2>
                                         </span>
                                     </div>
 

@@ -30,7 +30,7 @@
                                                         <tr>
                                                             <td align="center" style="padding: 40px 20px; background-color: #999898; border-radius: 10px;">
                                                                 <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5" style=" text-decoration-line:none;">
-                                                                    <h2 class="m-0 text-primary" style="color: black;"><i class="fa fa-book me-3"></i> eLEARNING</h2>
+                                                                    <h2 class="m-0 text-primary" style="color: black;"><i class="fa fa-book me-3"></i> eLearning</h2>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -48,17 +48,13 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="padding-bottom: 20px;">
-                                                                <p style="font-family: 'Rubik', sans-serif;font-size: 14px; font-weight: 400; line-height: 20px; color: #637b96; margin: 0; letter-spacing: 0.5px; line-height: 24px; ">Dear Name,<br>
+                                                                <p style="font-family: 'Rubik', sans-serif;font-size: 14px; font-weight: 400; line-height: 20px; color: #637b96; margin: 0; letter-spacing: 0.5px; line-height: 24px; ">Dear {{$name}},<br>
 
-                                                                    An exam has been scheduled. The subject of this exam is <b>subject</b> and it is a <b>title</b>. <br>
+                                                                    An exam has been scheduled. The subject of this exam  <b>{{$subject}}</b> and subject id is <b>{{$subject_id}}</b> and  it is your  <b>{{$title}}</b>. <br>
                                                                     The marks of this exam will be considered in your final result.<br>
-                                                                    Time Duration  is 10 minute. after that your test will be submitted automatically.<br>
-                                                                    Click on the below button to take the exam and read the question and give the correct answer.<br>
-
-                                                                    <button class="secondary">Exam</button>
-
-                                                                        Please do not share this question with anyone.
-                                                                       
+                                                                     after completion of time duration your test will be submitted automatically.<br>
+                                                                
+        
                                                                 </p>
                                                             </td>
                                                         </tr>

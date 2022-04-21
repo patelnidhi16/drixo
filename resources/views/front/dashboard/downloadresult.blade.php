@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>eLearning</title>
   <style>
    .asd {
     box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.15);

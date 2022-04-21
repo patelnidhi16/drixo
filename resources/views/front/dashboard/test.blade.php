@@ -178,20 +178,32 @@
 <script>
   $(document).ready(function() {
     var a = $('#end_time').val();
-    var countDownDate = new Date(a).getTime()
+    var countDownDate = new Date(a).getTime();
     var x = setInterval(function() {
       var now = new Date().getTime();
       var distance = countDownDate - now;
       // console.log(distance);
-      if (distance < 1) {
-        alert("your test time is over");
+      if (distance <=0) {
+        alert("your test time is over. your exam is submitted");
         $('#exam').submit();
       }
       // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      document.getElementById("demo").innerHTML =hours+":"+ minutes + ":" + seconds ;
+      else{
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("demo").innerHTML =hours+":"+ minutes + ":" + seconds ;
+      }
     });
+//     setTimeout(function() {
+//       alert(1);
+//       var now = new Date().getTime();
+//       var distance = countDownDate - now;
+      
+//       $('#exam').submit();
+//       alert("your test time is over. your exam is submitted");
+ 
+// },distance);
+  
   });
 </script>

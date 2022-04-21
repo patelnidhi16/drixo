@@ -1,7 +1,6 @@
 <div class="left-side-menu">
     <div class="media user-profile mt-2 mb-2">
-        <img src="{{asset('assets/images/users/avatar-7.jpg')}}" class="avatar-sm rounded-circle mr-2" alt="Shreyu" />
-        <img src="{{asset('assets/images/users/avatar-7.jpg')}}" class="avatar-xs rounded-circle mr-2" alt="Shreyu" />
+    <span class="iconify" data-icon="carbon:user-avatar-filled" style="color: #5369f8;" data-width="40"></span>
 
         <div class="media-body">
             <h6 class="pro-user-name mt-0 mb-0">{{Auth::guard('admin')->user()->email}}</h6>
@@ -12,23 +11,11 @@
                 <span data-feather="chevron-down"></span>
             </a>
             <div class="dropdown-menu profile-dropdown">
-                <a href="pages-profile.html" class="dropdown-item notify-item">
+                <!-- <a href="pages-profile.html" class="dropdown-item notify-item">
                     <i data-feather="user" class="icon-dual icon-xs mr-2"></i>
                     <span>My Account</span>
-                </a>
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i data-feather="settings" class="icon-dual icon-xs mr-2"></i>
-                    <span>Settings</span>
-                </a>
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i data-feather="help-circle" class="icon-dual icon-xs mr-2"></i>
-                    <span>Support</span>
-                </a>
-                <a href="pages-lock-screen.html" class="dropdown-item notify-item">
-                    <i data-feather="lock" class="icon-dual icon-xs mr-2"></i>
-                    <span>Lock Screen</span>
-                </a>
-                <a href="{{route('admin.change')}}" class="dropdown-item notify-item">
+                </a> -->
+                              <a href="{{route('admin.change')}}" class="dropdown-item notify-item">
                     <i data-feather="lock" class="icon-dual icon-xs mr-2"></i>
                     <span>Change Password</span>
                 </a>
@@ -60,33 +47,33 @@
                 </li>
                 <li>
                     <a href="{{route('admin.displaysubject')}}">
-                        <i data-feather="calendar"></i>
+                    <span class="iconify" data-icon="bx:list-ul"></span>
                         <span> Subject </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.student')}}">
 
-                        <i data-feather="calendar"></i>
+                    <span class="iconify" data-icon="bxs:user-plus"></span>
                         <span> Student </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.assigntest')}}">
-                        <i data-feather="calendar"></i>
+                    <span class="iconify" data-icon="ic:outline-assignment-turned-in" data-width="100"></span>
                         <span> Assign Test </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.assigntest_list')}}">
-                        <i data-feather="calendar"></i>
-                        <span>  Assign Test Student List</span>
+                    <span class="iconify" data-icon="clarity:assign-user-solid" data-width="100"></span>
+                        <span>  Assign Test Student </span>
                         <!-- display student table -->
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.result')}}">
-                        <i data-feather="calendar"></i>
+                    <span class="iconify" data-icon="codicon:output"></span>
                         <span> Return Result </span>
                         <!-- display student table but status = 0 -->
                     </a>
@@ -100,7 +87,7 @@
                 </li> -->
                 <li>
                     <a href="{{route('admin.attempt_test')}}">
-                        <i data-feather="calendar"></i>
+                    <span class="iconify" data-icon="ant-design:file-done-outlined"></span>
                         <span> Attemt Test </span>
                         <!-- display student table but status = 0 -->
                     </a>
@@ -108,7 +95,7 @@
                 <li>
                     <a href="{{route('admin.notattempt_test')}}">
 
-                        <i data-feather="calendar"></i>
+                    <span class="iconify" data-icon="mdi:book-cancel-outline" data-width="100"></span>
                         <span> Not attemt Test </span>
                         <!-- display student table but status = 1 -->
                     </a>

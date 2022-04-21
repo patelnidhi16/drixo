@@ -36,7 +36,7 @@
                                 <div class="col-6 p-5">
                                     <div class="mx-auto mb-5">
                                     <span class="logo-lg">
-                                            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
+                                            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLearning</h2>
                                         </span>
                                     </div>
 
@@ -75,9 +75,9 @@
                                     <div class="auth-page-sidebar">
                                         <div class="overlay"></div>
                                         <div class="auth-user-testimonial">
-                                            <p class="font-size-24 font-weight-bold text-white mb-1">I simply love it!</p>
-                                            <p class="lead">"It's a elegent templete. I love it very much!"
-                                            </p>
+                                        <p class="font-size-24 font-weight-bold text-white mb-1">Quiz Website</p>
+                                            <p class="lead">This is quiz website</p>
+                                            <p class="lead">Here you will able to attempt test and view result</p>
                                             <p>- Admin User</p>
                                         </div>
                                     </div>

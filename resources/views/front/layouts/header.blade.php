@@ -12,10 +12,12 @@
 
             <a href="index.html" class="nav-item nav-link active">Home</a>
 
-            <a href="about.html" class="nav-item nav-link">About</a>
+            <a href="{{route('about')}}" class="nav-item nav-link">About</a>
             @if(Auth::user()!=null)
             <a href="{{route('displaytest')}}" class="nav-item nav-link">Test</a>
             <a href="{{route('displaystudentresult')}}" class="nav-item nav-link">Result</a>
+            <a href="{{route('viewresult')}}" class="nav-item nav-link">All Result</a>
+           
             @endif
             @guest
             @if (Route::has('register'))
@@ -56,11 +58,10 @@
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="col-sm-10 col-lg-8">
-                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Best Online Courses</h5>
-                            <h1 class="display-3 text-white animated slideInDown">The Best Online Learning Platform</h1>
-                            <p class="fs-5 text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                            <h1 class="text-primary text-uppercase mb-3 animated slideInDown">eLEARNING</h1>
+                            <h1 class="display-3 text-white animated slideInDown">The Best Online Quiz Platform</h1>
+                            <p class="fs-5 text-white mb-4 pb-2">Best Platform to check your knowledge online.</p>
+                            <p class="fs-5 text-white mb-4 pb-2">Hear you can attempt online test and view your result.</p>
                         </div>
                     </div>
                 </div>
@@ -72,11 +73,10 @@
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="col-sm-10 col-lg-8">
-                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Best Online Courses</h5>
-                            <h1 class="display-3 text-white animated slideInDown">Get Educated Online From Your Home</h1>
-                            <p class="fs-5 text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                            <h1 class="text-primary text-uppercase mb-3 animated slideInDown">eLEARNING</h1>
+                            <h1 class="display-3 text-white animated slideInDown">The Best Online Quiz Platform</h1>
+                            <p class="fs-5 text-white mb-4 pb-2">Best Platform to check your knowledge online.</p>
+                            <p class="fs-5 text-white mb-4 pb-2">Hear you can attempt online test and view your result.</p>
                         </div>
                     </div>
                 </div>
@@ -84,4 +84,3 @@
         </div>
     </div>
 </div>
-<!-- Carousel End -->

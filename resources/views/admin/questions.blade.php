@@ -53,7 +53,7 @@
                                             <option value="25">25</option>
                                             <option value="50">50</option>
                                         </select> -->
-                                        <input type="number" class="total form-control mb-3" name="no_of_question" min="1">
+                                        <input type="number" class="total form-control mb-3" name="no_of_question" min="1" max="100" placeholder="Select or enter the number of question">
                                         <div id="parents">
                                         </div>
                                     </form>

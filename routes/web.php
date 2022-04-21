@@ -39,6 +39,7 @@ Route::get('/result/{subject}/{title}', [StudentController::class, 'result'])->n
 Route::get('/viewresult', [StudentController::class, 'viewresult'])->name('viewresult');
 Route::get('/downloadresult', [StudentController::class, 'downloadresult'])->name('downloadresult');
 Route::get('/pdf', [StudentController::class, 'pdf'])->name('pdf');
+Route::get('/about', [StudentController::class, 'about'])->name('about');
 
 
 

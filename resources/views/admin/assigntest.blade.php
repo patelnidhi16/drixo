@@ -23,23 +23,23 @@
                             <option value=''>Select Subject</option>
                         </select>
                         @error('subject_id')
-                                                <span class="invalid-feedback" role="alert">
-                                                   {{ $message }}
-                                                </span>
-                                                @enderror
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                        @enderror
                         <select class="title form-control mb-3" name="title" id="title">
                             <option value=''>Select Subject First</option>
                         </select>
                         @error('title')
-                                                <span class="invalid-feedback" role="alert">
-                                                   {{ $message }}
-                                                </span>
-                                                @enderror
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                        @enderror
                         <div class="row">
                             <div class="table-responsive">
                                 {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
                             </div>
-                            <button type="button" class="float-right btn btn-primary m-3" id="assign_test" >Assign test</button>
+                            <button type="button" class="float-right btn btn-primary m-3" id="assign_test">Assign test</button>
                             <!-- end col-12 -->
                         </div>
                     </div>
@@ -92,19 +92,19 @@
 
     // });
 
-           $(document).on('click','#All',function(){
-        if ($(this).prop('checked')==true){
+    $(document).on('click', '#All', function() {
+        if ($(this).prop('checked') == true) {
             $("input:checkbox[class=assign_test]").each(function() {
-            $(this).prop('checked', true);
-        });
-        }else{
+                $(this).prop('checked', true);
+            });
+        } else {
             $("input:checkbox[class=assign_test]").each(function() {
-            $(this).prop('checked', false);
-        });
+                $(this).prop('checked', false);
+            });
         }
-        
+
     })
-  
+
     $.ajax({
         type: "GET",
         url: '{{route("admin.select_subject")}}',
@@ -138,7 +138,7 @@
                 $.each(data, function(key, value) {
                     // console.log(key);
                     // console.log(value.id);
-                    console.log(value.title);
+                    // console.log(value.title);
 
                     display += '<option value="' + value.title + '">' + value.title +
                         "</option>";
@@ -147,49 +147,49 @@
             }
         });
     });
-$('#assign_test').click(function(){
-  
-if($('#subject_id').val()==''){
-   swal("Please select subject name")
-}
-else {
+    $('#assign_test').click(function() {
 
-    if($('#title').val()==''){
-       swal("Please select title ")
-    }
-    else{
-        $(document).on('click', '#assign_test', function() {
-        var student = [];
-        $("input:checkbox[class=assign_test]:checked").each(function() {
-            student.push($(this).attr('dataid'));
-        });
-        // console.log(student);
-        var subject_name = $('.subject').val();
-        var title = $('.title').val();
-        $.ajax({
-            type: "GET",
-            url: 'assign_test',
-            data: {
-                id: student,
-                subject_id: subject_name,
-                title: title,
-            },
-            success: function(data) {
-               
-                var user=[];
-                $.each(data, function(key, value) {
-                    // console.log(key);
-                    // console.log(value);
-                    user.push(value);
+        if ($('#subject_id').val() == '') {
+            swal("Please select subject name")
+        } else {
+
+            if ($('#title').val() == '') {
+                swal("Please select title ")
+            } else {
+                $(document).on('click', '#assign_test', function() {
+                    var student = [];
+                    $("input:checkbox[class=assign_test]:checked").each(function() {
+                        student.push($(this).attr('dataid'));
+                    });
+                    // console.log(student);
+                    var subject_name = $('.subject').val();
+                    var title = $('.title').val();
+                    $.ajax({
+                        type: "GET",
+                        url: 'assign_test',
+                        data: {
+                            id: student,
+                            subject_id: subject_name,
+                            title: title,
+                        },
+                        success: function(data) {
+                            if (data != '') {
+
+                                var user = [];
+                                $.each(data, function(key, value) {
+                                    user.push(value);
+                                });
+                                swal("you already assign this test for " + user + " id user. so you are not able to reasign this test. remaining student have assign test");
+                            } else {
+                                swal("you have successfully assign test");
+                            }
+                        }
+                    });
+
                 });
-                swal("you already assign this test for "+user+" id user. so you are not able to reasign this test. remaining student have assign test");
             }
-        });
+        }
 
-    }); 
-    }
-}
-
-});
+    });
 </script>
 @endpush

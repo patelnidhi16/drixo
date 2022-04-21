@@ -79,7 +79,7 @@
                     </ol>
                 </div>
                 <h5 class="page-title">Subject List</h5>
-                <a class="btn btn-primary float-right m-3" href="{{route('admin.subject')}}">Add Subject</a>
+                <a class="btn btn-primary float-right mt-1 mb-3" href="{{route('admin.subject')}}">Add Subject</a>
 
             </div>
         </div>

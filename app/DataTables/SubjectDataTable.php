@@ -37,7 +37,7 @@ class SubjectDataTable extends DataTable
             })
 
             ->editColumn('image', function($data) {
-                return '<img src="'.asset('/public/'.$data->image).'" style="height: 50px; width:50px;">';
+                return '<a href="'.asset('/public/'.$data->image).'" target="_blank"><img src="'.asset('/public/'.$data->image).'" style="height: 50px; width:50px;"></a>';
             })
             ->rawColumns(['image','action'])
             ->addIndexColumn();

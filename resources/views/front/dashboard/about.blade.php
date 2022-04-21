@@ -45,10 +45,7 @@
     <!-- Spinner End -->
     @include('front.layouts.header')
 
-    <!-- Service Start -->
-    @yield('content')
-    <!-- Service End -->
-
+    
 
     <!-- About Start -->
     <div class="container-xxl py-5">
@@ -69,20 +66,23 @@
                     <div class="row gy-2 gx-4 mb-4">
                         <div class="col-sm-6">
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Assesment</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Display Result </i></p>
-                        </div>
+                        </div> 
                         <div class="col-sm-6">
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Check knowledge</p>
                         </div>
                         <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Display correct and incorrect answer</p>
-                        </div>
-                        <div class="col-sm-6">
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Notify when Assign new Quiz</p>
                         </div>
-
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Display correct and incorrect answer</p>
+                        </div>
+                       
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Display Result </i></p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Download Result</p>
+                        </div>
                     </div>
 
                 </div>
@@ -90,8 +90,6 @@
         </div>
     </div>
     <!-- About End -->
-
-
 
     <!-- Footer Start -->
     @include('front.layouts.footer')

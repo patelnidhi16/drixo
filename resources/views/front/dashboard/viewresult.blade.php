@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>eLearning</title>
   <style>
    .asd {
     box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.15);
@@ -21,7 +21,8 @@
   <center>
     <h1>Result</h1>
     <center>
-
+      @if(isset($result[0]))
+     
       <div class="card m-4">
         <div class="card-body">
           <div class="card border-2">
@@ -80,6 +81,16 @@
           </div>
         </div>
       </div>
+      @else
+      <div class="card mx-5">
+  <div class="card-body ">
+  You have not attempt any  test yet!! or admin can not return result yet!.
+  </div>
+</div>
+      
+
+      @endif
+    
 
 
 

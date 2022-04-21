@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>eLEARNING</title>
+    <title>eLearning</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -135,8 +135,9 @@
                                     <div class="auth-page-sidebar">
                                         <div class="overlay"></div>
                                         <div class="auth-user-testimonial">
-                                            <p class="font-size-24 font-weight-bold text-white mb-1">I simply love it!</p>
-                                            <p class="lead">"It's a elegent templete. I love it very much!"</p>
+                                        <p class="font-size-24 font-weight-bold text-white mb-1">Quiz Website</p>
+                                            <p class="lead">This is quiz website</p>
+                                            <p class="lead">Here you will able to attempt test and view result</p>
                                             <p>- Admin User</p>
                                         </div>
                                     </div>

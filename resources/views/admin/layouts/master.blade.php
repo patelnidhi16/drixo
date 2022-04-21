@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>eLEARNING</title>
+    <title>eLearning</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -60,6 +60,7 @@
     <script src="{{asset('assets/js/app.min.js')}}"></script>
     <!-- <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     @stack('script')
 </body>
 

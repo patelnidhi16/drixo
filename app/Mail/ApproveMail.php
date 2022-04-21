@@ -16,9 +16,12 @@ class ApproveMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($name,$subject_id,$title,$subject)
     {
-        //
+        $this->name=$name;
+        $this->subject_id=$subject_id;
+        $this->title=$title;
+        $this->subject=$subject;
     }
 
     /**
@@ -28,6 +31,6 @@ class ApproveMail extends Mailable
      */
     public function build()
     {
-        return $this->view('auth.approvemail');
+        return $this->view('auth.approvemail')->with('name',$this->name)->with('subject_id',$this->subject_id)->with('title',$this->title)->with('subject',$this->subject);
     }
 }
