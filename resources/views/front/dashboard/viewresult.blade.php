@@ -70,7 +70,6 @@
                     <td>{{$data->title}}</td>
                     <td><span class="tag tag-success">{{$data->result}}</span></td>
                     <td>{{$data->total_mark}}</td>
-                   
                   </tr>
                   @php $i++ @endphp
                   @endforeach

@@ -20,7 +20,8 @@ class StudentsDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query);
+            ->eloquent($query)
+            ->addIndexColumn();
     }
 
     /**
@@ -65,7 +66,7 @@ class StudentsDataTable extends DataTable
     {
         return [
            
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('name'),
             Column::make('email'),
            

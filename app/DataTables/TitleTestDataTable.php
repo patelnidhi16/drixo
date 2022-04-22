@@ -72,7 +72,7 @@ class TitleTestDataTable extends DataTable
     {
         return [
             
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('title'),
             Column::computed('action')
                   ->exportable(false)

@@ -129,6 +129,9 @@
         width: 10px;
         margin-top: 9px;
     }
+    .error {
+            color: red;
+        }
 </style>
 
 <body>

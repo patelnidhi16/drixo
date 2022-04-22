@@ -21,7 +21,8 @@ class AssigntestListDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query);
+            ->eloquent($query)
+            ->addIndexColumn();
            
     }
 
@@ -73,7 +74,7 @@ class AssigntestListDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('student_id'),
             Column::make('subject_id'),
             Column::make('title'),

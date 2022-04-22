@@ -22,6 +22,7 @@
         .error,
         span {
             color: red;
+            margin-left: 33px;
         }
     </style>
 </head>
@@ -50,7 +51,7 @@
                                         {{Form::label('email','Email Address',array('class'=>'form-control-label'))}}
                                         <div class="input-group input-group-merge"  >
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">
+                                                <span class="input-group-text" style="margin-left: 0px;">
                                                     <i class="icon-dual" data-feather="mail"></i>
                                                 </span>
                                             </div>
@@ -65,11 +66,19 @@
                                         </div>
                                     </div>
 
+
+
+
+
+
+
+                                    
+
                                     <div class="form-group mt-4">
                                         {{Form::label('currentpassword','Current Password',array('class'=>'form-control-label'))}}
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">
+                                                <span class="input-group-text" style="margin-left: 0px;">
                                                     <i class="icon-dual" data-feather="lock"></i>
                                                 </span>
                                             </div>
@@ -89,7 +98,7 @@
                                         {{Form::label('password','Password',array('class'=>'form-control-label'))}}
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">
+                                                <span class="input-group-text" style="margin-left: 0px;">
                                                     <i class="icon-dual" data-feather="lock"></i>
                                                 </span>
                                             </div>
@@ -110,7 +119,7 @@
                                         {{Form::label('cpassword','Confirm Password',array('class'=>'form-control-label'))}}
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">
+                                                <span class="input-group-text" style="margin-left: 0px;">
                                                     <i class="icon-dual" data-feather="lock"></i>
                                                 </span>
                                             </div>
@@ -192,6 +201,17 @@
                 required: true,
                 equalTo: '#password'
             },
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+            $(element).parents("div.form-control").addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+            $(element).parents(".error").removeClass(errorClass).addClass(validClass);
+        },
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.parents('.input-group-merge'));
         },
         submitHandler: function(form) {
 

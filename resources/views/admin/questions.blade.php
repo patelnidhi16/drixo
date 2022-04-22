@@ -11,13 +11,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="float-right page-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Drixo</a></li>
-                        <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                        <li class="breadcrumb-item active">Datatable</li>
-                    </ol>
-                </div>
+                
                 <br>
                 <br>
                 <h5 class="page-title m-3">Add Question</h5>
@@ -34,7 +28,7 @@
 
                                     <form method="POST" action="" accept-charset="UTF-8" class="subject" class="authentication-form" id="question">
                                         @csrf
-                                        <input type="hidden" id="id" value="{{$id}}">
+                                        <input type="hidden" id="id" value="{{$id}}" name="subject_name">
                                         <div class="input-group input-group-merge">
                                             <input class="form-control mb-3" id="title" placeholder="Enter Test Title" name="title" type="text"><br>
                                             <span style="color: red;"></span>
@@ -54,8 +48,10 @@
                                             <option value="50">50</option>
                                         </select> -->
                                         <input type="number" class="total form-control mb-3" name="no_of_question" min="1" max="100" placeholder="Select or enter the number of question">
+                                        
                                         <div id="parents">
                                         </div>
+                                            <button type="button" class="display btn btn-primary">Enter</button>
                                     </form>
                                 </div>
                             </div>
@@ -136,9 +132,12 @@
     });
 
     $i = 0;
-    $('.total').change(function(e) {
+    
+    $('.display').click(function(e){
+        $(this).hide();
         e.preventDefault();
-        var total = $(this).val();
+        var total = $('.total').val();
+        alert(total);
         display = "";
         if ($i == 0) {
             for (var i = 1; i <= total; i++) {

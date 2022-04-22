@@ -21,7 +21,8 @@ class NotAttemptDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query);
+            ->eloquent($query)
+            ->addIndexColumn();
     }
     /**
      * Get query source of dataTable.
@@ -74,7 +75,7 @@ class NotAttemptDataTable extends DataTable
     {
         return [
           
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('student_id'),
             Column::make('subject_id'),
             Column::make('title'),

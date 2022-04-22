@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('questionlist/{id}', [StudentController::class, 'questionlist'])->name('questionlist');
     Route::get('editquestion', [StudentController::class, 'editquestion'])->name('editquestion');
     Route::post('updatequestion', [StudentController::class, 'updatequestion'])->name('updatequestion');
-    Route::get('alltest/{id}', [StudentController::class, 'alltest'])->name('alltest');
+    Route::get('alltest/{subject}', [StudentController::class, 'alltest'])->name('alltest');
     Route::get('display_title/{id}/{title}', [StudentController::class, 'display_title'])->name('display_title');
     Route::get('assign_test', [StudentController::class, 'assign_test'])->name('assign_test');
     Route::get('attempt_test', [StudentController::class, 'attempt_test'])->name('attempt_test');

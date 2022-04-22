@@ -6,6 +6,7 @@
     <style>
         .error {
             color: red;
+            margin-left: 49px;
         }
     </style>
 </head>
@@ -37,8 +38,10 @@
 
                                                 <span class="iconify" data-icon="ri:lock-password-fill"></span>
                                                 </span>
+                                         
                                             </div>
                                             <input class="form-control" id="subject_name" placeholder="Enter your subjectname" name="subject_name" type="text" value=""><br>
+                                        <span class="error"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -50,6 +53,7 @@
                                                 </span>
                                             </div>
                                             <input class="form-control" id="image" name="image" type="file" value=""><br>
+                                            <span class="error"></span>
                                         </div>
                                     </div>
 
@@ -109,11 +113,23 @@
         rules: {
             subject_name: {
                 required: true,
+            
             },
             image: {
                 required: true,
             },
 
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+            $(element).parents("div.form-control").addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+            $(element).parents(".error").removeClass(errorClass).addClass(validClass);
+        },
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.parents('.input-group-merge'));
         },
         submitHandler: function(form) {
             $.ajax({
@@ -137,6 +153,17 @@
                     };
                     window.location.href = '/admin/displaysubject';
                 },
+              
+                    error: function(data) {
+                   var errors = $.parseJSON(data.responseText);
+
+                   $.each(errors.errors, function(key, value) {
+                       console.log(key);
+                       console.log(value);
+                       $('#subject').find('[name=' + key + ']').nextAll('span').html(value[0]);
+                   });
+               
+                }
             });
         },
     });

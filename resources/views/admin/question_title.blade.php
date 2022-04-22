@@ -18,7 +18,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Question</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -75,8 +75,8 @@
                                     <li class="breadcrumb-item active">Datatable</li>
                               </ol>
                         </div>
-                        <h5 class="page-title">Test Name:-{{$question[0]['title']}}</h5>
         
+                     <h5 class="page-title">Test id:-{{$question[0]['title']}}</h5> 
                   </div>
             </div>
 

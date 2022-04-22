@@ -26,7 +26,6 @@ class AssigntestDataTable extends DataTable
                 // return "<button class='request badge badge-pill badge-danger' dataid='$user->id'>Rejected</button>";
                 // }
                 // else{
-
                 //     return "<button class='request badge badge-pill badge-success' dataid='$user->id'>Approve</button>";
                 // }
                 return "<input type='checkbox' dataid='$user->id' name='assign_test[]' class='assign_test'>";
@@ -83,7 +82,7 @@ class AssigntestDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('name'),
             Column::make('email'),
         ];

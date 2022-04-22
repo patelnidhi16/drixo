@@ -16,6 +16,7 @@ use App\DataTables\TitleTestDataTable;
 use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\Eligible_Student;
+use App\Http\Requests\SubjectRequest;
 use App\Mail\ApproveMail;
 use App\Models\Answer;
 use App\Models\Option;
@@ -67,13 +68,15 @@ class StudentController extends Controller
         return view('admin.subject');
     }
 
-    public function addsubject(Request $request, SubjectDataTable $StudentDataTable)
+    public function addsubject(SubjectRequest $request, SubjectDataTable $StudentDataTable)
     {
+        
         $detail = $request->file('image');
         $name_of_image = $detail->getClientOriginalName();
         Subject::create([
             'subject_name' => $request->subject_name,
             'image' => $name_of_image,
+            'slug' => $request->subject_name,
         ]);
 
         $request->image->move('public/', $name_of_image);
@@ -123,7 +126,7 @@ class StudentController extends Controller
     {
         //    dd(1);
         $id = $id;
-        $route = route('admin.displayquestions', $id);
+        $route = route('admin.displayquestions',$id);
         // dd($route);
         return $route;
     }
@@ -141,46 +144,46 @@ class StudentController extends Controller
 
     public function storequestions(Eligible_Student  $request, SubjectDataTable $StudentDataTable)
     {
-
         //    $x= Question::where('subject_id', $request->id)->where('title', $request->title)->get()->toArray();
         //    if($x){
-        //     echo '<script>alert("this title is already taken")</script>';
-        //    }else{
-        //        dd(2);
-        //    }
-        $x = Subject::where('id', $request->id)->first();
+            //     echo '<script>alert("this title is already taken")</script>';
+            //    }else{
+                //        dd(2);
+                //    }
+                $x = Subject::where('slug', $request->subject_name)->first();
+                
 
         $len = count($request->question);
         for ($i = 1; $i <= $len; $i++) {
             $a = Question::create([
-                'subject_id' => $request->id,
+                'subject_id' => $x->id,
                 'title' => $request->title,
                 'question' => $request->question[$i]
             ]);
 
             Option::create([
                 'question_id' => $a->id,
-                'subject_id' => $request->id,
+                'subject_id' =>  $x->id,
                 'option' => $request->option1[$i],
             ]);
             Option::create([
                 'question_id' => $a->id,
-                'subject_id' => $request->id,
+                'subject_id' =>  $x->id,
                 'option' => $request->option2[$i],
             ]);
             Option::create([
                 'question_id' => $a->id,
-                'subject_id' => $request->id,
+                'subject_id' =>  $x->id,
                 'option' => $request->option3[$i],
             ]);
             Option::create([
                 'question_id' => $a->id,
-                'subject_id' => $request->id,
+                'subject_id' =>  $x->id,
                 'option' => $request->option4[$i],
             ]);
             Answer::create([
                 'question_id' => $a->id,
-                'subject_id' => $request->id,
+                'subject_id' =>  $x->id,
                 'answer' => $request->ans[$i],
             ]);
         }
@@ -219,10 +222,12 @@ class StudentController extends Controller
             'answer' => $request->answer,
         ]);
     }
-    public function alltest($id, TitleTestDataTable $TitleTestDataTable)
+    public function alltest($subject, TitleTestDataTable $TitleTestDataTable)
     {
-        $title = Question::where('subject_id', $id)->groupby('title')->get();
-        $subject_name = Subject::where('id', $id)->first()->subject_name;
+       $x= Subject::where('subject_name',$subject)->first();
+        
+        $title = Question::where('subject_id', $x->id)->groupby('title')->get();
+        $subject_name = $subject;
         // return $TitleDatatable->render('admin.alltest',compact('title','subject_name'));
         return view('admin.alltest', compact('title', 'subject_name'));
     }

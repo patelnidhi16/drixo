@@ -21,7 +21,8 @@ class SubmissionDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query);
+            ->eloquent($query)
+            ->addIndexColumn();
            
     }
 
@@ -74,7 +75,7 @@ class SubmissionDataTable extends DataTable
     {
         return [
             
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('user_id'),
             Column::make('subject'),
             Column::make('title'),

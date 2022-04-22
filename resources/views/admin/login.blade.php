@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-      <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
+    <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
     <!-- App css -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
@@ -19,6 +19,7 @@
     <style>
         .error {
             color: red;
+            margin-left: 49px;
         }
     </style>
 </head>
@@ -98,7 +99,7 @@
                                             <p class="lead">This is quiz website</p>
                                             <p class="lead">Here you will able to attempt test and view result</p>
                                             <p>- Admin User</p>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -143,10 +144,22 @@
             password: {
                 required: true,
             },
-            cpassword: {
-                required: true,
-                equalTo: '#password'
-            },
+            // cpassword: {
+            //     required: true,
+            //     equalTo: '#password'
+            // },
+        },
+
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+            $(element).parents("div.form-control").addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+            $(element).parents(".error").removeClass(errorClass).addClass(validClass);
+        },
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.parents('.input-group-merge'));
         },
         // submitHandler: function(form) {
         //     $.ajax({

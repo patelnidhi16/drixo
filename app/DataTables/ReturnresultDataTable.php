@@ -86,7 +86,7 @@ class ReturnresultDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('user_id'),
             Column::make('subject'),
             Column::make('title'),
