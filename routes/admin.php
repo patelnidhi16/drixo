@@ -19,9 +19,11 @@ Route::post('change',    'ChangeController@change');
 Route::get('reset',     'ResetController@showreset')->name('reset');
 Route::post('reset',     'ResetController@reset');
 Route::group(['middleware' => 'auth:admin'], function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('admin.dashboard');
+    // })->name('dashboard');
+    Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('dashboard');
+
     Route::get('/calander', function () {
         return view('admin.calander');
     })->name('calander');
@@ -39,7 +41,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('questions/{id}', [StudentController::class, 'questions'])->name('questions');
     Route::get('displayquestions/{id}', [StudentController::class, 'displayquestions'])->name('displayquestions');
     Route::get('question', [StudentController::class, 'question'])->name('question');
-    Route::post('questions/{id}/{title}', [StudentController::class, 'storequestions'])->name('storequestion');
+    Route::post('question/{id}', [StudentController::class, 'storequestions'])->name('storequestion');
     Route::get('questionlist/{id}', [StudentController::class, 'questionlist'])->name('questionlist');
     Route::get('editquestion', [StudentController::class, 'editquestion'])->name('editquestion');
     Route::post('updatequestion', [StudentController::class, 'updatequestion'])->name('updatequestion');

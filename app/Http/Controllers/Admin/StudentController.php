@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Result;
 use Carbon\Carbon;
 use Illuminate\Routing\Route;
+use Mockery\Matcher\Subset;
 use PDF;
 
 class StudentController extends Controller
@@ -70,7 +71,7 @@ class StudentController extends Controller
 
     public function addsubject(SubjectRequest $request, SubjectDataTable $StudentDataTable)
     {
-        
+
         $detail = $request->file('image');
         $name_of_image = $detail->getClientOriginalName();
         Subject::create([
@@ -126,7 +127,7 @@ class StudentController extends Controller
     {
         //    dd(1);
         $id = $id;
-        $route = route('admin.displayquestions',$id);
+        $route = route('admin.displayquestions', $id);
         // dd($route);
         return $route;
     }
@@ -144,23 +145,20 @@ class StudentController extends Controller
 
     public function storequestions(Eligible_Student  $request, SubjectDataTable $StudentDataTable)
     {
-        //    $x= Question::where('subject_id', $request->id)->where('title', $request->title)->get()->toArray();
-        //    if($x){
-            //     echo '<script>alert("this title is already taken")</script>';
-            //    }else{
-                //        dd(2);
-                //    }
-                $x = Subject::where('slug', $request->subject_name)->first();
-                
-
+// dd($request->all());
+    //  dd($request->no_of_question);
+        // dd($x->format('M d,Y H:i')) ;
+        $x = Subject::where('slug', $request->subject_name)->first();
         $len = count($request->question);
         for ($i = 1; $i <= $len; $i++) {
             $a = Question::create([
                 'subject_id' => $x->id,
                 'title' => $request->title,
-                'question' => $request->question[$i]
+                'question' => $request->question[$i],
+                'slug' => $request->title,
+                'start_time'=>$request->start_time,
+                'end_time'=>$request->end_time,
             ]);
-
             Option::create([
                 'question_id' => $a->id,
                 'subject_id' =>  $x->id,
@@ -224,49 +222,25 @@ class StudentController extends Controller
     }
     public function alltest($subject, TitleTestDataTable $TitleTestDataTable)
     {
-       $x= Subject::where('subject_name',$subject)->first();
-        
-        $title = Question::where('subject_id', $x->id)->groupby('title')->get();
+        // dd($subject);
+        $x = Subject::where('slug', $subject)->first();
+        $title = Question::with('getsubject')->where('subject_id', $x->id)->groupby('title')->get()->toArray();
+
         $subject_name = $subject;
-        // return $TitleDatatable->render('admin.alltest',compact('title','subject_name'));
         return view('admin.alltest', compact('title', 'subject_name'));
     }
     public function display_title($id, $title)
     {
+        $x = Subject::where('subject_name', $id)->get()->toArray();
+        $question = Question::with('getoption')->with('getans')->where('slug', $title)->where('subject_id', $x[0]['id'])->get()->toArray();
 
-        $question = Question::where('title', $title)->where('subject_id', $id)->get()->toArray();
-        for ($i = 0; $i < count($question); $i++) {
-
-            $option[] = Option::where('question_id', $question[$i]['id'])->get()->toArray();
-        }
-        for ($i = 0; $i < count($question); $i++) {
-
-            $answer[] = Answer::where('question_id', $question[$i]['id'])->get()->toArray();;
-        }
-        return view('admin.question_title', compact('question', 'option', 'answer'));
+        return view('admin.question_title', compact('question'));
     }
     public function assign_test(Request $request)
     {
-
-        // dd($request->all());
         $email = Auth::guard('admin')->user();
-        // dd($email);
         $len = count($request->id);
-        // for ($i = 0; $i < $len; $i++) {
-        //     $x = Student::where('title', $request->title)->where('subject_id', $request->subject_id)->first();
 
-        //     if ($x == null) {
-
-        //         $y = Student::create([
-        //             'student_id' => $request->id[$i],
-        //             'subject_id' => $request->subject_id,
-        //             'title' => $request->title,
-        //             'status' => '1',
-        //         ]);
-
-        //         Mail::to($email)->send(new ApproveMail());
-        //     }
-        // }
         $user = [];
         foreach ($request->id as $id) {
             $x = Student::where('student_id', $id)->where('title', $request->title)->where('subject_id', $request->subject_id)->first();
@@ -277,7 +251,6 @@ class StudentController extends Controller
                     'title' => $request->title,
                     'status' => '1',
                 ]);
-
                 foreach ($request->id as $key => $val) {
                     $x = User::where('id', $val)->get();
                     $name = $x[0]['name'];
@@ -296,7 +269,6 @@ class StudentController extends Controller
     }
     public function select_subject()
     {
-
         $subject = Subject::get();
         return $subject;
     }
@@ -343,10 +315,10 @@ class StudentController extends Controller
     {
         $student_id = Auth::guard('web')->user()->id;
         $x = Student::where('student_id', $student_id)->where('title', $title)->select('end_time')->first()->toArray();
-        $end_time = $x['end_time'];
+        $current_time = Carbon::now('Asia/Kolkata')->format('M d,Y H:i:s');
         $question = Question::with('getoption', 'getsubject')->where('subject_id', $id)->where('title', $title)->get()->toArray();
 
-        return view('front.dashboard.test', compact('question', 'end_time'));
+        return view('front.dashboard.test', compact('question', 'current_time'));
     }
     public function storerecord(Request $request)
     {;
@@ -383,7 +355,6 @@ class StudentController extends Controller
                     $mark++;
                 }
             }
-
             Result::create([
                 'user_id' => $id,
                 'subject' => $subject_name,
@@ -498,5 +469,15 @@ class StudentController extends Controller
     public function about()
     {
         return view('front.dashboard.about');
+    }
+    public function dashboard()
+    {
+       $student= User::get();
+       $students=count($student);
+       $subject= Subject::get();
+       $subjects=count($subject);
+      $test= Question::groupby('title')->get();
+     $tests=count($test);
+        return view('admin.dashboard',compact('students','subjects','tests'));
     }
 }

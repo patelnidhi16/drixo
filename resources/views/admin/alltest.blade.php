@@ -18,10 +18,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                
-                <h5 class="page-title">Subject Name:-{{$subject_name}}</h5>
+                <h5 class="page-title">Subject Name:-{{$title[0]['getsubject'][0]['subject_name']}}</h5>
             </div>
         </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card m-b-30">
@@ -30,16 +30,15 @@
                             <table class="table">
                                 <tr>
                                     <th>Id</th>
-                                    
                                     <th>Test Title</th>
                                     <th>Action</th>
                                 </tr>
                                 <tr>
                                     @foreach($title as $user)
-                                    <td>{{$user->id}}</td>
-                                   
-                                    <td>{{$user->title}}</td>
-                                    <td><a class="display_title btn btn-primary" title="{{$user->title}}" dataid="{{$user->subject_id}}" href="{{route('admin.display_title',[$user->subject_id,$user->title])}}">View Question</a></td>
+                                    <td>{{$user['id']}}</td>
+                                    <td>{{$user['title']}}</td>
+
+                                    <td><a class="display_title btn btn-primary" title="{{$user['title']}}" dataid="{{$user['subject_id']}}" href="{{route('admin.display_title',[$user['getsubject'][0]['slug'],$user['slug']])}}">View Question</a></td>
                                 </tr>
                                 @endforeach
 

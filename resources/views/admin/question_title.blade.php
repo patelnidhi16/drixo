@@ -15,16 +15,16 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Question</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form method="POST" accept-charset="UTF-8" class="question_update authentication-form">
+      <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Question</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                  <div class="modal-body">
+                        <form method="POST" accept-charset="UTF-8" class="question_update authentication-form">
                               @csrf
                               <div class="form-group mt-4" id="parent">
                                     <input type="hidden" class="id" name="id">
@@ -57,10 +57,10 @@
 
                   </div>
                   </form>
+            </div>
+
       </div>
-      
-    </div>
-  </div>
+</div>
 </div>
 
 
@@ -68,15 +68,9 @@
       <div class="container-fluid">
             <div class="row">
                   <div class="col-sm-12">
-                        <div class="float-right page-breadcrumb">
-                              <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Drixo</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                    <li class="breadcrumb-item active">Datatable</li>
-                              </ol>
-                        </div>
-        
-                     <h5 class="page-title">Test id:-{{$question[0]['title']}}</h5> 
+
+
+                        <h5 class="page-title">Title:-{{$question[0]['title']}}</h5>
                   </div>
             </div>
 
@@ -103,37 +97,21 @@
                                                 @foreach($question as $questions)
                                                 <tr>
                                                       <td>{{$questions['id']}}</td>
-                                                    
-                                                      <td>{{$questions['question']}}</td>
-                                                      @foreach($option as $options)
-                                                      @if($questions['id']==$options[0]['question_id'])
-                                                      <td>
-                                                            {{$options[0]['option']}}
-                                                      </td>
-                                                      <td>
-                                                            {{$options[1]['option']}}
-                                                      </td>
-                                                      <td>
-                                                            {{$options[2]['option']}}
-                                                      </td>
-                                                      <td>
-                                                            {{$options[3]['option']}}
-                                                      </td>
-                                                      @endif
-                                                      @endforeach
-                                                      @foreach($answer as $answers)
-                                                      @if($questions['id']==$answers[0]['question_id'])
-                                                      <td>
-                                                            {{$answers[0]['answer']}}
-                                                      </td>
 
-                                                      @endif
+                                                      <td>{{$questions['question']}}</td>
+                                                      @foreach($question[0]['getoption'] as $x)
+                                                      <td>
+                                                            {{$x['option']}}
+                                                      </td>
                                                       @endforeach
-                                                    <td><button type="button" class="edit btn btn-success"  data-toggle="modal" data-target="#exampleModal" dataid="{{$questions['id']}}">Edit</button></td>
+                                                      <td>
+                                                            {{$question[0]['getans'][0]['answer']}}
+                                                      </td>
+                                                      <td><button type="button" class="edit btn btn-success" data-toggle="modal" data-target="#exampleModal" dataid="{{$questions['id']}}">Edit</button></td>
                                                 </tr>
                                                 @endforeach
 
-                                                
+
 
                                           </tbody>
 
@@ -159,8 +137,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-  $(document).on('click','.edit',function(){
-    var id = $(this).attr('dataid');
+      $(document).on('click', '.edit', function() {
+            var id = $(this).attr('dataid');
             $.ajax({
                   headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -183,8 +161,8 @@
                         });
                   }
             });
-  });
- $('.question_update').validate({
+      });
+      $('.question_update').validate({
 
             submitHandler: function(form) {
                   swal({

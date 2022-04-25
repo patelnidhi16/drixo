@@ -35,6 +35,7 @@ class Eligible_Student extends HttpFormRequest
                     return $query->where('subject_id', $this->id)->where('title', $this->title);
                 // }
             })],
+            'no_of_question'=>'required',
         ];
     }
     public function messages()

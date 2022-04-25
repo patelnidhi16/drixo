@@ -2,7 +2,7 @@
 @section('content')
 
 <head>
-<meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         .error {
             color: red;
@@ -13,7 +13,7 @@
 <div class="account-pages my-5" style="margin-left: 259px; margin-top: 120px !important;">
     <div class="container mt-5">
         <div class="row justify-content-center">
-           
+
             <div class="col-xl-10 ">
                 <div class="card mt-5">
                     <div class="card-body p-0 ">
@@ -21,7 +21,7 @@
                             <div class="col-md-6 p-5">
                                 <div class="mx-auto mb-5">
                                     <a href="index.html">
-                                    <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
+                                        <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
 
                                     </a>
                                 </div>
@@ -36,12 +36,12 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
 
-                                                <span class="iconify" data-icon="ri:lock-password-fill"></span>
+                                                    <span class="iconify" data-icon="ri:lock-password-fill"></span>
                                                 </span>
-                                         
+
                                             </div>
-                                            <input class="form-control" id="subject_name" placeholder="Enter your subjectname" name="subject_name" type="text" value=""><br>
-                                        <span class="error"></span>
+                                            <input class="form-control" id="subject_name" placeholder="Enter your subjectname" name="subject_name" type="text"><br>
+                                            <span class="error"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -49,14 +49,13 @@
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
-                                                <span class="iconify" data-icon="bi:image"></span>
+                                                    <span class="iconify" data-icon="bi:image"></span>
                                                 </span>
                                             </div>
-                                            <input class="form-control" id="image" name="image" type="file" value=""><br>
+                                            <input class="form-control" id="image" name="image" type="file" value="" accept="image/*"><br>
                                             <span class="error"></span>
                                         </div>
                                     </div>
-
                                     <div class="form-group mb-0 text-center">
                                         <button class="btn btn-primary btn-block" type="submit" id="submit_btn"> Add
                                             Subject
@@ -68,10 +67,10 @@
                                 <div class="auth-page-sidebar">
                                     <div class="overlay"></div>
                                     <div class="auth-user-testimonial">
-                                    <p class="font-size-24 font-weight-bold text-white mb-1">Quiz Website</p>
-                                            <p class="lead">This is quiz website</p>
-                                            <p class="lead">Here you will able to attempt test and view result</p>
-                                            <p>- Admin User</p>
+                                        <p class="font-size-24 font-weight-bold text-white mb-1">Quiz Website</p>
+                                        <p class="lead">This is quiz website</p>
+                                        <p class="lead">Here you will able to attempt test and view result</p>
+                                        <p>- Admin User</p>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +93,6 @@
 
 <!-- Vendor js -->
 <script src="http://127.0.0.1:8000/assets/js/vendor.min.js"></script>
-
 <!-- App js -->
 <script src="http://127.0.0.1:8000/assets/js/app.min.js"></script>
 <script>
@@ -113,7 +111,7 @@
         rules: {
             subject_name: {
                 required: true,
-            
+
             },
             image: {
                 required: true,
@@ -139,30 +137,30 @@
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                   
+
                     swal({
-                        title: "Good job!",
-                        text: "You clicked the button!",
-                        type: "success",
-                        button: "Aww yiss!",
-                        timer: 5000
-                    }),
-                    function() {
-                        location.reload(true);
-                        tr.hide();
-                    };
+                            title: "Good job!",
+                            text: "You clicked the button!",
+                            type: "success",
+                            button: "Aww yiss!",
+                            timer: 5000
+                        }),
+                        function() {
+                            location.reload(true);
+                            tr.hide();
+                        };
                     window.location.href = '/admin/displaysubject';
                 },
-              
-                    error: function(data) {
-                   var errors = $.parseJSON(data.responseText);
 
-                   $.each(errors.errors, function(key, value) {
-                       console.log(key);
-                       console.log(value);
-                       $('#subject').find('[name=' + key + ']').nextAll('span').html(value[0]);
-                   });
-               
+                error: function(data) {
+                    var errors = $.parseJSON(data.responseText);
+
+                    $.each(errors.errors, function(key, value) {
+                        console.log(key);
+                        console.log(value);
+                        $('#subject').find('[name=' + key + ']').nextAll('span').html(value[0]);
+                    });
+
                 }
             });
         },

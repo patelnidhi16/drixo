@@ -132,6 +132,7 @@
     }
   </style>
 </head>
+
 <div class="container-xxl">
   <div class="container">
     <div class="row g-4">
@@ -142,12 +143,12 @@
           <center>
             <p id="demo" style="color:red;"></p>
           </center>
-          <form id="exam" method="POST" action="/storerecord">
+          @if($current_time<$question[0]['end_time']) <form id="exam" method="POST" action="/storerecord">
             @csrf
             <input type="hidden" value="{{$question[0]['getsubject'][0]['subject_name']}}" name="subject_name">
             <input type="hidden" value="{{$question[0]['subject_id']}}" name="subject_id">
             <input type="hidden" value="{{$question[0]['title']}}" name="title">
-            <input type="hidden" value="{{$end_time}}" name="end_time" id='end_time'>
+            <input type="hidden" value="{{$question[0]['end_time']}}" name="end_time" id='end_time'>
             @foreach($question as $questions)
             <div class="privew">
               <div class="questionsBox">
@@ -167,7 +168,10 @@
             @endforeach
             <div class="card-footer text-muted"> <button class="btn btn-primary btn-block" type="submit" id="submit_btn">Submit
               </button> </div>
-          </form>
+            </form>
+            @else
+            <p>Your Exam time is over. you can't able to attempt this test</p>
+            @endif
         </div>
       </div>
     </div>
@@ -175,7 +179,6 @@
 </div>
 @endsection
 <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js') }}"></script>
-
 <script>
   $(document).ready(function() {
     var a = $('#end_time').val();
@@ -183,12 +186,10 @@
     var x = setInterval(function() {
       var now = new Date().getTime();
       var distance = countDownDate - now;
-      if (distance <= 0) {
-        setTimeout(function() {
-          alert("your test time is over. your exam is submitted");
-          $('#exam').submit();
-
-        });
+      if (distance < 0) {
+        clearInterval(x);
+        alert("your test time is over. your exam is submitted");
+        $('#exam').submit();
       } else {
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));

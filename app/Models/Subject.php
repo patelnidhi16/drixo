@@ -15,10 +15,7 @@ class Subject extends Model
         'slug'
     ];
   
-    public function getsubjectid(){
-        return $this->hasMany(Question::class,'id','subject_id');
-    }
-  
+   
     public function setSlugAttribute()
     {
     $this->attributes['slug'] = Str::slug($this->subject_name, "-");
