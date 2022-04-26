@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Result;
 use Carbon\Carbon;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\DB;
 use Mockery\Matcher\Subset;
 use PDF;
 
@@ -145,8 +146,8 @@ class StudentController extends Controller
 
     public function storequestions(Eligible_Student  $request, SubjectDataTable $StudentDataTable)
     {
-// dd($request->all());
-    //  dd($request->no_of_question);
+        // dd($request->all());
+        //  dd($request->no_of_question);
         // dd($x->format('M d,Y H:i')) ;
         $x = Subject::where('slug', $request->subject_name)->first();
         $len = count($request->question);
@@ -156,8 +157,8 @@ class StudentController extends Controller
                 'title' => $request->title,
                 'question' => $request->question[$i],
                 'slug' => $request->title,
-                'start_time'=>$request->start_time,
-                'end_time'=>$request->end_time,
+                'start_time' => $request->start_time,
+                'end_time' => $request->end_time,
             ]);
             Option::create([
                 'question_id' => $a->id,
@@ -472,12 +473,58 @@ class StudentController extends Controller
     }
     public function dashboard()
     {
-       $student= User::get();
-       $students=count($student);
-       $subject= Subject::get();
-       $subjects=count($subject);
-      $test= Question::groupby('title')->get();
-     $tests=count($test);
-        return view('admin.dashboard',compact('students','subjects','tests'));
+        $student = User::get();
+        $students = count($student);
+        $subject = Subject::get();
+        $subjects = count($subject);
+        $test = Question::groupby('title')->get();
+        $tests = count($test);
+        $today_users = User::whereDate('created_at', Carbon::today())->get();
+        $count['today_users_count'] = count($today_users);
+        $weekly_users = User::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        $count['weekly_users_count'] = count($weekly_users);
+        $monthly_users = User::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get();
+        $count['monthly_users_count'] = count($monthly_users);
+        $yearly_users = User::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->get();
+        $count['yearly_users_count'] = count($yearly_users);
+        $today_users = Result::whereDate('created_at', Carbon::today())->get();
+        $count['today_result_count'] = count($today_users);
+        $weekly_users = Result::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        $count['weekly_result_count'] = count($weekly_users);
+        $monthly_users = Result::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get();
+        $count['monthly_result_count'] = count($monthly_users);
+        $yearly_users = Result::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->get();
+        $count['yearly_result_count'] = count($yearly_users);
+        return view('admin.dashboard', compact('students', 'subjects', 'tests','count'));
     }
+    public function testgraph()
+    {
+        $tests =  Question::with('getsubject')->select(DB::raw('*, count(*) as total', 'subject_id'))->groupBy('subject_id')->get()->toArray();
+
+        return $tests;
+    }
+    public function usergraph()
+    {
+        $today_users = User::whereDate('created_at', Carbon::today())->get();
+        $count['today_users_count'] = count($today_users);
+        $weekly_users = User::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        $count['weekly_users_count'] = count($weekly_users);
+        $monthly_users = User::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get();
+        $count['monthly_users_count'] = count($monthly_users);
+        $yearly_users = User::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->get();
+        $count['yearly_users_count'] = count($yearly_users);
+        return $count;
+    }
+    public function attemptgraph(){
+        $today_users = Result::whereDate('created_at', Carbon::today())->get();
+        $count['today_users_count'] = count($today_users);
+        $weekly_users = Result::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        $count['weekly_users_count'] = count($weekly_users);
+        $monthly_users = Result::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get();
+        $count['monthly_users_count'] = count($monthly_users);
+        $yearly_users = Result::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->get();
+        $count['yearly_users_count'] = count($yearly_users);
+        return $count;
+    }
+  
 }
