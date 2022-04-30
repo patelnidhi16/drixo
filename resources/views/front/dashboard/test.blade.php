@@ -132,7 +132,6 @@
     }
   </style>
 </head>
-
 <div class="container-xxl">
   <div class="container">
     <div class="row g-4">
@@ -143,7 +142,7 @@
           <center>
             <p id="demo" style="color:red;"></p>
           </center>
-          @if($current_time<$question[0]['end_time']) <form id="exam" method="POST" action="/storerecord">
+           <form id="exam" method="POST" action="/storerecord">
             @csrf
             <input type="hidden" value="{{$question[0]['getsubject'][0]['subject_name']}}" name="subject_name">
             <input type="hidden" value="{{$question[0]['subject_id']}}" name="subject_id">
@@ -169,9 +168,6 @@
             <div class="card-footer text-muted"> <button class="btn btn-primary btn-block" type="submit" id="submit_btn">Submit
               </button> </div>
             </form>
-            @else
-            <p>Your Exam time is over. you can't able to attempt this test</p>
-            @endif
         </div>
       </div>
     </div>
@@ -186,7 +182,7 @@
     var x = setInterval(function() {
       var now = new Date().getTime();
       var distance = countDownDate - now;
-      if (distance < 0) {
+      if (distance == 0) {
         clearInterval(x);
         alert("your test time is over. your exam is submitted");
         $('#exam').submit();
@@ -197,5 +193,10 @@
         document.getElementById("demo").innerHTML = hours + ":" + minutes + ":" + seconds;
       }
     });
+  });
+ 
+  $(document).on('click','#submit_btn',function(){
+    alert("your exam is submitted");
+    
   });
 </script>

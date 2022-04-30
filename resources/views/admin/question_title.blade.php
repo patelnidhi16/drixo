@@ -2,11 +2,16 @@
 @section('content')
 <!-- Button trigger modal -->
 
-<style>
-      .error {
-            color: red;
-      }
-</style>
+
+<head>
+      <link href="{{asset('/admin/assets/css/datetimepicker.css')}}" rel="stylesheet">
+
+      <style>
+            .error {
+                  color: red;
+            }
+      </style>
+</head>
 
 <!-- Button trigger modal -->
 <br>
@@ -26,6 +31,18 @@
                   <div class="modal-body">
                         <form method="POST" accept-charset="UTF-8" class="question_update authentication-form">
                               @csrf
+                              <div class="form-group">
+                                    <div class="input-group input-group-merge">
+                                          <input type="text" class="launch_date_time form-control mb-0" name="start_time" id="start_time" autocomplete="off" placeholder="Select start date and time">
+                                    </div>
+                              </div>
+                              <div class="form-group">
+                                    <div class="input-group input-group-merge">
+                                          <input type="text" class="launch_date_time form-control mb-0" name="end_time" id="end_time" autocomplete="off" placeholder="Select end date and time">
+                                    </div>
+                              </div>
+
+
                               <div class="form-group mt-4" id="parent">
                                     <input type="hidden" class="id" name="id">
                                     <div class="input-group input-group-merge">
@@ -51,7 +68,7 @@
                   </div>
                   <div class="form-group mb-0 text-center row">
                         <button class="btn btn-primary btn-block col-4 ml-3" type="submit" id="submit_btn">
-                              Update Question
+                              Update
                         </button>
                         <button type="button" class="btn btn-secondary col-2 mx-1 exit" data-dismiss="modal">Close</button>
 
@@ -68,9 +85,7 @@
       <div class="container-fluid">
             <div class="row">
                   <div class="col-sm-12">
-
-
-                        <h5 class="page-title">Title:-{{$question[0]['title']}}</h5>
+         <h5 class="page-title">Title:-{{$question[0]['title']}}</h5>
                   </div>
             </div>
 
@@ -88,24 +103,34 @@
                                                       <th>Option3</th>
                                                       <th>Option4</th>
                                                       <th>Answer</th>
+                                                      <th>Start Time</th>
+                                                      <th>End Time</th>
                                                       <th>Action</th>
-
                                                 </tr>
                                           </thead>
                                           <tbody>
 
-                                                @foreach($question as $questions)
+                                                @foreach($question as $key=>$questions)
                                                 <tr>
+
                                                       <td>{{$questions['id']}}</td>
 
                                                       <td>{{$questions['question']}}</td>
-                                                      @foreach($question[0]['getoption'] as $x)
+                                                      @foreach($question[$key]['getoption'] as $x)
                                                       <td>
                                                             {{$x['option']}}
                                                       </td>
                                                       @endforeach
                                                       <td>
-                                                            {{$question[0]['getans'][0]['answer']}}
+                                                            {{$question[$key]['getans'][0]['answer']}}
+                                                      </td>
+                                                      <td>
+
+                                                            {{$question[0]['start_time']}}
+                                                      </td>
+                                                      <td>
+                                                            {{$question[0]['end_time']}}
+
                                                       </td>
                                                       <td><button type="button" class="edit btn btn-success" data-toggle="modal" data-target="#exampleModal" dataid="{{$questions['id']}}">Edit</button></td>
                                                 </tr>
@@ -116,6 +141,7 @@
                                           </tbody>
 
                                     </table>
+
                               </div>
                         </div>
                   </div> <!-- end col -->
@@ -132,11 +158,23 @@
 </script>
 <script src="{{ asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js') }}"></script>
 <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{asset('/admin/assets/js/datetimepicker.js')}}"></script>
+
 
 <script>
+      $('.launch_date_time').datetimepicker({
+
+            format: 'M d,Y H:i:s',
+            formatTime: 'H:i:s',
+            formatDate: 'M d,Y',
+            startDate: new Date(),
+            minDate: 0
+      });
       $(document).on('click', '.edit', function() {
             var id = $(this).attr('dataid');
             $.ajax({
@@ -149,19 +187,21 @@
                         id: id
                   },
                   success: function(data) {
-
-                        $('.question').val(data[0]);
-                        $('.id').val(data[3]);
-                        $('.option1').val(data[1][0]);
-                        $('.option2').val(data[1][1]);
-                        $('.option3').val(data[1][2]);
-                        $('.option4').val(data[1][3]);
-                        $(".answer" + data[2]).each(function() {
+                        $('.question').val(data.question);
+                        $('.id').val(data.id);
+                        $('.option1').val(data.getoption[0].option);
+                        $('.option2').val(data.getoption[1].option);
+                        $('.option3').val(data.getoption[2].option);
+                        $('.option4').val(data.getoption[3].option);
+                        $('#start_time').val(data.start_time);
+                        $('#end_time').val(data.end_time);
+                        $(".answer" + data.getans[0].answer).each(function() {
                               $(this).attr('checked', true);
                         });
                   }
             });
-      });
+            });
+      
       $('.question_update').validate({
 
             submitHandler: function(form) {

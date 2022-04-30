@@ -66,7 +66,7 @@
                                     <div class="form-group mt-4">
                                         {{Form::label('password','Password',array('class'=>'form-control-label'))}}
 
-                                        <a href="{{route('admin.reset')}}" class="float-right  text-unline-dashed ml-1 text-primary font-weight-bold ml-1">Forgot your password?</a>
+                                        <a href="{{route('admin.reset')}}" class="float-right  text-unline-dashed ml-1 text-primary font-weight-bold ml-1" >Forgot password</a>
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">

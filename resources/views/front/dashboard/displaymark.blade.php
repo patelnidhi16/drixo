@@ -4,10 +4,10 @@
         <h6 class="section-title bg-white text-center text-primary px-3">Your Marks</h6>
         <h1 class="mb-5">View Mark</h1>
     </div>
+    
     <div class="container-xxl">
         <div class="container">
             <div class="row g-4">
-
                 @if(count($result)>0)
                 @foreach($result as $user )
                 @if($user['status']==1)
@@ -18,7 +18,7 @@
                             <h5 class="mb-3">{{$user['subject']}}</h5>
                             <p>{{$user['title']}}</p>
                         <!-- <a type="button" style="background-color:#06bbcc; color:white;" class="view" subject="{{$user['subject']}}" title="{{$user['title']}}">View Test</a> -->
-                        <a type="button" style="background-color:#06bbcc; color:white;" class="view" href="{{route('viewresponse',['subject'=>$user['subject'],'title'=>$user['title']])}}">View Test</a>
+                        <a type="button" style="background-color:#06bbcc; color:white;" class="view" href="{{route('viewresponse',['subject'=>$user['getslug'][0]['slug'],'title'=>$user['slug']])}}">View Mark</a>
 
                            
                         </div>

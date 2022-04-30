@@ -30,8 +30,10 @@ class Question extends Model
     public function getanswer(){
         return $this->hasMany(Submission::class,'question_id','id');
     }
+   
     public function setSlugAttribute()
     {
     $this->attributes['slug'] = Str::slug($this->title, "-");
     }
+   
 }

@@ -17,6 +17,7 @@
     <table style="max-width: 600px; width: 600px; margin: 0px auto;" cellpadding="0" cellspacing="0">
         <tbody>
             <tr>
+                @php getHelper() @endphp
                 <td style="padding-top: 50px; padding-bottom: 50px;">
                     <table width="100%" height="100%" cellpadding="0" cellspacing="0" align="left">
                         <tbody>

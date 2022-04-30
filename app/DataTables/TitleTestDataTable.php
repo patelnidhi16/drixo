@@ -24,12 +24,11 @@ class TitleTestDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function($user){
-                return "<a class='display_title btn btn-primary' title='{{$user->title}}' dataid='{{$user->subject_id}}' href='{{route('admin.display_title',[$user->subject_id,$user->title])}}'>View Question</a>";
+                return '<a class="display_title btn btn-primary" title="{{$user["title"]}}" dataid="{{$user["subject_id"]}}" href="'.route("admin.display_title",[$user["getsubject"][0]["slug"],$user["slug"]]).' " style="width:120px;">View Question</a>';
             })
             ->rawColumns(['action'])
     ->addIndexColumn();
     }  
-
     /**
      * Get query source of dataTable.
      *

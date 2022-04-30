@@ -122,7 +122,6 @@
                 required: true,
                 email: true,
             },
-
         },
         submitHandler: function(form) {
             $.ajax({

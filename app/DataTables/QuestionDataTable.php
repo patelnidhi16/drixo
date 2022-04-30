@@ -20,8 +20,8 @@ class QuestionDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
-            ->addColumn('action', 'question.action');
+        ->eloquent($query)
+        ->addIndexColumn();
     }
 
     /**
@@ -32,7 +32,8 @@ class QuestionDataTable extends DataTable
      */
     public function query(Question $model)
     {
-        return $model->with('getoption')->get();
+        return $model->newQuery();
+
     }
 
     /**
@@ -65,15 +66,10 @@ class QuestionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+           
             Column::make('id')->data('DT_RowIndex'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+           
+            
         ];
     }
 

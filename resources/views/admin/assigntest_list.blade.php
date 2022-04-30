@@ -42,10 +42,8 @@
                         </div>
                         <div class="row">
                             <div class="table-responsive">
-                               
                                 {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
                             </div>
-                            <!-- end col-12 -->
                         </div>
                     </div>
                 </div>
@@ -68,9 +66,6 @@
 {!! $dataTable->scripts() !!}
 <script>
      $(document).ready(function(){
-
-  
-
 $('#assigntestlist-table').on('preXhr.dt', function(e, settings, data) {
         // console.log(data);
         data.subject_id = $('#subject_filter').val();

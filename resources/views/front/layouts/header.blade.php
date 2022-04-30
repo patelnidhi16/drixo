@@ -1,5 +1,8 @@
 <!-- Navbar Start -->
-
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+</head>
+<body>
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
@@ -9,7 +12,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-
             <a href="index.html" class="nav-item nav-link active">Home</a>
 
             <a href="{{route('about')}}" class="nav-item nav-link">About</a>
@@ -84,3 +86,4 @@
         </div>
     </div>
 </div>
+</body>

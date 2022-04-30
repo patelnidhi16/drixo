@@ -3,6 +3,7 @@
 namespace App\Http\Requests\admin;
 
 use App\Models\Question;
+use App\Models\Subject;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest as HttpFormRequest;
 use Illuminate\Http\Request;
@@ -27,15 +28,15 @@ class Eligible_Student extends HttpFormRequest
      */
     public function rules(Request $request)
     {
-        // dd($request->all());
-   
+        $x= Subject::where('subject_name',$request->subject_name)->get()->toArray();
         return [
-            'title' => ['required', Rule::unique('questions')->where(function ($query)  {
-                // for ($i=0; $i < count($this->id); $i++) { 
-                    return $query->where('subject_id', $this->id)->where('title', $this->title);
-                // }
+            'title' => ['required', Rule::unique('questions')->where(function ($query) use($x)  {
+              
+                    return $query->where('subject_id',$x[0]['id'])->where('title', $this->title);
+                
             })],
-            'no_of_question'=>'required',
+            'end_time'=>'required|after_or_equal:start_time'
+
         ];
     }
     public function messages()

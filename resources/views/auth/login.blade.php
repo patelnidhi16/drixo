@@ -1,14 +1,12 @@
-
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>eLearning</title>
     <link href="{{asset('front/assets/img/favicon.jpg')}}" rel="icon">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
-   
+
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -129,9 +127,10 @@
         width: 10px;
         margin-top: 9px;
     }
+
     .error {
-            color: red;
-        }
+        color: red;
+    }
 </style>
 
 <body>
@@ -142,7 +141,7 @@
                 <div class="col-md-4 login-sec">
                     <h2 class="text-center">Login Now</h2>
 
-                    <form method="POST" class="login-form" action="{{ route('login') }}">
+                    <form method="POST" class="login-form" action="{{route('login')}}">
                         @csrf
                         <div class="form-group">
                             <label for="email" class="text-uppercase">Username</label>
@@ -169,15 +168,23 @@
 
                         <div class="form-check">
                             @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                            <a class="btn btn-link" href="{{ route('password.request') }}" style="margin-left: 30px;">
                                 {{ __('Forgot Your Password?') }}
                             </a>
                             @endif
 
                             @if (Route::has('register'))
-                            <p>Don't have an account?
+                            <div class="row">
+                                <div class="col-8">
+                                Don't have an account?
+                                </div>
+                                <div class="col-4">
+                                <a class="nav-link" href="http://127.0.0.1:8000/register" style="margin-left: -64px;margin-top: -8px;"> Register</a>
+                                </div>
+                            </div>
+                            <!-- <p>Don't have an account?
                                 <a class="nav-link" href="{{ route('register') }}"> {{ __('Register') }}</a>
-                            </p>
+                            </p> -->
                             @endif
                             <!-- <button type="submit" class="btn btn-login ">Submit</button> -->
                         </div>
@@ -190,26 +197,26 @@
                 </div>
                 <div class="col-md-8 banner-sec">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                       
+
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
                                 <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg">
                                 <div class="carousel-caption d-none d-md-block">
                                     <div class="banner-text">
-                                    <div class="banner-text">
-                                        <h2 style="color: black;">Quiz Website</h2>
-                                        <h4 style="color: black;">This is quiz website</h4>
-                                    
-                                        <h6 style="color: black;">Here you will able to attempt test and view your result</h6>
-                                    </div>
+                                        <div class="banner-text">
+                                            <h2 style="color: black;">Quiz Website</h2>
+                                            <h4 style="color: black;">This is quiz website</h4>
+
+                                            <h6 style="color: black;">Here you will able to attempt test and view your result</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                           
 
+
+                        </div>
                     </div>
                 </div>
-            </div>
     </section>
 
 </body>

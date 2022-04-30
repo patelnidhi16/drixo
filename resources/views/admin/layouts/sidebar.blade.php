@@ -1,3 +1,7 @@
+<head>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+</head>
+<body>
 <div class="left-side-menu">
     <div class="media user-profile mt-2 mb-2">
     <span class="iconify" data-icon="carbon:user-avatar-filled" style="color: #5369f8;" data-width="40"></span>
@@ -74,7 +78,7 @@
                 <li>
                     <a href="{{route('admin.result')}}">
                     <span class="iconify" data-icon="codicon:output"></span>
-                        <span> Return Result </span>
+                        <span>Display Result </span>
                         <!-- display student table but status = 0 -->
                     </a>
                 </li>
@@ -113,3 +117,4 @@
     </div>
     <!-- Sidebar -left -->
 </div>
+</body>

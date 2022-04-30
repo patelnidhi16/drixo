@@ -142,6 +142,7 @@
     }
   </style>
 </head>
+
 <div class="container-xxl">
   <div class="container">
     <div class="row g-4">
@@ -149,14 +150,11 @@
         <div class="card-header text-center text-capitalize" style="color:#181d38; font-size: x-large;">{{$question[0]['getsubject'][0]['subject_name']}}</div>
 
         <div class="card-body">
-          <div class="mark btn btn-primary lg-5 d-none d-lg-block col-2" style="background-color: #06BBCC;">Total Mark:{{$result[0]['result']}}</div>
+          <div class="mark btn btn-primary lg-5 d-none d-lg-block col-2" style="background-color: #06BBCC;margin-left: 10px;font-size: 20px;">Total Mark:{{$result[0]['result']}}</div>
           <span id=displayTime style="color: red; margin-left:570px; font-size:20px;"></span>
           <form id="exam" method="POST" action="/storerecord">
             @csrf
             @php
-
-
-
             @endphp
             @foreach($question as $questions)
             <div class="privew">

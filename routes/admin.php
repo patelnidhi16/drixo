@@ -62,5 +62,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/testgraph', [StudentController::class, 'testgraph'])->name('testgraph');
     Route::get('/usergraph', [StudentController::class, 'usergraph'])->name('usergraph');
     Route::get('/attemptgraph', [StudentController::class, 'attemptgraph'])->name('attemptgraph');
+
    
 });

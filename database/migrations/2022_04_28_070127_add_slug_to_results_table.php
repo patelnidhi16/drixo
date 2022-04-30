@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStartTimeStudentsTable extends Migration
+class AddSlugToResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddStartTimeStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('students', function (Blueprint $table) {
-            $table->string('start_time')->after('status');
+        Schema::table('results', function (Blueprint $table) {
+            $table->string('slug')->after('total_mark');
         });
     }
 
@@ -25,7 +25,7 @@ class AddStartTimeStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('students', function (Blueprint $table) {
+        Schema::table('results', function (Blueprint $table) {
             //
         });
     }

@@ -10,63 +10,7 @@
 
             </div>
 
-            <!-- content -->
-            <!-- <div class="row mx-5">
-                <div class="col-md- col-xl-3">
-                    <div class="card">
-                        <div class="card-body p-0">
-                            <div class="media p-3">
-                                <div class="media-body">
-                                    <span class="text-muted text-uppercase font-size-12 font-weight-bold">Today Student</span>
-                                    <h2 class="mb-0">{{$students}}</h2>
-                                </div>
-                                <div class="align-self-center">
-                                    <div id="today-revenue-chart" class="apex-charts"></div>
-                                    <span class="text-success font-weight-bold font-size-13"><i class='uil uil-arrow-up'></i> 10.21%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-xl-3">
-                    <div class="card">
-                        <div class="card-body p-0">
-                            <div class="media p-3">
-                                <div class="media-body">
-                                    <span class="text-muted text-uppercase font-size-12 font-weight-bold">Total Subject
-                                    </span>
-                                    <h2 class="mb-0">{{$subjects}}</h2>
-                                </div>
-                                <div class="align-self-center">
-                                    <div id="today-product-sold-chart" class="apex-charts"></div>
-                                    <span class="text-danger font-weight-bold font-size-13"><i class='uil uil-arrow-down'></i> 5.05%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-xl-3">
-                    <div class="card">
-                        <div class="card-body p-0">
-                            <div class="media p-3">
-                                <div class="media-body">
-                                    <span class="text-muted text-uppercase font-size-12 font-weight-bold">Total Test</span>
-                                    <h2 class="mb-0">11</h2>
-                                </div>
-                                <div class="align-self-center">
-                                    <div id="today-new-customer-chart" class="apex-charts"></div>
-                                    <span class="text-success font-weight-bold font-size-13"><i class='uil uil-arrow-up'></i>{{ $tests}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div> -->
-
+           
             <!-- stats + charts -->
             <div class="row">
                 <div class="col-xl-3">
@@ -77,7 +21,7 @@
                             <div class="media px-3 py-4 border-bottom">
                                 <div class="media-body">
                                     <span class="text-muted">Total Student</span>
-                                    <h4 class="mt-0 mb-1 font-size-22 font-weight-normal">{{$students}}</h4>
+                                    <h4 class="mt-0 mb-1 font-size-22 font-weight-normal">{{$count['students']}}</h4>
                                 </div>
                                 <i data-feather="users" class="align-self-center icon-dual icon-lg"></i>
                             </div>
@@ -86,7 +30,7 @@
                             <div class="media px-3 py-4 border-bottom">
                                 <div class="media-body">
                                     <span class="text-muted">Total Subject</span>
-                                    <h4 class="mt-0 mb-1 font-size-22 font-weight-normal">{{$subjects}}</h4>
+                                    <h4 class="mt-0 mb-1 font-size-22 font-weight-normal">{{$count['subjects']}}</h4>
                                 </div>
                                 <i data-feather="book-open" class="align-self-center icon-dual icon-lg"></i>
                             </div>
@@ -95,7 +39,7 @@
                             <div class="media px-3 py-4">
                                 <div class="media-body">
                                     <span class="text-muted">Total Test</span>
-                                    <h4 class="mt-0 mb-1 font-size-22 font-weight-normal">{{ $tests}}</h4>
+                                    <h4 class="mt-0 mb-1 font-size-22 font-weight-normal">{{$count['tests']}}</h4>
                                 </div>
                                 <i data-feather="users" class="align-self-center icon-dual icon-lg"></i>
                             </div>
@@ -113,38 +57,60 @@
                 <div class="col-xl-3">
                     <div class="card">
                         <div class="card-body p-0">
-                            <h5 class="card-title header-title border-bottom p-3 mb-0">Details</h5>
+                            <h5 class="card-title header-title border-bottom p-3 mb-0" >Details</h5>
                             <!-- stat 1 -->
-                            <div class="media px-3 py-4 border-bottom">
+                            <div class="media px-3 py-3 border-bottom" style="margin-bottom: -35px !IMPORTANT;">
                                 <div class="media-body">
-                                    <span class="text-muted">Assign test history</span>
-                                    <h6 class="mt-0 mb-1 font-size-8 font-weight-normal">
-                                        Today&nbsp;&nbsp;week&nbsp;&nbsp;month&nbsp;&nbsp;year<br />
-                                        &nbsp;&nbsp;&nbsp;{{$count['today_users_count']}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$count['weekly_users_count']}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$count['monthly_users_count']}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$count['yearly_users_count']}}
-                                    </h6>
+                                    <h5 class="text-muted">Assign test history</h5>
+                                   
+                                    <table class="table">
+                                        <tr>
+                                            <td>Today</td>
+                                            <td>week</td>
+                                            <td>month</td>
+                                            <td>year</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{$count['today_users_count']}}</td>
+                                            <td>{{$count['weekly_users_count']}}</td>
+                                            <td>{{$count['monthly_users_count']}}</td>
+                                            <td>{{$count['yearly_users_count']}}</td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <i data-feather="award" class="align-self-center icon-dual icon-lg"></i>
                             </div>
                             <!-- stat 2 -->
-                            
-                            <div class="media px-3 py-4">
-                                <div class="media-body">
-                                    <span class="text-muted">Student History</span>
-                                    <h6 class="mt-0 mb-1 font-size-8 font-weight-normal">
-                                        Today&nbsp;&nbsp;week&nbsp;&nbsp;month&nbsp;&nbsp;year<br />
-                                        &nbsp;&nbsp;&nbsp;{{$count['today_result_count']}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$count['weekly_result_count']}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$count['monthly_result_count']}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$count['yearly_result_count']}}
-                                    </h6>
+
+                            <div class="media px-3 py-3 mb-0">
+                                <div class="media-body"  style="margin-bottom: -29px !IMPORTANT;">
+                                    <h5 class="text-muted">Student History</h5>
+                                   
+                                    <table class="table">
+                                        <tr>
+                                            <td>Today</td>
+                                            <td>week</td>
+                                            <td>month</td>
+                                            <td>year</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{$count['today_result_count']}}</td>
+                                            <td>{{$count['weekly_result_count']}}</td>
+                                            <td>{{$count['monthly_result_count']}}</td>
+                                            <td>{{$count['yearly_result_count']}}</td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <i data-feather="users" class="align-self-center icon-dual icon-lg"></i>
                             </div>
-                            <div class="media px-3 py-4 border-bottom">
+                            <!-- <div class="media px-3 py-4 border-bottom">
                                 <div class="media-body">
                                     <span class="text-muted">Subject Test History</span>
                                     <h6 class="mt-0 mb-1 font-size-8 font-weight-normal">
                                           </h6>
                                 </div>
                                 <i data-feather="book-open" class="align-self-center icon-dual icon-lg"></i>
-                            </div>
+                            </div> -->
 
                             <!-- stat 3 -->
                         </div>

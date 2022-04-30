@@ -15,10 +15,9 @@ class Subject extends Model
         'slug'
     ];
   
-   
-    public function setSlugAttribute()
+    public function getNameAttribute($value)
     {
-    $this->attributes['slug'] = Str::slug($this->subject_name, "-");
+        return ucfirst($value);
     }
    
 

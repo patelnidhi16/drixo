@@ -1,2 +1,0 @@
-wedfeccvtgtry
-{{$data}}

@@ -214,6 +214,17 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="box14">
+                <img class="pic-1" src="https://thumbs.dreamstime.com/b/handwriting-announcement-text-get-results-concept-achieve-result-written-sticky-stick-note-wooden-background-110722395.jpg">
+                <div class="box-content" class="aa">
+                    <h3 class="title">All Result</h3>
+                    <ul class="icon">
+                        <li><span class="post"><a href="{{route('viewresult')}}" style=" width: 150px; ">Click to View All Result</a></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endif

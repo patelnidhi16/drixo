@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 <!-- <link rel="stylesheet" href='path/to/font-awesome/css/font-awesome.min.css'> -->
 <style>
-    .error {
+    .error,.server_error {
         color: red;
         margin-left: 49px;
     }
@@ -35,8 +35,11 @@
                                     <i class="icon-image" data-feather="lock"></i>
                                 </span>
                             </div>
-                            <input class="form-control" id="subject_name" placeholder="Enter your subjectname" name="subject_name" type="text" value=""><br>
+
+                            <input class="form-control" id="subject_name"  name="subject_name" type="text" value=""><br>
                         </div>
+                        <span class="server_error" ></span>
+                      
                     </div>
                     <div class="form-group mt-4">
                         <label for="image" class="form-control-label">image</label>
@@ -72,7 +75,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-             
+
                 <h5 class="page-title">Subject List</h5>
                 <a class="btn btn-primary float-right mt-1 mb-3" href="{{route('admin.subject')}}">Add Subject</a>
 
@@ -155,7 +158,8 @@
                                 icon: "success",
                             });
                             $('#student-table').DataTable().ajax.reload();
-                        }
+                        },
+
                     });
 
                 } else {
@@ -176,7 +180,7 @@
                 id: id
             },
             success: function(data) {
-                console.log(data);
+
                 $('#subject_name').val(data.subject_name);
                 $('#id').val(data.id);
                 $('#old_image').val(data.image);
@@ -188,7 +192,11 @@
             subject_name: {
                 required: true,
             },
+        },
 
+        errorPlacement: function(error, element) {
+          
+            error.insertAfter(element.parents('.input-group-merge'));
         },
         submitHandler: function(form) {
             swal({
@@ -216,6 +224,13 @@
                                 });
                                 $('#student-table').DataTable().ajax.reload();
                             },
+                            error: function(error) {
+                                console.log(error);
+                                $(error.responseJSON.errors).each(function(key, value) {
+                                    $('#updatesubject').find('.server_error').html(value.subject_name[0]);
+
+                                });
+                            }
                         });
                     } else {
                         swal("Your imaginary file is safe!");
@@ -224,22 +239,25 @@
 
         }
     });
-   
-    $(document).on('click','.add_question',function(){
-      id=$(this).attr('dataid');
-      $.ajax({
+
+    $(document).on('click', '.add_question', function() {
+        id = $(this).attr('dataid');
+        $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "questions/" + id ,
+            url: "questions/" + id,
             type: 'get',
             data: {
                 id: id
             },
             success: function(data) {
-                window.location.href=data;
+                window.location.href = data;
+
+
+            },
+            error: function(data) {
                 console.log(data);
-            
             }
         });
     });

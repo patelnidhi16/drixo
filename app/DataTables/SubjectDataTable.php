@@ -35,15 +35,12 @@ class SubjectDataTable extends DataTable
                 $result .= '</div>';
                 return $result; 
             })
-
             ->editColumn('image', function($data) {
                 return '<a href="'.asset('/public/'.$data->image).'" target="_blank"><img src="'.asset('/public/'.$data->image).'" style="height: 50px; width:50px;"></a>';
             })
             ->rawColumns(['image','action'])
             ->addIndexColumn();
-            
     }
-
     /**
      * Get query source of dataTable.
      *
