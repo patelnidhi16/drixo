@@ -176,22 +176,35 @@
                             @if (Route::has('register'))
                             <div class="row">
                                 <div class="col-8">
-                                Don't have an account?
+                                    Don't have an account?
                                 </div>
                                 <div class="col-4">
-                                <a class="nav-link" href="http://127.0.0.1:8000/register" style="margin-left: -64px;margin-top: -8px;"> Register</a>
+                                    <a class="nav-link" href="http://127.0.0.1:8000/register" style="margin-left: -64px;margin-top: -8px;"> Register</a>
                                 </div>
                             </div>
                             <!-- <p>Don't have an account?
                                 <a class="nav-link" href="{{ route('register') }}"> {{ __('Register') }}</a>
                             </p> -->
                             @endif
+                            <a href="{{ url('auth/google') }}" style="width:50px; height:20px;">
+
+                                <span class="iconify" data-icon="akar-icons:google-contained-fill" data-width="30" data-height="30"></span>
+
+                            </a>
+                            <a href="{{ url('auth/facebook') }}" style="margin-left: 20px;">
+                                <span class="iconify" data-icon="akar-icons:facebook-fill" data-width="30" data-height="30"></span>
+                            </a>
+                            <a href="{{ url('auth/linkedin') }}" style="margin-left: 20px;">
+                            <span class="iconify" data-icon="entypo-social:linkedin-with-circle" data-width="30" data-height="30"></span>
+                            </a>
+                            <a href="{{ url('auth/github') }}" style="margin-left: 20px;">
+                            <span class="iconify" data-icon="akar-icons:github-fill" data-width="30" data-height="30"></span>
+                            </a>
                             <!-- <button type="submit" class="btn btn-login ">Submit</button> -->
                         </div>
                         <button type="submit" class="btn btn-login float-center  ">
                             {{ __('Login') }}
                         </button>
-
                     </form>
                     <div class="copy-text">Created with <i class="fa fa-heart"></i> by Grafreez</div>
                 </div>
@@ -225,7 +238,7 @@
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js')}}"></script>
 <script src="{{asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js')}}"></script>
-
+<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 <script>
     $('.login-form').validate({
         rules: {

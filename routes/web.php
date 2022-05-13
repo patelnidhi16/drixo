@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Auth\GithubController;
+use App\Http\Controllers\Auth\LinkedinController;
 use App\Mail\ApproveMail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +30,9 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/index', [StudentController::class, 'index'])->name('index');
+
 Route::group(['middleware' => 'auth:web'], function () {
-    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+   
     Route::get('/displaytest', [StudentController::class, 'displaytest'])->name('displaytest');
     Route::get('/displaystudentresult', [StudentController::class, 'displaystudentresult'])->name('displaystudentresult');
     Route::get('/test/{id}/{title}', [StudentController::class, 'test'])->name('test');
@@ -42,6 +46,15 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/about', [StudentController::class, 'about'])->name('about');
 });    
 
+Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
 
 
+Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 
+Route::get('auth/linkedin', [LinkedinController::class, 'redirectToLinkedin']);
+Route::get('auth/linkedin/callback', [LinkedinController::class, 'handleCallback']);
+
+Route::get('auth/github', [GithubController::class, 'redirectToGithub']);
+Route::get('auth/github/callback', [GithubController::class, 'handleCallback']);

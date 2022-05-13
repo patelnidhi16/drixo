@@ -52,7 +52,7 @@
                                                     <span class="iconify" data-icon="bi:image"></span>
                                                 </span>
                                             </div>
-                                            <input class="form-control" id="image" name="image" type="file" value="" accept="image/*"><br>
+                                            <input class="form-control" id="image" name="image" type="file" value=""><br>
                                             <span class="error"></span>
                                         </div>
                                     </div>

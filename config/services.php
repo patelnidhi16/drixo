@@ -24,10 +24,25 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
-    'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
-        'secret' => env('AWS_SECRET_ACCESS_KEY'),
-        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    'google' => [
+        'client_id' => '791685701165-2nk9rju4ug4v1ht6md8ts05mj5962fvl.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
     ],
-
+    'facebook' => [
+        'client_id' => '2798301146983376',
+        'client_secret' => '84cf34434fe8711b18f316cf8b799e7d',
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+    ],
+    'linkedin' => [
+        'client_id' => '77s27g2nv2824y',
+        'client_secret' => 'B0V5G99IcqoKQU7o',
+        'redirect' => 'http://localhost:8000/auth/linkedin/callback',
+    ],
+    'github' => [
+        'client_id' => '75a8c74e512fa5d268d8',
+        'client_secret' => '511782342f9fffdb90fea6da00c2ffc08dff23ed',
+        'redirect' => 'http://127.0.0.1:8000/auth/github/callback',
+    ],
+    
 ];
