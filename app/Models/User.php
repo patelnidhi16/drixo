@@ -25,6 +25,7 @@ class User extends Authenticatable
         'facebook_id',
         'linkedin_id',
         'git_id',
+        'twitter_id'
     ];
 
     /**
@@ -46,3 +47,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 }
+

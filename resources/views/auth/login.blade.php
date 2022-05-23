@@ -140,7 +140,6 @@
             <div class="row">
                 <div class="col-md-4 login-sec">
                     <h2 class="text-center">Login Now</h2>
-
                     <form method="POST" class="login-form" action="{{route('login')}}">
                         @csrf
                         <div class="form-group">
@@ -200,6 +199,7 @@
                             <a href="{{ url('auth/github') }}" style="margin-left: 20px;">
                             <span class="iconify" data-icon="akar-icons:github-fill" data-width="30" data-height="30"></span>
                             </a>
+                         
                             <!-- <button type="submit" class="btn btn-login ">Submit</button> -->
                         </div>
                         <button type="submit" class="btn btn-login float-center  ">

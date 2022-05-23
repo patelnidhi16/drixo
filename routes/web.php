@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Auth\GithubController;
 use App\Http\Controllers\Auth\LinkedinController;
+use App\Http\Controllers\Auth\TwitterController;
 use App\Mail\ApproveMail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/index', [StudentController::class, 'index'])->name('index');
+Route::get('/abc', [StudentController::class, 'abc'])->name('abc');
 
 Route::group(['middleware' => 'auth:web'], function () {
    

@@ -35,11 +35,9 @@ class GithubController extends Controller
         $finduser = User::where('git_id', $user->id)->first();
 
         if ($finduser) {
-          
             Auth::guard('web')->login($finduser);
             return redirect()->route('index');
         } else {
-          
             $newUser = User::create([
                 'name' => $user->name,
                 'email' => $user->email,

@@ -17,7 +17,9 @@ class AdminSeeder extends Seeder
     {
         Admin::insert([
             'email'=>'admin@gmail.com',
-            'password'=>Hash::make('admin')
+            'password'=>Hash::make('admin'),
+            'assign_role' => 'Administration',
+
         ]);
     }
 }

@@ -62,6 +62,15 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/testgraph', [StudentController::class, 'testgraph'])->name('testgraph');
     Route::get('/usergraph', [StudentController::class, 'usergraph'])->name('usergraph');
     Route::get('/attemptgraph', [StudentController::class, 'attemptgraph'])->name('attemptgraph');
+    Route::get('/permission', [StudentController::class, 'permission'])->name('permission');
+    Route::post('/permission', [StudentController::class, 'storepermission']);
+    Route::get('/adminlisting', [StudentController::class, 'admin'])->name('adminuser');
+    Route::post('/adminlisting', [StudentController::class, 'addadmin'])->name('addadmin');
+    Route::get('/admindelete', [StudentController::class, 'admindelete'])->name('admindelete');
+    Route::get('/adminedit', [StudentController::class, 'adminedit'])->name('adminedit');
+    Route::post('/adminedit', [StudentController::class, 'adminupdate'])->name('adminupdate');
+    Route::get('/editrole', [StudentController::class, 'editrole'])->name('editrole');
 
    
+
 });

@@ -20,7 +20,6 @@ class GoogleController extends Controller
      */
     public function redirectToGoogle()
     {
-      
         return Socialite::driver('google')->redirect();
     }
 

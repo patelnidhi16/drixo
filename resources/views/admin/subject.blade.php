@@ -105,7 +105,7 @@
 <script src="{{ asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
 <script>
     $('#subject').validate({
         rules: {

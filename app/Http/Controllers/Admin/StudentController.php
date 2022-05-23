@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\abcDataTable;
+use App\DataTables\AdminDataTable;
 use App\DataTables\AssigntestDataTable;
 use App\DataTables\AssigntestListDataTable;
 use App\DataTables\AttempttestDataTable;
@@ -21,8 +22,10 @@ use App\Http\Requests\admin\Eligible_Student;
 use App\Http\Requests\SubjectRequest;
 use App\Http\Requests\UpdateSubject;
 use App\Mail\ApproveMail;
+use App\Models\Admin;
 use App\Models\Answer;
 use App\Models\Option;
+use App\Models\Permission;
 use App\Models\Question;
 use App\Models\Student;
 use App\Models\Subject;
@@ -37,9 +40,13 @@ use App\Models\Result;
 use Carbon\Carbon;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Mockery\Matcher\Subset;
 use PDF;
+use Spatie\Permission\Models\Role;
+use App\Models\Role_has_permission;
 
 class StudentController extends Controller
 {
@@ -184,15 +191,13 @@ class StudentController extends Controller
                 'subject_id' =>  $x->id,
                 'answer' => $request->ans[$key],
             ]);
-            
         }
         return redirect()->route('admin.displaysubject');
-       
-        }
-        public function editquestion(Request $request)
-        {
-            $questions = Question::with('getoption')->with('getans')->where('id', $request->id)->first()->toArray();
-            return $questions;
+    }
+    public function editquestion(Request $request)
+    {
+        $questions = Question::with('getoption')->with('getans')->where('id', $request->id)->first()->toArray();
+        return $questions;
     }
     public function updatequestion(Request $request)
     {
@@ -219,7 +224,7 @@ class StudentController extends Controller
         $x = Subject::where('slug', $subject)->first();
         $title = Question::with('getsubject')->where('subject_id', $x->id)->groupby('title')->get()->toArray();
         $subject_name = $subject;
-        return $TitleTestDataTable->render('admin.student', compact('subject_name','title'));
+        return $TitleTestDataTable->render('admin.student', compact('subject_name', 'title'));
 
         // return view('admin.alltest', compact('title', 'subject_name'));
     }
@@ -227,7 +232,7 @@ class StudentController extends Controller
     {
         $x = Subject::where('subject_name', $id)->get()->toArray();
         $question = Question::with('getoption')->with('getans')->where('slug', $title)->where('subject_id', $x[0]['id'])->get()->toArray();
-      
+
 
         return view('admin.question_title', compact('question'));
     }
@@ -473,6 +478,7 @@ class StudentController extends Controller
         $tests =  Question::with('getsubject')->select(DB::raw('*, count(*) as total', 'subject_id'))->groupBy('subject_id')->get()->toArray();
         return $tests;
     }
+
     public function usergraph()
     {
         $today_users = User::whereDate('created_at', Carbon::today())->get();
@@ -498,5 +504,87 @@ class StudentController extends Controller
         return $count;
     }
 
-   
+    public function abc()
+    {
+        $query = 'SELECT SUM((';
+        $column = Schema::getColumnListing('students');
+
+
+        foreach ($column as $key => $val) {
+            if ($key == (count($column) - 1)) {
+
+                $query .= 'IFNULL(CHAR_LENGTH("' . $val . '"),0)';
+            } else {
+
+                $query .= 'IFNULL(CHAR_LENGTH("' . $val . '"),0)+';
+            }
+        }
+        $query .= ")/1024) as 'size' FROM `users`";
+
+        $size = DB::select($query);
+        dd($size[0]->size);
+    }
+
+    public function permission(AdminDataTable $AdminDataTable)
+    {
+        $permissions = Permission::get();
+      $roles=Role_has_permission::get();
+      return $AdminDataTable->render('admin.permission', compact('permissions', 'roles'));
+
+      
+    }
+    public function storepermission(Request $request)
+    {
+        $role = Role::create([
+            'name' => $request->role,
+            'guard_name' => 'admin',
+        ]);
+        $role->syncPermissions($request->permissions)->get();
+        if ($role) {
+            $response['status'] = 'success';
+            $response['message'] = 'Role created successfully';
+        } else {
+            $response['status'] = 'danger';
+            $response['message'] = 'Something went wrong! Try again later...';
+        }
+        return $response;
+    }
+    public function admin(AdminDataTable $AdminDataTable)
+    {
+        $roles = Role::get();
+        $admin = Admin::get();
+        return $AdminDataTable->render('admin.adminlisting', compact('admin', 'roles'));
+    }
+    public function addadmin(Request $request)
+    {
+        Admin::create([
+            'email' => $request->email,
+            'assign_role' => $request->role,
+            'password' => Hash::make($request->password),
+        ]);
+    }
+    public function admindelete(Request $request)
+    {
+        $id = $request->id;
+        $data = Admin::find($id);
+        $data->delete();
+    }
+    public function adminedit(Request $request)
+    {
+        $id = $request->id;
+        $data = Admin::find($id);
+        return $data;
+    }
+
+    public function adminupdate(Request $request)
+    {
+        Admin::where('id', $request->id)->update([
+            'email' => $request->update_email,
+            'assign_role' => $request->update_role,
+        ]);
+    }
+
+    public function editrole(){
+        dd(1);
+    }
 }

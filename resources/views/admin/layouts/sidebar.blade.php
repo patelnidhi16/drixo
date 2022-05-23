@@ -50,9 +50,21 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('admin.adminuser')}}">
+                        <i data-feather="home"></i>
+                        <span> Admin User </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('admin.displaysubject')}}">
                     <span class="iconify" data-icon="bx:list-ul"></span>
                         <span> Subject </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.permission')}}">
+                    <span class="iconify" data-icon="bx:list-ul"></span>
+                        <span> Role Permission </span>
                     </a>
                 </li>
                 <li>
