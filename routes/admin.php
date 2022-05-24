@@ -68,8 +68,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('/adminlisting', [StudentController::class, 'addadmin'])->name('addadmin');
     Route::get('/admindelete', [StudentController::class, 'admindelete'])->name('admindelete');
     Route::get('/adminedit', [StudentController::class, 'adminedit'])->name('adminedit');
-    Route::post('/adminedit', [StudentController::class, 'adminupdate'])->name('adminupdate');
-    Route::get('/editrole', [StudentController::class, 'editrole'])->name('editrole');
+    Route::post('/adminedit', [StudentController::class, 'addadmin'])->name('adminupdate');
+    Route::get('/editredirect/{id}', [StudentController::class, 'editredirect'])->name('editredirect');
+    Route::post('/editredirect/{id}', [StudentController::class, 'editrole'])->name('editrole');
 
    
 

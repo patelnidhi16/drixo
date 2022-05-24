@@ -20,24 +20,26 @@
                 <div class="card mx-5">
                     <div class="card-body ">
                         <div class="row">
-                    <select class="form-control col-2 ml-5" id="subject_filter">
-                                    <option>Select Subject </option>
-                                    @foreach($subject as $sub)
-                                    <option>{{$sub['subject_name']}}</option>
-                                    @endforeach
-                                </select>
-                                <select id="title_filter" class="form-control col-2 ml-5">
+                            <select class="form-control col-2 ml-5" id="subject_filter">
+                                <option>Select Subject </option>
+                                @foreach($subject as $sub)
+                                <option>{{$sub['subject_name']}}</option>
+                                @endforeach
+                            </select>
+                            <select id="title_filter" class="form-control col-2 ml-5">
                                 <option value=''>Select Subject First</option>
-                                </select>
+                            </select>
                         </div>
                         <div class="row">
                             <div class="table-responsive">
-                          
-                            
+
+
                                 {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
                             </div>
-                            <button type="button" class="float-right btn btn-primary m-3" id="assign_test" >Return Result</button>
-                            <!-- end col-12 -->
+                            @if(auth()->user()->can('displayresult_create') )
+                            <button type="button" class="float-right btn btn-primary m-3" id="assign_test">Return Result</button>
+
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -62,82 +64,82 @@
 
 {!! $dataTable->scripts() !!}
 <script>
-     $(document).ready(function(){
-   $(document).on('click','#All',function(){
-        if ($(this).prop('checked')==true){
-            $("input:checkbox[class=assign_test]").each(function() {
-            $(this).prop('checked', true);
+    $(document).ready(function() {
+        $(document).on('click', '#All', function() {
+            if ($(this).prop('checked') == true) {
+                $("input:checkbox[class=assign_test]").each(function() {
+                    $(this).prop('checked', true);
+                });
+            } else {
+                $("input:checkbox[class=assign_test]").each(function() {
+                    $(this).prop('checked', false);
+                });
+            }
+
         });
-        }else{
-            $("input:checkbox[class=assign_test]").each(function() {
-            $(this).prop('checked', false);
-        });
-        }
-        
-    });
-    $(document).on('click', '#assign_test', function() {
-        var student = [];
-        $("input:checkbox[class=assign_test]:checked").each(function() {
-            student.push($(this).attr('dataid'));
-        });
-        console.log(student);
-        
-        $.ajax({
-            type: "GET",
-            url: '/admin/displayresult',
-            data: {
-                id: student,
-            },
-            success: function(data) {
-                swal("Good job!", "Test has been assigned successfully ", "success");
+        $(document).on('click', '#assign_test', function() {
+            var student = [];
+            $("input:checkbox[class=assign_test]:checked").each(function() {
+                student.push($(this).attr('dataid'));
+            });
+            console.log(student);
+
+            $.ajax({
+                type: "GET",
+                url: '/admin/displayresult',
+                data: {
+                    id: student,
+                },
+                success: function(data) {
+                    swal("Good job!", "Test has been assigned successfully ", "success");
                 }
+            });
+
         });
 
-    }); 
-   
-        
-       
+
+
         $('#attempttest-table').on('preXhr.dt', function(e, settings, data) {
             console.log(data);
             data.subject = $('#subject_filter').val();
             data.title = $('#title_filter').val();
 
         });
-      
-       
-        $("#subject_filter").change(function(){
+
+
+        $("#subject_filter").change(function() {
             window.LaravelDataTables['attempttest-table'].draw();
-            
+
         });
-        $("#title_filter").change(function(){
+        $("#title_filter").change(function() {
             window.LaravelDataTables['attempttest-table'].draw();
-            
+
         });
         $(document).on('change', '#subject_filter', function() {
-           
-        var subject = $(this).val();
-      
-        $.ajax({
-            type: "GET",
-            url: '{{route("admin.filter_title")}}',
-            data: {
-                subject: subject,
-            },
-            success: function(data) {
-              
-               
-                display = "<option value=''>Select title</option>";
-                $.each(data, function(key, value) {
-                   
-                    console.log(value.title);
 
-                    display += '<option value="' + value.title + '">' + value.title +
-                        "</option>";
-                });
-                $('#title_filter').html(display);
-            }
+            var subject = $(this).val();
+
+            $.ajax({
+                type: "GET",
+                url: '{{route("admin.filter_title")}}',
+                data: {
+                    subject: subject,
+                },
+                success: function(data) {
+
+
+                    display = "<option value=''>Select title</option>";
+                    $.each(data, function(key, value) {
+
+                        console.log(value.title);
+
+                        display += '<option value="' + value.title + '">' + value.title +
+                            "</option>";
+                    });
+                    $('#title_filter').html(display);
+                }
+            });
         });
-    });
     })
 </script>
 @endpush

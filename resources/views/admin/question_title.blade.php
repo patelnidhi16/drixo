@@ -85,7 +85,7 @@
       <div class="container-fluid">
             <div class="row">
                   <div class="col-sm-12">
-         <h5 class="page-title">Title:-{{$question[0]['title']}}</h5>
+                        <h5 class="page-title">Title:-{{$question[0]['title']}}</h5>
                   </div>
             </div>
 
@@ -132,7 +132,9 @@
                                                             {{$question[0]['end_time']}}
 
                                                       </td>
+                                                      @can('test_update')
                                                       <td><button type="button" class="edit btn btn-success" data-toggle="modal" data-target="#exampleModal" dataid="{{$questions['id']}}">Edit</button></td>
+                                                      @endcan
                                                 </tr>
                                                 @endforeach
 
@@ -200,8 +202,8 @@
                         });
                   }
             });
-            });
-      
+      });
+
       $('.question_update').validate({
 
             submitHandler: function(form) {

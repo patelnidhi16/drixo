@@ -21,10 +21,15 @@ class TitleTestDataTable extends DataTable
      */
     public function dataTable($query)
     {
+        $admin = Auth()->guard('admin')->user();
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function($user){
-                return '<a class="display_title btn btn-primary" title="{{$user["title"]}}" dataid="{{$user["subject_id"]}}" href="'.route("admin.display_title",[$user["getsubject"][0]["slug"],$user["slug"]]).' " style="width:120px;">View Question</a>';
+                if( Auth()->guard('admin')->user()->can('test_view')){
+
+                    return '<a class="display_title btn btn-primary" title="{{$user["title"]}}" dataid="{{$user["subject_id"]}}" href="'.route("admin.display_title",[$user["getsubject"][0]["slug"],$user["slug"]]).' " style="width:120px;">View Question</a>';
+                }
+               
             })
             ->rawColumns(['action'])
     ->addIndexColumn();

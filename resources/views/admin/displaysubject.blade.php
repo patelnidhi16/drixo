@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 <!-- <link rel="stylesheet" href='path/to/font-awesome/css/font-awesome.min.css'> -->
 <style>
-    .error,.server_error {
+    .error,
+    .server_error {
         color: red;
         margin-left: 49px;
     }
@@ -36,10 +37,10 @@
                                 </span>
                             </div>
 
-                            <input class="form-control" id="subject_name"  name="subject_name" type="text" value=""><br>
+                            <input class="form-control" id="subject_name" name="subject_name" type="text" value=""><br>
                         </div>
-                        <span class="server_error" ></span>
-                      
+                        <span class="server_error"></span>
+
                     </div>
                     <div class="form-group mt-4">
                         <label for="image" class="form-control-label">image</label>
@@ -77,16 +78,17 @@
             <div class="col-sm-12">
 
                 <h5 class="page-title">Subject List</h5>
-                <a class="btn btn-primary float-right mt-1 mb-3" href="{{route('admin.subject')}}">Add Subject</a>
 
+
+                @can('subject_create')
+                <a class="btn btn-primary float-right mt-1 mb-3" href="{{route('admin.subject')}}">Add Subject</a>
+                @endcan
             </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-
-
                         <div class="table-responsive">
                             {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
                         </div>
@@ -195,7 +197,7 @@
         },
 
         errorPlacement: function(error, element) {
-          
+
             error.insertAfter(element.parents('.input-group-merge'));
         },
         submitHandler: function(form) {

@@ -68,13 +68,13 @@
                                 <input type="hidden" id="id" name="id">
                                 <div class="form-group ">
                                     <label for="email">Email</label>
-                                    <input type="text" name="update_email" placeholder="Enter Email" class="form-control " id="update_email">
+                                    <input type="text" name="email" placeholder="Enter Email" class="form-control " id="update_email">
 
                                 </div>
 
                                 <div class="form-group">
                                     <label for="role">Role</label>
-                                    <select class="form-control " name="update_role">
+                                    <select class="form-control " name="role">
                                         <option value="">Select Role</option>
                                         @foreach($roles as $role)
                                         <option>
@@ -210,7 +210,7 @@
 
     $(document).on('click', '.update', function() {
         var id = $(this).attr('dataid');
-        alert(id);
+     
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

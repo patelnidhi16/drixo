@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
@@ -15,11 +16,12 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        Admin::insert([
+        DB::table('admins')->truncate();
+        $admin = Admin::create([
             'email'=>'admin@gmail.com',
             'password'=>Hash::make('admin'),
             'assign_role' => 'Administration',
-
         ]);
+        $admin->assignRole(['Administration']);
     }
 }

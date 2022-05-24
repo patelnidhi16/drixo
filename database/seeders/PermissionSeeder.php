@@ -15,17 +15,18 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('permissions')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         $module_array = array(
             'Subject' => 'subject',
-            'Students' => 'students',
             'AssignTest' => 'assigntest',
             'DisplayResult' => 'displayresult',
-            'AttemptTest' => 'attemptaest',
-            'NotAttemptTest' => 'notattemptaest',
+            'Test' => 'test',
+            'Role' => 'role',
+            'Admin' => 'admin',
         );
         foreach ($module_array as $key => $val) {
             $permissions = array();

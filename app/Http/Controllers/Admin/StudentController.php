@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\abcDataTable;
 use App\DataTables\AdminDataTable;
+use App\DataTables\AdminRoleDataTable;
 use App\DataTables\AssigntestDataTable;
 use App\DataTables\AssigntestListDataTable;
 use App\DataTables\AttempttestDataTable;
@@ -525,13 +526,12 @@ class StudentController extends Controller
         dd($size[0]->size);
     }
 
-    public function permission(AdminDataTable $AdminDataTable)
+    public function permission(AdminRoleDataTable $AdminRoleDataTable)
     {
-        $permissions = Permission::get();
-      $roles=Role_has_permission::get();
-      return $AdminDataTable->render('admin.permission', compact('permissions', 'roles'));
 
-      
+        $permissions = Permission::get();
+        $roles = Role_has_permission::get();
+        return $AdminRoleDataTable->render('admin.permission', compact('permissions', 'roles'));
     }
     public function storepermission(Request $request)
     {
@@ -553,15 +553,24 @@ class StudentController extends Controller
     {
         $roles = Role::get();
         $admin = Admin::get();
+
         return $AdminDataTable->render('admin.adminlisting', compact('admin', 'roles'));
     }
     public function addadmin(Request $request)
     {
-        Admin::create([
-            'email' => $request->email,
-            'assign_role' => $request->role,
-            'password' => Hash::make($request->password),
-        ]);
+      
+        $admin = Admin::updateOrCreate(
+            [
+                'id' => $request->id,
+            ],
+            [
+                'email' => $request->email,
+                'assign_role' => $request->role,
+                'password' => Hash::make($request->password),
+            ]
+        );
+        
+        $admin->assignRole($request->role);
     }
     public function admindelete(Request $request)
     {
@@ -584,7 +593,20 @@ class StudentController extends Controller
         ]);
     }
 
-    public function editrole(){
-        dd(1);
+    public function editredirect($id)
+    {
+        $roles = Role::find($id)->toArray();
+        $permissions = Permission::all()->toArray();
+
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')->all();
+
+        return view('admin.editrole', compact('roles', 'permissions', 'rolePermissions'));
+    }
+    public function editrole(Request $request)
+    {
+        $role = Role::find($request->id);
+        $input = $request->all();
+        $role->update($input);
+        $role->permissions()->sync($request->permissions);
     }
 }

@@ -39,7 +39,9 @@
                             <div class="table-responsive">
                                 {!! $dataTable->table(['class' => 'table table-striped zero-configuration dataTable']) !!}
                             </div>
+                            @if(auth()->user()->can('assigntest_create') )
                             <button type="button" class="float-right btn btn-primary m-3" id="assign_test">Assign test</button>
+                           @endif
                             <!-- end col-12 -->
                         </div>
                     </div>

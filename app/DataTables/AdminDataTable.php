@@ -25,7 +25,6 @@ class AdminDataTable extends DataTable
                 $result = '<div class="btn-group">';
                 $result .= "<button dataid='$user->id' class='rounded delete btn btn-danger mr-2 ' style='height:40px'>Delete</button>";
                 $result .= "<button dataid='$user->id' class='rounded update btn btn-primary mr-2 ' style='height:40px' data-toggle='modal' data-target='#exampleModal1'>Update</button>";
-               
                $result .= '</div>';
                return $result; 
             })
