@@ -70,19 +70,22 @@
                         </a>
                     </li>
                    @endif
-                    <li>
-                        <a href="{{route('admin.student')}}">
-
-                            <span class="iconify" data-icon="bxs:user-plus"></span>
-                            <span> Student </span>
+                   <li>
+                       <a href="{{route('admin.student')}}">
+                           
+                           <span class="iconify" data-icon="bxs:user-plus"></span>
+                           <span> Student </span>
                         </a>
                     </li>
+                    @if(auth()->user()->can('assigntest_view'))
                     <li>
                         <a href="{{route('admin.assigntest')}}">
                             <span class="iconify" data-icon="ic:outline-assignment-turned-in" data-width="100"></span>
                             <span> Assign Test </span>
                         </a>
                     </li>
+                   @endif
+
                     <li>
                         <a href="{{route('admin.assigntest_list')}}">
                             <span class="iconify" data-icon="clarity:assign-user-solid" data-width="100"></span>
@@ -91,6 +94,8 @@
                         </a>
                     </li>
                     
+                    @if(auth()->user()->can('displayresult_view'))
+                   
                     <li>
                         <a href="{{route('admin.result')}}">
                             <span class="iconify" data-icon="codicon:output"></span>
@@ -98,6 +103,7 @@
                             <!-- display student table but status = 0 -->
                         </a>
                     </li>
+                   @endif
 
 
                     <li>

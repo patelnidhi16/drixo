@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Auth\GithubController;
 use App\Http\Controllers\Auth\LinkedinController;
 use App\Http\Controllers\Auth\TwitterController;
+use App\Http\Controllers\HomeController;
 use App\Mail\ApproveMail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -60,3 +61,8 @@ Route::get('auth/linkedin/callback', [LinkedinController::class, 'handleCallback
 
 Route::get('auth/github', [GithubController::class, 'redirectToGithub']);
 Route::get('auth/github/callback', [GithubController::class, 'handleCallback']);
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/save-token', [App\Http\Controllers\HomeController::class, 'saveToken'])->name('save-token');
+Route::post('/send-notification', [App\Http\Controllers\HomeController::class, 'sendNotification'])->name('send.notification');

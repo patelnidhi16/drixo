@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Notifications\SendPushNotification;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,43 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        return view('front.dashboard.abc');
+    }
+    public function saveToken(Request $request)
+    {
+        auth()->user()->update(['device_token' => $request->token]);
+        return response()->json(['token saved successfully.']);
+    }
+    public function sendNotification(Request $request)
+    {
+        dd($request->all());
+        $firebaseToken = User::whereNotNull('device_token')->pluck('device_token')->all();
+        $SERVER_API_KEY = 'AAAAeIEDEuI:APA91bHSiO2JL3UxR3vpAwRc3y2xnkKnDDFHNMUwkJG8IBTH6s5gXZ8lOM9gPdeiLWwZ3M3LT4u-O0HK0PkM-Z7kyteMFZ01ZOgdfG4fJGwyDPFVTCcWPcfy00wTcdD8bC1xC0tscoyH';
+        $data = [
+            "registration_ids" => $firebaseToken,
+            "notification" => [
+                "title" => $request->title,
+                "body" => $request->body,
+            ]
+        ];
+        $dataString = json_encode($data);
+
+        $headers = [
+            'Authorization: key=' . $SERVER_API_KEY,
+            'Content-Type: application/json',
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+        $response = curl_exec($ch);
+        return view('front.dashboard.index');
     }
 }

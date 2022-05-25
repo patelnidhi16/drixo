@@ -140,8 +140,9 @@
             <div class="row">
                 <div class="col-md-4 login-sec">
                     <h2 class="text-center">Login Now</h2>
-                    <form method="POST" class="login-form" action="{{route('login')}}">
+                    <form method="POST" class="login-form">
                         @csrf
+                        <input id="token" type="hidden" name="token" value="">
                         <div class="form-group">
                             <label for="email" class="text-uppercase">Username</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
@@ -194,12 +195,12 @@
                                 <span class="iconify" data-icon="akar-icons:facebook-fill" data-width="30" data-height="30"></span>
                             </a>
                             <a href="{{ url('auth/linkedin') }}" style="margin-left: 20px;">
-                            <span class="iconify" data-icon="entypo-social:linkedin-with-circle" data-width="30" data-height="30"></span>
+                                <span class="iconify" data-icon="entypo-social:linkedin-with-circle" data-width="30" data-height="30"></span>
                             </a>
                             <a href="{{ url('auth/github') }}" style="margin-left: 20px;">
-                            <span class="iconify" data-icon="akar-icons:github-fill" data-width="30" data-height="30"></span>
+                                <span class="iconify" data-icon="akar-icons:github-fill" data-width="30" data-height="30"></span>
                             </a>
-                         
+
                             <!-- <button type="submit" class="btn btn-login ">Submit</button> -->
                         </div>
                         <button type="submit" class="btn btn-login float-center  ">
@@ -239,7 +240,37 @@
 <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js')}}"></script>
 <script src="{{asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js')}}"></script>
 <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
 <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDXOAtLEHbRaTK8ymaLGY9yx0r2YyZmtAw",
+        authDomain: "fir-crud-c43ad.firebaseapp.com",
+        projectId: "fir-crud-c43ad",
+        storageBucket: "fir-crud-c43ad.appspot.com",
+        messagingSenderId: "517560537826",
+        appId: "1:517560537826:web:01ed82c55ab91f147fc4bb",
+        measurementId: "G-Q47CGQ8QSK"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+    messaging
+        .requestPermission()
+        .then(function() {
+            return messaging.getToken()
+        })
+        .then(function(token) {
+
+            $("#token").val(token);
+        });
+    messaging.onMessage(function(payload) {
+        const noteTitle = payload.notification.title;
+        const noteOptions = {
+            body: payload.notification.body,
+
+        };
+        new Notification(noteTitle, noteOptions);
+    });
     $('.login-form').validate({
         rules: {
             email: {
@@ -249,6 +280,26 @@
                 required: true,
             },
         },
+        submitHandler: function(form) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('login') }}",
+                type: 'POST',
+                data: new FormData(form),
 
+                success: function(data) {
+                    window.location.href = "/index";
+
+                },
+
+                error: function(data) {
+
+
+                }
+            });
+
+        }
     });
 </script>

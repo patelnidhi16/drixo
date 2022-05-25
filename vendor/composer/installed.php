@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '775c4495f61139ab8c8d0b7bf4c77bc7f79a5037',
+        'reference' => '7f6d9c0ff30ddbe72215140d432f107f4ea4c206',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -448,6 +448,15 @@
                 0 => '*',
             ),
         ),
+        'kutia-software-company/larafirebase' => array(
+            'pretty_version' => '1.3.3',
+            'version' => '1.3.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kutia-software-company/larafirebase',
+            'aliases' => array(),
+            'reference' => 'f18aaca482a9ffcd93857ee26bfa4ebc42fc3dc1',
+            'dev_requirement' => false,
+        ),
         'laravel/framework' => array(
             'pretty_version' => 'v8.83.13',
             'version' => '8.83.13.0',
@@ -463,7 +472,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '775c4495f61139ab8c8d0b7bf4c77bc7f79a5037',
+            'reference' => '7f6d9c0ff30ddbe72215140d432f107f4ea4c206',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

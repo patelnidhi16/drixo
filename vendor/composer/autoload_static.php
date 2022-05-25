@@ -34,6 +34,7 @@ class ComposerStaticInit60318fff3605a0c6bdb795172ec92954
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
+        '86b1a3c81386576820df6ff03395c2c7' => __DIR__ . '/..' . '/kutia-software-company/larafirebase/src/Helpers/All.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
@@ -150,6 +151,10 @@ class ComposerStaticInit60318fff3605a0c6bdb795172ec92954
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Sanctum\\' => 16,
             'Laravel\\Sail\\' => 13,
+        ),
+        'K' => 
+        array (
+            'Kutia\\Larafirebase\\' => 19,
         ),
         'I' => 
         array (
@@ -496,6 +501,10 @@ class ComposerStaticInit60318fff3605a0c6bdb795172ec92954
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
+        'Kutia\\Larafirebase\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kutia-software-company/larafirebase/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -658,6 +667,8 @@ class ComposerStaticInit60318fff3605a0c6bdb795172ec92954
 
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\DataTables\\AdminDataTable' => __DIR__ . '/../..' . '/app/DataTables/AdminDataTable.php',
+        'App\\DataTables\\AdminRoleDataTable' => __DIR__ . '/../..' . '/app/DataTables/AdminRoleDataTable.php',
         'App\\DataTables\\AssigntestDataTable' => __DIR__ . '/../..' . '/app/DataTables/AssigntestDataTable.php',
         'App\\DataTables\\AssigntestListDataTable' => __DIR__ . '/../..' . '/app/DataTables/AssigntestListDataTable.php',
         'App\\DataTables\\NotAttemptDataTable' => __DIR__ . '/../..' . '/app/DataTables/NotAttemptDataTable.php',
@@ -711,12 +722,16 @@ class ComposerStaticInit60318fff3605a0c6bdb795172ec92954
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Answer' => __DIR__ . '/../..' . '/app/Models/Answer.php',
         'App\\Models\\Option' => __DIR__ . '/../..' . '/app/Models/Option.php',
+        'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
         'App\\Models\\Question' => __DIR__ . '/../..' . '/app/Models/Question.php',
         'App\\Models\\Result' => __DIR__ . '/../..' . '/app/Models/Result.php',
+        'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
+        'App\\Models\\Role_has_permission' => __DIR__ . '/../..' . '/app/Models/Role_has_permission.php',
         'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
         'App\\Models\\Subject' => __DIR__ . '/../..' . '/app/Models/Subject.php',
         'App\\Models\\Submission' => __DIR__ . '/../..' . '/app/Models/Submission.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Notifications\\LoginNotification' => __DIR__ . '/../..' . '/app/Notifications/LoginNotification.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -3529,6 +3544,12 @@ class ComposerStaticInit60318fff3605a0c6bdb795172ec92954
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'Kutia\\Larafirebase\\Channels\\FirebaseChannel' => __DIR__ . '/..' . '/kutia-software-company/larafirebase/src/Channels/FirebaseChannel.php',
+        'Kutia\\Larafirebase\\Exceptions\\UnsupportedTokenFormat' => __DIR__ . '/..' . '/kutia-software-company/larafirebase/src/Exceptions/UnsupportedTokenFormat.php',
+        'Kutia\\Larafirebase\\Facades\\Larafirebase' => __DIR__ . '/..' . '/kutia-software-company/larafirebase/src/Facades/Larafirebase.php',
+        'Kutia\\Larafirebase\\Messages\\FirebaseMessage' => __DIR__ . '/..' . '/kutia-software-company/larafirebase/src/Messages/FirebaseMessage.php',
+        'Kutia\\Larafirebase\\Providers\\LarafirebaseServiceProvider' => __DIR__ . '/..' . '/kutia-software-company/larafirebase/src/Providers/LarafirebaseServiceProvider.php',
+        'Kutia\\Larafirebase\\Services\\Larafirebase' => __DIR__ . '/..' . '/kutia-software-company/larafirebase/src/Services/Larafirebase.php',
         'Laravel\\Sail\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/InstallCommand.php',
         'Laravel\\Sail\\Console\\PublishCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/PublishCommand.php',
         'Laravel\\Sail\\SailServiceProvider' => __DIR__ . '/..' . '/laravel/sail/src/SailServiceProvider.php',

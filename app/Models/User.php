@@ -25,7 +25,8 @@ class User extends Authenticatable
         'facebook_id',
         'linkedin_id',
         'git_id',
-        'twitter_id'
+        'twitter_id',
+        'device_token'
     ];
 
     /**
